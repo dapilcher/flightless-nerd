@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"next-on-keystone.postcategories"},{"v":2,"unique":true,"key":{"key":1},"name":"key_1","ns":"next-on-keystone.postcategories","background":true}],"uuid":"4c2a30c8a7d54dd6a11a61908c51a7a1"}
