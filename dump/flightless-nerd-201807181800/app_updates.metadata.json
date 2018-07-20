@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"next-on-keystone.app_updates"},{"v":2,"key":{"key":1},"name":"key_1","ns":"next-on-keystone.app_updates","background":true}],"uuid":"c01496eaaa1e4757b44862fef494a982"}
