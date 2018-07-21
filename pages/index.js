@@ -7,7 +7,7 @@ import Link from "next/link";
 class App extends Component {
 	static async getInitialProps() {
 		let response = await axios.get(
-			`${process.env.HOST_URL || "http://localhost:3000"}/api/posts`
+			`${process.env.HOST_URL || "http://localhost:3000/"}api/posts`
 		);
 		console.log(response.data);
 		return { posts: response.data };
