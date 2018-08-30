@@ -1,1 +1,1 @@
-web: node run build && node run start
+web: next build && node keystone.js
