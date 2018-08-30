@@ -30,10 +30,25 @@ exports = module.exports = nextApp => keystoneApp => {
 		Post.model
 			.find()
 			.where("state", "published")
+			.populate('author')
 			.sort("-publishedDate")
-			.exec(function(err, results) {
+			.exec(function (err, results) {
 				if (err) throw err;
 				console.log("in /api/posts");
+				res.json(results);
+			});
+	});
+
+	keystoneApp.get("/api/post/:id", (req, res, next) => {
+		const Post = keystone.list("Post");
+		const postId = req.params.id;
+		Post.model
+			.find()
+			.where("_id", postId)
+			.populate('author')
+			.exec(function (err, results) {
+				if (err) res.json({ Error: err });
+				console.log("in /api/post/id");
 				res.json(results);
 			});
 	});

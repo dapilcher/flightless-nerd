@@ -1,6 +1,7 @@
 import Document, { Head, Main, NextScript } from "next/document";
 import flush from "styled-jsx/server";
 import Navbar from "../components/navbar";
+import Footer from "../components/Footer";
 
 export default class MyDocument extends Document {
 	static getInitialProps({ renderPage }) {
@@ -13,10 +14,12 @@ export default class MyDocument extends Document {
 		return (
 			<html>
 				<Head>
+					<title>Flightless Nerd</title>
 					<meta
 						name="viewport"
 						content="width=device-width, initial-scale=1.0"
 					/>
+					<link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway" rel="stylesheet"></link>
 					<link
 						rel="stylesheet"
 						href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
@@ -25,16 +28,18 @@ export default class MyDocument extends Document {
 					/>
 				</Head>
 				<body>
-					<div className="header container">
+					<div className="header container px-0">
 						<span>
 							<span className="display-4">Flightless Nerd</span>
-							<span className="text-primary ml-3">
+							<br className="d-md-none" />
+							<span className="text-primary ml-md-3">
 								Video Game News &amp; Reviews
 							</span>
 						</span>
 					</div>
 					<Navbar />
 					<Main />
+					<Footer />
 					<script
 						src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 						integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

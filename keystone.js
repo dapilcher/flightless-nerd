@@ -37,5 +37,8 @@ app.prepare().then(() => {
 		users: "users"
 	});
 
+	// Cloudinary config
+	// keystone.set("cloudinary config", process.env.CLOUDINARY_URL);
+
 	keystone.start();
 });

@@ -1,7 +1,7 @@
 import { Component } from "react";
 import axios from "axios";
-import ArticleCard from "../components/articleCard";
-import Carousel from "../components/carousel";
+import ArticleCard from "../components/ArticleCard";
+import Carousel from "../components/Carousel";
 import Link from "next/link";
 
 class App extends Component {
@@ -9,64 +9,89 @@ class App extends Component {
 		let response = await axios.get(
 			`${process.env.HOST_URL || "http://localhost:3000/"}api/posts`
 		);
-		console.log(response.data);
 		return { posts: response.data };
 	}
 
 	render() {
 		return (
-			<div>
+			<React.Fragment>
 				<style jsx>{`
 					.header {
-						padding: 16px 16px;
+						padding: 1rem 1rem;
 					}
-					.posts {
-						padding: 16px 16px;
+					.post-cards {
+						padding: 1rem 0;
+						display: grid;
+						grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+						grid-gap: 10px;
+						justify-content: center;
 					}
-					.post {
-						margin-bottom: 16px;
+					.post-card {
+						margin-bottom: 1rem;
+					}
+					.sidebar {
+						padding: 1rem;
+					}
+					.section-header {
+						width: 100%;
+						height: auto;
+						margin-top: 1rem;
+						font-size: 2rem;
+						text-align: center;
+					}
+					.section-title {
+						display: flex;
+						flex-basis: 100%;
+						align-items: center;
+					}
+					.section-title::before,
+					.section-title::after {
+						content: "";
+						flex-grow: 1;
+						background: rgba(0, 0, 0, 0.125);
+						height: 1px;
+						font-size: 0px;
+						line-height: 0px;
+					}
+					.section-title::before {
+						margin-right: 1rem;
+					}
+					.section-title::after {
+						margin-left: 1rem;
 					}
 				`}</style>
-				<div className="row">
-					<Carousel />
-				</div>
-				<div className="container">
-					<div className="row">
-						<div className="col-md-8 posts">
-							{this.props.posts.map((post, i) => {
-								return (
-									<div className="post" key={i}>
-										<div className="row">
-											<ArticleCard post={post} />
-										</div>
-									</div>
-								);
-							})}
+				<style global jsx>{`
+					ul {
+						list-style-type: none;
+						padding: 0;
+					}
+				`}</style>
+				<main>
+					<div className="container">
+						<div className="row">
+							<Carousel posts={this.props.posts.filter(post => post.isFeatured)} />
 						</div>
-						<div className="col-md-4 sidebar">
-							<form className="form-inline my-2 my-lg-0">
-								<input
-									className="form-control"
-									type="search"
-									placeholder="Search"
-									aria-label="Search"
-								/>
-							</form>
-							<h6>Recent Posts</h6>
-							<hr />
-							<ul>
-								{this.props.posts.map((post, i) => (
-									<li key={i}>
-										<Link href={`/posts/${post.slug}`}>
-											<a>{post.title}</a>
-										</Link>
-									</li>
-								))}
-							</ul>
+						<div className="row">
+							<div className="section-header">
+								<div className="section-title">
+									Latest Updates
+							</div>
+							</div>
+							<div className="post-cards">
+								{this.props.posts.map((post, i) => {
+									return (
+										<div className="post-card" key={i}>
+											<div>
+												<ArticleCard post={post} />
+											</div>
+										</div>
+									);
+								})}
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+				</main>
+			</React.Fragment>
 		);
 	}
 }

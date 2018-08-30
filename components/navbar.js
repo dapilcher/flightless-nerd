@@ -1,9 +1,9 @@
 import { Component } from "react";
 import Link from "next/link";
 
-const Navbar = props => (
+const Navbar = () => (
 	<nav className="navbar navbar-expand-md navbar-light">
-		<div className="container">
+		<div className="container px-0">
 			<button
 				className="navbar-toggler"
 				type="button"
