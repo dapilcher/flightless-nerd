@@ -1,1 +1,1 @@
-web: next build; node keystone.js
+web: node keystone.js
