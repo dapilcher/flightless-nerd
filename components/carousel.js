@@ -1,38 +1,18 @@
 import React from 'react';
-import Link from "next/link";
-
-const Slide = props => (
-  <React.Fragment>
-    <style jsx>{`
-      max-width: 100%;
-      .slide-text {
-        color: white;
-        position: absolute;
-        bottom: 2rem;
-        left: 0;
-        background: rgba(0,0,0,0.5);
-        margin: 3rem;
-        padding: 0.5rem;
-        border-radius: 3px;
-      }
-    `}</style>
-    <div className="carousel-slide">
-      <img className="slide-img" src={props.post.image.secure_url} alt={props.post.title} />
-      <div className="slide-text d-none d-md-block">
-        <Link href={`/post?id=${props.post._id}`} prefetch><a className="h2">{props.post.title}</a></Link>
-        <span dangerouslySetInnerHTML={{ __html: props.post.content.brief }}></span>
-      </div>
-    </div>
-  </React.Fragment>
-)
+import Slide from './CarouselSlide';
 
 class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      slide_index: 0
+      slideIndex: 0,
+      prevSlideIndex: 0,
+      nextSlideIndex: 0,
+      sliding: false
     }
     this.shiftSlide = this.shiftSlide.bind(this);
+    this.setNextSlideIndex = this.setNextSlideIndex.bind(this);
+    this.setPrevSlideIndex = this.setPrevSlideIndex.bind(this);
     this.setSlide = this.setSlide.bind(this);
   }
 
@@ -41,11 +21,11 @@ class Carousel extends React.Component {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.state.slideTimer);
+    if (this.state.slideTimer) clearTimeout(this.state.slideTimer);
   }
 
   shiftSlide(n) {
-    let index = this.state.slide_index;
+    let index = this.state.slideIndex;
     index += n;
     if (index >= this.props.posts.length) {
       index = 0;
@@ -56,17 +36,35 @@ class Carousel extends React.Component {
     this.setSlide(index);
   }
 
+  setPrevSlideIndex(i) {
+    let prevSlideIndex = i - 1;
+    if (prevSlideIndex < 0) {
+      prevSlideIndex = this.props.posts.length - 1;
+    }
+    this.setState({ prevSlideIndex })
+  }
+
+  setNextSlideIndex(i) {
+    let nextSlideIndex = i + 1;
+    if (nextSlideIndex >= this.props.posts.length) {
+      nextSlideIndex = 0;
+    }
+    this.setState({ nextSlideIndex })
+  }
+
   setSlide(i) {
+    this.setPrevSlideIndex(i);
+    this.setNextSlideIndex(i);
     if (this.state.slideTimer) {
       clearTimeout(this.state.slideTimer);
     }
     const slideTimer = setTimeout(() => { this.shiftSlide(1) }, 7000);
-    this.setState({ slide_index: i, slideTimer });
+    this.setState({ slideIndex: i, slideTimer });
   }
 
   render() {
     const { posts } = this.props;
-    const slides = posts.map(post => <Slide post={post} />)
+    const slides = posts.map(post => <Slide post={post} sliding={this.state.sliding} />)
     return (
       <React.Fragment>
         <style jsx>{`
@@ -114,22 +112,25 @@ class Carousel extends React.Component {
           .dot-active, .dot:hover {
             background: rgba(255,255,255,0.8);
           }
-          .fade {
-            animation: fade 1s ease;
-          }
-          @keyframes fade {
-            from {opacity: 0}
-            to {opacity: 1}
-          }
           `}</style>
         <div className="carousel-container">
-          {slides[this.state.slide_index]}
+          <div className="carousel-slides">
+            {/* <div id="prev-slide">
+              {slides[this.state.prevSlideIndex]}
+            </div>
+            <div id="currentSlide"> */}
+            {slides[this.state.slideIndex]}
+            {/* </div>
+            <div id="next-slide">
+              {slides[this.state.nextSlideIndex]}
+            </div> */}
+          </div>
 
           <a className="prev" onClick={() => this.shiftSlide(-1)}>&#10094;</a>
           <a className="next" onClick={() => this.shiftSlide(1)}>&#10095;</a>
           <div className="dots">
             {slides.map((_, i) => (
-              <a className={`dot ${i === this.state.slide_index ? 'dot-active' : ''}`}
+              <a className={`dot ${i === this.state.slideIndex ? 'dot-active' : ''}`}
                 onClick={() => this.setSlide(i)}
                 key={`dot-${i}`} />
             ))}
