@@ -1,6 +1,6 @@
 {
   "name": "flightless-nerd",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "async": "2.1.4",
@@ -22,7 +22,6 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "node keystone.js",
-    "prestart": "next build"
+    "start": "node keystone.js"
   }
 }
