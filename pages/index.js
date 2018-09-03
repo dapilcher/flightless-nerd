@@ -23,7 +23,7 @@ class App extends Component {
 						padding: 1rem 0;
 						display: grid;
 						grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-						grid-gap: 10px;
+						grid-gap: 1rem;
 						justify-content: center;
 					}
 					.post-card {
@@ -65,6 +65,21 @@ class App extends Component {
 						list-style-type: none;
 						padding: 0;
 					}
+
+					.blue-box {
+						position: relative;
+					}
+					.blue-box::before {
+						z-index: -1;
+						content: "";
+						position: absolute;
+						background-color: #007bff;
+						left: 0;
+						top: 50%;
+						width: 100%;
+						height: 30%;
+						transform: rotate(1deg);
+					}
 				`}</style>
 				<main>
 					<div className="container">
@@ -74,8 +89,8 @@ class App extends Component {
 						<div className="row">
 							<div className="section-header">
 								<div className="section-title">
-									Latest Updates
-							</div>
+									<span className="blue-box">Latest Updates</span>
+								</div>
 							</div>
 							<div className="post-cards">
 								{this.props.posts.map((post, i) => {

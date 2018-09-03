@@ -2,6 +2,7 @@ import Document, { Head, Main, NextScript } from "next/document";
 import flush from "styled-jsx/server";
 import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
+import Logo from '../components/Logo';
 
 export default class MyDocument extends Document {
 	static getInitialProps({ renderPage }) {
@@ -27,15 +28,32 @@ export default class MyDocument extends Document {
 						crossorigin="anonymous"
 					/>
 				</Head>
+				<style jsx global>{`
+					.blue-box {
+						position: relative;
+					}
+					.blue-box::before {
+						z-index: -1;
+						content: "";
+						position: absolute;
+						background-color: #007bff;
+						left: 0;
+						top: 50%;
+						width: 100%;
+						height: 30%;
+						transform: rotate(1deg);
+					}
+				`}</style>
 				<body>
 					<div className="header container px-0">
-						<span>
-							<span className="display-4">Flightless Nerd</span>
+						<Logo />
+						{/* <span>
+							<span className="display-4 blue-box">Flightless Nerd</span>
 							<br className="d-md-none" />
 							<span className="text-primary ml-md-3">
 								Video Game News &amp; Reviews
 							</span>
-						</span>
+						</span> */}
 					</div>
 					<Navbar />
 					<Main />

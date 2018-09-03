@@ -3,11 +3,28 @@ import axios from "axios";
 import helpers from '../helpers';
 
 const Post = ({ post }) => (
-	<div className="post">
-		<h3>{post.title}</h3>
-		<h6 className="text-muted">{helpers.toRelativeTime(post.publishedDate)}{post.author ? ` by ${post.author.name.first} ${post.author.name.last}` : ''}</h6>
-		<div dangerouslySetInnerHTML={{ __html: post.content.extended }} />
-	</div>
+	<React.Fragment>
+		<style jsx>{`
+			.post-container {
+				max-width: 75%;
+				margin: 0 auto;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+			.post-img {
+				max-width: 100%;
+			}
+		`}</style>
+		<div className="post-container">
+			{post.image ?
+				<img className="post-img" src={post.image.secure_url} alt={post.title} /> :
+				''}
+			<h3>{post.title}</h3>
+			<h6 className="text-muted">{helpers.toRelativeTime(post.publishedDate)}{post.author ? ` by ${post.author.name.first} ${post.author.name.last}` : ''}</h6>
+			<div dangerouslySetInnerHTML={{ __html: post.content.extended }} />
+		</div>
+	</React.Fragment>
 );
 
 class PostContainer extends React.Component {
