@@ -44,7 +44,7 @@ export default class MyDocument extends Document {
 						transform: rotate(1deg);
 					}
 				`}</style>
-				<body>
+				<body style={{ overflowX: 'hidden' }}>
 					<div className="header container px-0">
 						<Logo />
 						{/* <span>

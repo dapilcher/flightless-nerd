@@ -12,7 +12,7 @@ const Footer = () => (
 			}
 		`}</style>
 		<div className="footer container">
-			<p>This is the footer</p>
+			<p>&copy; {new Date().getFullYear()}</p>
 		</div>
 	</React.Fragment>
 );

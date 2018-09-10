@@ -6,14 +6,18 @@ const Post = ({ post }) => (
 	<React.Fragment>
 		<style jsx>{`
 			.post-container {
-				max-width: 75%;
-				margin: 0 auto;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 			}
 			.post-img {
 				max-width: 100%;
+			}
+			@media (min-width:768px) {
+				.post-container {
+					max-width: 75%;
+					margin: 0 auto;
+				}
 			}
 		`}</style>
 		<div className="post-container">

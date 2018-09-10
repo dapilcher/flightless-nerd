@@ -26,8 +26,8 @@ class App extends Component {
 						grid-gap: 1rem;
 						justify-content: center;
 					}
-					.post-card {
-						margin-bottom: 1rem;
+					.post-card:not(:last-child) {
+						border-bottom: 1px solid rgba(0,0,0,0.1);
 					}
 					.sidebar {
 						padding: 1rem;
@@ -58,6 +58,12 @@ class App extends Component {
 					}
 					.section-title::after {
 						margin-left: 1rem;
+					}
+
+					@media (min-width: 768px) {
+						.post-card:not(:last-child) {
+							border-bottom: none;
+						}
 					}
 				`}</style>
 				<style global jsx>{`
@@ -92,16 +98,16 @@ class App extends Component {
 									<span className="blue-box">Latest Updates</span>
 								</div>
 							</div>
-							<div className="post-cards">
-								{this.props.posts.map((post, i) => {
-									return (
-										<div className="post-card" key={i}>
-											<div>
+							<div className="post-cards-container">
+								<div className="post-cards">
+									{this.props.posts.map((post, i) => {
+										return (
+											<div className="post-card" key={i}>
 												<ArticleCard post={post} />
 											</div>
-										</div>
-									);
-								})}
+										);
+									})}
+								</div>
 							</div>
 						</div>
 					</div>

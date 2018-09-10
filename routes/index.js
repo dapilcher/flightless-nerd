@@ -25,6 +25,8 @@ exports = module.exports = nextApp => keystoneApp => {
 	// Next request handler
 	const handle = nextApp.getRequestHandler();
 
+	keystoneApp.all('/api*', keystone.middleware.cors);
+
 	keystoneApp.get("/api/posts", (req, res, next) => {
 		const Post = keystone.list("Post");
 		Post.model

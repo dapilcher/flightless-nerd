@@ -57,11 +57,11 @@ const Slide = props => (
       }
     `}</style>
     <div className={`carousel-slide ${props.sliding ? 'sliding' : ''}`}>
-      <Link href={`/post?id=${props.post._id}`} >
+      <Link href={`/post?id=${props.post._id}`}>
         <a><img className="slide-img" src={props.post.image.secure_url} alt={props.post.title} /></a>
       </Link>
       <div className="slide-text-box">
-        <Link href={`/post?id=${props.post._id}`} prefetch><a className="slide-text-title">{props.post.title}</a></Link>
+        <Link href={`/post?id=${props.post._id}`}><a className="slide-text-title">{props.post.title}</a></Link>
         <span className="slide-text-content" dangerouslySetInnerHTML={{ __html: props.post.content.brief }}></span>
       </div>
     </div>
