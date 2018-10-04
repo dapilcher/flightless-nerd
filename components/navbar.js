@@ -1,71 +1,78 @@
 import { Component } from "react";
 import Link from "next/link";
+import Logo from './Logo';
 
 const Navbar = () => (
-	<nav className="navbar navbar-expand-md navbar-light">
-		<div className="container px-0">
-			<button
-				className="navbar-toggler"
-				type="button"
-				data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
-				<span className="navbar-toggler-icon" />
-			</button>
+	<React.Fragment>
+		<style jsx>{`
+			.navbar {
+				background-color: #586CFF;
+				background-image: linear-gradient(to bottom right, #586CFF, #2539CC);
+				font-family: Raleway;
+				display: flex;
+				flex-direction: column;
+				border-bottom: 0.5rem solid #EB3E34;
+			}
+			
+			.navbar__items {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: flex-end;
+			}
+			
+			.navbar__item {
+				padding: 1rem 1rem 0.5rem 1rem;
+			}
+			.navbar__item:hover {
+				cursor: pointer;
+				background-color: #EB3E34;
+				// background-color: #D2251B;
+			}
 
-			<div className="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul className="navbar-nav mr-auto">
-					<li className="nav-item active">
-						<Link href="/">
-							<a className="nav-link">
-								Home <span className="sr-only">(current)</span>
-							</a>
-						</Link>
-					</li>
-					<li className="nav-item">
-						<Link href="/">
-							<a className="nav-link">News</a>
-						</Link>
-					</li>
-					<li className="nav-item dropdown">
-						<a
-							className="nav-link dropdown-toggle"
-							href="#"
-							id="navbarDropdown"
-							role="button"
-							data-toggle="dropdown"
-							aria-haspopup="true"
-							aria-expanded="false"
-						>
-							Reviews
-						</a>
-						<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-							<Link href="/">
-								<a className="dropdown-item">PS4</a>
-							</Link>
-							<Link href="/">
-								<a className="dropdown-item">XBoxOne</a>
-							</Link>
-							<Link href="/">
-								<a className="dropdown-item">Switch</a>
-							</Link>
-							<Link href="/">
-								<a className="dropdown-item">PC</a>
-							</Link>
-						</div>
-					</li>
-					<li className="nav-item">
-						<Link href="/">
-							<a className="nav-link">Podcast</a>
-						</Link>
-					</li>
-				</ul>
-			</div>
+			.navbar__link {
+				color: #fff;
+			}
+			.navbar__link:hover {
+				text-decoration: none;
+			}
+
+			@media (min-width: 992px) {
+				.navbar {
+					flex-direction: row;
+				}
+				.navbar__items {
+					justify-content: flex-end;
+				}
+			}
+
+		`}</style>
+		<div className="navbar">
+			<Logo />
+			<nav className="navbar__items">
+				<div className="navbar__item">
+					<Link href="/">
+						<a className="navbar__link">Home</a>
+					</Link>
+				</div>
+				<div className="navbar__item">
+					<Link href="/">
+						<a className="navbar__link">News</a>
+					</Link>
+				</div>
+				<div className="navbar__item">
+					<Link href="/">
+						<a className="navbar__link">Reviews</a>
+					</Link>
+				</div>
+				<div className="navbar__item">
+					<Link href="/">
+						<a className="navbar__link">Podcast</a>
+					</Link>
+				</div>
+			</nav>
 		</div>
-	</nav>
+	</React.Fragment>
 );
 
 export default Navbar;

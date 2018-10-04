@@ -28,6 +28,7 @@ exports = module.exports = nextApp => keystoneApp => {
 	keystoneApp.all('/api*', keystone.middleware.cors);
 
 	keystoneApp.get("/api/posts", (req, res, next) => {
+		console.log("in /api/posts");
 		const Post = keystone.list("Post");
 		Post.model
 			.find()
@@ -36,12 +37,12 @@ exports = module.exports = nextApp => keystoneApp => {
 			.sort("-publishedDate")
 			.exec(function (err, results) {
 				if (err) throw err;
-				console.log("in /api/posts");
 				res.json(results);
 			});
 	});
 
 	keystoneApp.get("/api/post/:id", (req, res, next) => {
+		console.log(`in /api/post/id -- id: ${req.params.id}`);
 		const Post = keystone.list("Post");
 		const postId = req.params.id;
 		Post.model
@@ -50,7 +51,6 @@ exports = module.exports = nextApp => keystoneApp => {
 			.populate('author')
 			.exec(function (err, results) {
 				if (err) res.json({ Error: err });
-				console.log("in /api/post/id");
 				res.json(results);
 			});
 	});

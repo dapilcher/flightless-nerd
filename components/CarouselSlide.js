@@ -24,9 +24,10 @@ const Slide = props => (
         margin: 0.5rem;
         left: 0;
         bottom: 0;
-        background: rgba(0,0,0,0.5);
+        background-color: rgba(0,0,0,0.5);
+        // background-color: #EB3E34cc;
         padding: 0.5rem;
-        border-radius: 3px;
+        border-radius: 1rem 1rem 1rem 0;
       }
 
       .slide-text-content {
@@ -42,10 +43,9 @@ const Slide = props => (
           position: absolute;
           bottom: 2rem;
           left: 0;
-          background: rgba(0,0,0,0.5);
           margin: 2rem 3rem;
           padding: 0.5rem;
-          border-radius: 3px;
+          border-radius: 1rem 1rem 1rem 0;
         }
         .slide-text-title {
           font-size: 2rem;

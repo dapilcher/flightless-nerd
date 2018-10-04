@@ -16,6 +16,7 @@ class App extends Component {
 		return (
 			<React.Fragment>
 				<style jsx>{`
+					main {font-family: Raleway, sans-serif;}
 					.header {
 						padding: 1rem 1rem;
 					}
@@ -27,7 +28,7 @@ class App extends Component {
 						justify-content: center;
 					}
 					.post-card:not(:last-child) {
-						border-bottom: 1px solid rgba(0,0,0,0.1);
+						border-bottom: 1px solid #EB3E34;
 					}
 					.sidebar {
 						padding: 1rem;
@@ -38,6 +39,7 @@ class App extends Component {
 						margin-top: 1rem;
 						font-size: 2rem;
 						text-align: center;
+						font-family: Bangers;
 					}
 					.section-title {
 						display: flex;
@@ -48,8 +50,8 @@ class App extends Component {
 					.section-title::after {
 						content: "";
 						flex-grow: 1;
-						background: rgba(0, 0, 0, 0.125);
-						height: 1px;
+						background: #586CFF;
+						height: 2px;
 						font-size: 0px;
 						line-height: 0px;
 					}
@@ -59,34 +61,18 @@ class App extends Component {
 					.section-title::after {
 						margin-left: 1rem;
 					}
-
 					@media (min-width: 768px) {
 						.post-card:not(:last-child) {
 							border-bottom: none;
 						}
 					}
-				`}</style>
+					`}</style>
 				<style global jsx>{`
 					ul {
 						list-style-type: none;
 						padding: 0;
 					}
-
-					.blue-box {
-						position: relative;
-					}
-					.blue-box::before {
-						z-index: -1;
-						content: "";
-						position: absolute;
-						background-color: #007bff;
-						left: 0;
-						top: 50%;
-						width: 100%;
-						height: 30%;
-						transform: rotate(1deg);
-					}
-				`}</style>
+					`}</style>
 				<main>
 					<div className="container">
 						<div className="row">
@@ -95,7 +81,7 @@ class App extends Component {
 						<div className="row">
 							<div className="section-header">
 								<div className="section-title">
-									<span className="blue-box">Latest Updates</span>
+									<span>Latest Updates</span>
 								</div>
 							</div>
 							<div className="post-cards-container">

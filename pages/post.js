@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import fetch from 'isomorphic-unfetch';
 import helpers from '../helpers';
 
 const Post = ({ post }) => (
@@ -33,11 +34,13 @@ const Post = ({ post }) => (
 
 class PostContainer extends React.Component {
 	static async getInitialProps({ query }) {
-		let response = await axios.get(
+		const response = await fetch(
 			`${process.env.HOST_URL || "http://localhost:3000/"}api/post/${query.id}`
 		);
-		return { post: response.data };
+		const data = await response.json();
+		return { post: data };
 	}
+
 	render() {
 		return (
 			<div className="container">

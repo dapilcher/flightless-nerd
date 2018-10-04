@@ -1,6 +1,6 @@
 import Document, { Head, Main, NextScript } from "next/document";
 import flush from "styled-jsx/server";
-import Navbar from "../components/navbar";
+import Navbar from '../components/navbar';
 import Footer from "../components/Footer";
 import Logo from '../components/Logo';
 
@@ -20,45 +20,51 @@ export default class MyDocument extends Document {
 						name="viewport"
 						content="width=device-width, initial-scale=1.0"
 					/>
-					<link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway" rel="stylesheet"></link>
-					<link
+					<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-reboot.min.css" />
+					<link rel="icon" type="image/x-icon" href="/static/images/Austrich_favicon.png" />
+					<link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway:300,400|Bangers" rel="stylesheet"></link>
+					{/* <link
 						rel="stylesheet"
 						href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
 						integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
 						crossorigin="anonymous"
-					/>
+					/> */}
 				</Head>
-				<style jsx global>{`
-					.blue-box {
-						position: relative;
+				<body style={{ overflowX: 'hidden' }}>
+					<style jsx>{`
+					overflowX: hidden;
+						display: flex;
+						flex-direction: row;
+						justify-content: center;
+
+					.container {
+						display: flex;
+						flex-direction: column;
+						max-width: 100%;
 					}
-					.blue-box::before {
-						z-index: -1;
-						content: "";
-						position: absolute;
-						background-color: #007bff;
-						left: 0;
-						top: 50%;
-						width: 100%;
-						height: 30%;
-						transform: rotate(1deg);
+					@media (min-width: 576px) {
+						.container { max-width: 90%; }
+					}
+
+					@media (min-width: 768px) {
+						.container { max-width: 760px; }
+					}
+
+					@media (min-width: 992px) {
+						.container { max-width: 960px; }
+					}
+
+					@media (min-width: 1200px) {
+						.container { max-width: 1100px; }
 					}
 				`}</style>
-				<body style={{ overflowX: 'hidden' }}>
-					<div className="header container px-0">
-						<Logo />
-						{/* <span>
-							<span className="display-4 blue-box">Flightless Nerd</span>
-							<br className="d-md-none" />
-							<span className="text-primary ml-md-3">
-								Video Game News &amp; Reviews
-							</span>
-						</span> */}
+					<div className="container">
+						{/* <Logo /> */}
+						<Navbar />
+						<Main />
+						<Footer />
 					</div>
-					<Navbar />
-					<Main />
-					<Footer />
-					<script
+					{/* <script
 						src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 						integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 						crossorigin="anonymous"
@@ -72,7 +78,7 @@ export default class MyDocument extends Document {
 						src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
 						integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
 						crossorigin="anonymous"
-					/>
+					/> */}
 					<NextScript />
 				</body>
 			</html>

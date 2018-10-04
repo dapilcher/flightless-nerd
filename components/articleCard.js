@@ -14,11 +14,24 @@ const ArticleCard = props => (
 				padding-bottom: 1rem;
 			}
 			.article-card-img-container {
-				max-width: 50vw;
+				width: 50vw;
 			}
-			.article-card-img {
+			.article-card-img,
+			.article-card-img-placeholder {
 				max-width: 100%;
 				border-radius: 1rem 1rem 1rem 0;
+			}
+			.article-card-img-placeholder {
+				background-color: #586CFF;
+        background-image: linear-gradient(to bottom right, #586CFF, #2539CC);
+				color: white;
+				height: 100%;
+				text-align: center;
+			}
+			.article-card-img-placeholder > span {
+				font-size: 4rem;
+				font-weight: 300;
+				margin: 1rem;
 			}
 			.article-card-body {
 				display: flex;
@@ -27,7 +40,7 @@ const ArticleCard = props => (
 				margin: auto 0;
 			}
 			.article-card-body > h5 {
-				font-weight: 300;
+				font-weight: 400;
 				font-size: 1rem;
 			}
 			.article-card-body > h6 {
@@ -41,35 +54,21 @@ const ArticleCard = props => (
 				display: none;
 			}
 
-
-			.blue-box {
-				position: relative;
-			}
-			.blue-box::before {
-				z-index: -1;
-				content: "";
-				position: absolute;
-				background-color: #007bff;
-				left: 0;
-				top: 50%;
-				width: 100%;
-				height: 30%;
-				transform: rotate(1deg);
-			}
-
 			@media (min-width: 768px) {
 				.article-card {
 					flex-direction: column;
 					font-size: 14px;
 					margin: 0;
 					padding-bottom: 0;
-					border: 1px solid rgba(0,0,0,0.1);
+					border: 1px solid #586CFF;
 					border-radius: 1rem 1rem 1rem 0;
+					align-items: start;
 				}
 				.article-card-img-container {
 					max-width: 100%;
 				}
-				.article-card-img {
+				.article-card-img,
+				.article-card-img-placeholder {
 					border-radius: 1rem 1rem 0 0;
 				}
 				.article-card-body {
@@ -88,27 +87,33 @@ const ArticleCard = props => (
 				.article-card-text {
 					display: block;
 				}
+				.pointer {
+					cursor: pointer;
+				}
 			}
 		`}</style>
-		<Link href={`/post?id=${props.post._id}`}>
-			<div className="article-card">
-				{props.post.image ?
-					<div className="article-card-img-container">
-						<img className="article-card-img" src={props.post.image.secure_url} alt={props.post.title} />
-					</div> :
-					''}
-				<div className="article-card-body">
-					<h5 className="article-card-title">{props.post.title}</h5>
-					<h6 className="article-card-subtitle">
-						{helpers.toRelativeTime(props.post.publishedDate)}
-					</h6>
-					<div
-						className="article-card-text"
-						dangerouslySetInnerHTML={{ __html: props.post.content.brief }}
-					/>
-				</div>
+		<div className="article-card">
+			<div className="article-card-img-container">
+				<Link href={`/post?id=${props.post._id}`}>
+					{props.post.image ?
+						<img className="article-card-img pointer" src={props.post.image.secure_url} alt={props.post.title} /> :
+						<div className="article-card-img-placeholder pointer"><span>FN</span></div>
+					}
+				</Link>
 			</div>
-		</Link>
+			<div className="article-card-body">
+				<Link href={`/post?id=${props.post._id}`} prefetch>
+					<h5 className="article-card-title pointer">{props.post.title}</h5>
+				</Link>
+				<h6 className="article-card-subtitle">
+					{helpers.toRelativeTime(props.post.publishedDate)}
+				</h6>
+				<div
+					className="article-card-text"
+					dangerouslySetInnerHTML={{ __html: props.post.content.brief }}
+				/>
+			</div>
+		</div>
 	</React.Fragment>
 );
 

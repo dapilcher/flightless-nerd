@@ -23,12 +23,15 @@ keystone.init({
 	mongo: process.env.MONGO_URI || "mongodb://localhost:27017"
 });
 
+keystone.set('cors allow origin', true);
+keystone.set('cors allow methods', true);
+keystone.set('cors allow headers', true);
+
 // Load your project's Models
 keystone.import("models");
 
 // Start Next app
 app.prepare().then(() => {
-	keystone.set('cors allow origin', true);
 
 	// Load your project's Routes
 	keystone.set("routes", require("./routes")(app));
