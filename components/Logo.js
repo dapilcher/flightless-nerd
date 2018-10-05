@@ -17,11 +17,11 @@ const Logo = () => (
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-bottom: 1rem;
+        // margin-bottom: 1rem;
       }
 
       .logo-img {
-        max-width: 10rem;
+        max-width: 6rem;
         margin: 1rem;
       }
 
@@ -29,7 +29,7 @@ const Logo = () => (
         font-weight: 300;
         font-size: 3rem;
         font-family: 'Bangers';
-        text-shadow: 1px 1px 5px #000;
+        text-shadow: 3px 3px 5px #000;
         color: #fff;
       }
 
@@ -41,6 +41,7 @@ const Logo = () => (
       @media (min-width: 992px) {
         .logo-container {
           justify-content: flex-start;
+          align-items: center;
         }
         .logo-title {
           font-size: 4rem;
@@ -64,14 +65,13 @@ const Logo = () => (
         }
       }
     `}</style>
-
     <div className="logo-container">
       <img className="logo-img" src="/static/images/Austrich_circle_cropped.png" alt="Austrich" />
       <div className="title-container">
         <span className="logo-title">Flightless Nerd</span>
-        <span className="logo-subtitle">
+        {/* <span className="logo-subtitle">
           Video Game News &amp; Reviews
-      </span>
+        </span> */}
       </div>
     </div>
   </React.Fragment>

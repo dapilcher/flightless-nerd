@@ -57,7 +57,7 @@ const ArticleCard = props => (
 			@media (min-width: 768px) {
 				.article-card {
 					flex-direction: column;
-					font-size: 14px;
+					// font-size: 14px;
 					margin: 0;
 					padding-bottom: 0;
 					border: 1px solid #586CFF;
@@ -74,14 +74,13 @@ const ArticleCard = props => (
 				.article-card-body {
 					padding: 10px;
 					margin: 0;
-					// margin-top: 1rem;
 				}
 				.article-card-body > h5 {
-					font-weight: 300;
+					font-weight: 500;
 					font-size: 1.25rem;
 				}
 				.article-card-body > h6 {
-					font-weight: 300;
+					font-weight: 400;
 					font-size: 0.9rem;
 				}
 				.article-card-text {

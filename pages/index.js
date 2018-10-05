@@ -16,9 +16,9 @@ class App extends Component {
 		return (
 			<React.Fragment>
 				<style jsx>{`
-					main {font-family: Raleway, sans-serif;}
-					.header {
-						padding: 1rem 1rem;
+					main {
+						font-family: Raleway, sans-serif;
+						font-weight: 400;
 					}
 					.post-cards {
 						padding: 1rem 0;

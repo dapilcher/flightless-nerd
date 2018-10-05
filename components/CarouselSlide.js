@@ -10,7 +10,7 @@ const Slide = props => (
 
       .slide-text-title {
         font-size: 1rem;
-        font-weight: 300;
+        font-weight: 500;
         color: white;
       }
 
@@ -49,6 +49,7 @@ const Slide = props => (
         }
         .slide-text-title {
           font-size: 2rem;
+          font-weight: 400;
         }
       }
 

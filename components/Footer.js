@@ -5,7 +5,9 @@ const Footer = () => (
 		<style jsx>{`
 			.footer {
 				width: 100%;
-				border-top: 2px solid #586CFF;
+				background-color: #586CFF;
+				background-image: linear-gradient(to bottom right, #586CFF, #2539CC);
+				border-top: 0.5rem solid #EB3E34;
 				padding: 1rem 0;
 				display: flex;
 				flex-direction: column;
