@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Slide = props => (
+const Slide = ({ sliding, post }) => (
   <React.Fragment>
     <style jsx>{`
       // max-width: 100%;
@@ -11,7 +11,7 @@ const Slide = props => (
       .slide-text-title {
         font-size: 1rem;
         font-weight: 500;
-        color: white;
+        color: #eee;
       }
 
       .slide-text-title:hover {
@@ -19,7 +19,7 @@ const Slide = props => (
       }
 
       .slide-text-box {
-        color: white;
+        color: #eee;
         position: absolute;
         margin: 0.5rem;
         left: 0;
@@ -39,7 +39,7 @@ const Slide = props => (
           display: block;
         }
         .slide-text-box {
-          color: white;
+          color: #eee;
           position: absolute;
           bottom: 2rem;
           left: 0;
@@ -48,22 +48,21 @@ const Slide = props => (
           border-radius: 1rem 1rem 1rem 0;
         }
         .slide-text-title {
+          font-family: Montserrat;
           font-size: 2rem;
           font-weight: 400;
         }
       }
-
-      @media (min-width: 992px) {
-        
-      }
     `}</style>
-    <div className={`carousel-slide ${props.sliding ? 'sliding' : ''}`}>
-      <Link href={`/post?id=${props.post._id}`}>
-        <a><img className="slide-img" src={props.post.image.secure_url} alt={props.post.title} /></a>
+    <div className={`carousel-slide ${sliding ? 'sliding' : ''}`}>
+      <Link href={`/post?id=${post._id}`}>
+        <a><img className="slide-img" src={post.image.secure_url} alt={post.title} /></a>
       </Link>
       <div className="slide-text-box">
-        <Link href={`/post?id=${props.post._id}`}><a className="slide-text-title">{props.post.title}</a></Link>
-        <span className="slide-text-content" dangerouslySetInnerHTML={{ __html: props.post.content.brief }}></span>
+        <Link href={`/post?id=${post._id}`}><a className="slide-text-title">{post.title}</a></Link>
+        <span className="slide-text-content"
+          dangerouslySetInnerHTML={post.content.brief.html ? { __html: post.content.brief.html } : { __html: post.content.brief }}
+        ></span>
       </div>
     </div>
   </React.Fragment>

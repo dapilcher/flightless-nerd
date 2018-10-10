@@ -2,7 +2,7 @@ import { Component } from "react";
 import axios from "axios";
 import ArticleCard from "../components/ArticleCard";
 import Carousel from "../components/Carousel";
-import Link from "next/link";
+import AdBanner from '../components/AdBanner';
 
 class App extends Component {
 	static async getInitialProps() {
@@ -20,10 +20,18 @@ class App extends Component {
 						font-family: Raleway, sans-serif;
 						font-weight: 400;
 					}
+					.container {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+					}
+					.row {
+						width: 100%;
+					}
 					.post-cards {
 						padding: 1rem 0;
 						display: grid;
-						grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+						grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 						grid-gap: 1rem;
 						justify-content: center;
 					}
@@ -43,6 +51,7 @@ class App extends Component {
 					}
 					.section-title {
 						display: flex;
+						color: #333;
 						flex-basis: 100%;
 						align-items: center;
 					}
@@ -62,6 +71,9 @@ class App extends Component {
 						margin-left: 1rem;
 					}
 					@media (min-width: 768px) {
+						.post-cards {
+							grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+						}
 						.post-card:not(:last-child) {
 							border-bottom: none;
 						}
@@ -75,6 +87,7 @@ class App extends Component {
 					`}</style>
 				<main>
 					<div className="container">
+						<AdBanner />
 						<div className="row">
 							<Carousel posts={this.props.posts.filter(post => post.isFeatured)} />
 						</div>
@@ -96,6 +109,7 @@ class App extends Component {
 								</div>
 							</div>
 						</div>
+						<AdBanner />
 					</div>
 				</main>
 			</React.Fragment>

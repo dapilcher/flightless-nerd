@@ -68,10 +68,11 @@ class Carousel extends React.Component {
     return (
       <React.Fragment>
         <style jsx>{`
-          .carousel-container {
+          .carousel__container {
             max-width: 100%;
             position: relative;
             margin: auto;
+            border-bottom: 0.3rem solid #EB3E34;
           }
           .prev, .next {
             cursor: pointer;
@@ -115,6 +116,9 @@ class Carousel extends React.Component {
           }
 
           @media (min-width: 768px) {
+            .carousel__container {
+              border-bottom-width: 0.5rem;
+            }
             .prev, .next {
               padding: 1rem;
             }
@@ -132,8 +136,8 @@ class Carousel extends React.Component {
             }
           }
           `}</style>
-        <div className="carousel-container">
-          <div className="carousel-slides">
+        <div className="carousel__container">
+          <div className="carousel__slides">
             {/* <div id="prev-slide">
               {slides[this.state.prevSlideIndex]}
             </div>

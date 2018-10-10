@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 const helpers = require("../helpers");
 
-const ArticleCard = props => (
+const ArticleCard = ({ post }) => (
 	<React.Fragment>
 		<style jsx>{`
 			.article-card {
@@ -38,6 +38,10 @@ const ArticleCard = props => (
 				flex-direction: column;
 				padding: 5px;
 				margin: auto 0;
+				color: #333;
+			}
+			.article-card-title, .article-card-subtitle {
+				font-family: Montserrat;
 			}
 			.article-card-body > h5 {
 				font-weight: 400;
@@ -53,16 +57,18 @@ const ArticleCard = props => (
 			.article-card-text {
 				display: none;
 			}
-
+			.pointer {
+				cursor: pointer;
+			}
 			@media (min-width: 768px) {
 				.article-card {
 					flex-direction: column;
-					// font-size: 14px;
 					margin: 0;
 					padding-bottom: 0;
 					border: 1px solid #586CFF;
 					border-radius: 1rem 1rem 1rem 0;
 					align-items: start;
+					box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
 				}
 				.article-card-img-container {
 					max-width: 100%;
@@ -74,6 +80,9 @@ const ArticleCard = props => (
 				.article-card-body {
 					padding: 10px;
 					margin: 0;
+					width: 100%;
+					background-color: #eee;
+					border-radius: 0 0 1rem 0;
 				}
 				.article-card-body > h5 {
 					font-weight: 500;
@@ -86,31 +95,39 @@ const ArticleCard = props => (
 				.article-card-text {
 					display: block;
 				}
-				.pointer {
-					cursor: pointer;
+			}
+			@media (min-width: 685px) {
+				.article-card {
+					flex-direction: column;
+					margin: 0;
+					padding-bottom: 0;
+					border: 1px solid #586CFF;
+					border-radius: 1rem 1rem 1rem 0;
+					align-items: start;
+					box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
 				}
 			}
 		`}</style>
-		<div className="article-card">
+		<div className="article-card pointer">
 			<div className="article-card-img-container">
-				<Link href={`/post?id=${props.post._id}`}>
-					{props.post.image ?
-						<img className="article-card-img pointer" src={props.post.image.secure_url} alt={props.post.title} /> :
+				<Link href={`/post?id=${post._id}`}>
+					{post.image ?
+						<img className="article-card-img" src={post.image.secure_url} alt={post.title} /> :
 						<div className="article-card-img-placeholder pointer"><span>FN</span></div>
 					}
 				</Link>
 			</div>
 			<div className="article-card-body">
-				<Link href={`/post?id=${props.post._id}`} prefetch>
-					<h5 className="article-card-title pointer">{props.post.title}</h5>
+				<Link href={`/post?id=${post._id}`} prefetch>
+					<h5 className="article-card-title">{post.title}</h5>
 				</Link>
 				<h6 className="article-card-subtitle">
-					{helpers.toRelativeTime(props.post.publishedDate)}
+					{helpers.toRelativeTime(post.publishedDate)}
 				</h6>
-				<div
+				{/* <div
 					className="article-card-text"
-					dangerouslySetInnerHTML={{ __html: props.post.content.brief }}
-				/>
+					dangerouslySetInnerHTML={post.content.brief.html ? { __html: post.content.brief.html } : { __html: post.content.brief }}
+				/> */}
 			</div>
 		</div>
 	</React.Fragment>

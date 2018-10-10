@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
 					/>
 					<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-reboot.min.css" />
 					<link rel="icon" type="image/x-icon" href="/static/images/Austrich_favicon.png" />
-					<link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway:300,400,500|Bangers" rel="stylesheet"></link>
+					<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Raleway:400|Bangers" rel="stylesheet"></link>
 				</Head>
 				<body>
 					<Main />
