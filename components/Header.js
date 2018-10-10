@@ -36,7 +36,7 @@ class Header extends Component {
           width: 100%;
           background-color: #586CFF;
           background-image: linear-gradient(to bottom right, #586CFF, #2539CC);
-          background: url("https://www.transparenttextures.com/patterns/cubes.png"), linear-gradient(to bottom right, #586CFF, #2539CC);
+          background: linear-gradient(to bottom right, #586CFF4D, #2539CCCC), url("https://www.transparenttextures.com/patterns/cubes.png"), linear-gradient(to bottom right, #586CFF, #2539CC);
           font-family: Raleway;
           font-size: 1.2rem;
           border-bottom: 0.3rem solid #EB3E34;

@@ -1,6 +1,7 @@
-import { Component } from "react";
+import { Fragment, Component } from "react";
 import axios from "axios";
 import ArticleCard from "../components/ArticleCard";
+import ArticleCardGrid from "../components/ArticleCardGrid";
 import Carousel from "../components/Carousel";
 import AdBanner from '../components/AdBanner';
 
@@ -14,7 +15,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<React.Fragment>
+			<Fragment>
 				<style jsx>{`
 					main {
 						font-family: Raleway, sans-serif;
@@ -97,7 +98,8 @@ class App extends Component {
 									<span>Latest Updates</span>
 								</div>
 							</div>
-							<div className="post-cards-container">
+							<ArticleCardGrid posts={this.props.posts} />
+							{/* <div className="post-cards__container">
 								<div className="post-cards">
 									{this.props.posts.map((post, i) => {
 										return (
@@ -107,12 +109,12 @@ class App extends Component {
 										);
 									})}
 								</div>
-							</div>
+							</div> */}
 						</div>
 						<AdBanner />
 					</div>
 				</main>
-			</React.Fragment>
+			</Fragment>
 		);
 	}
 }

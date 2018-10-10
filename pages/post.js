@@ -15,6 +15,7 @@ const Post = ({ post }) => (
 			}
 			.post__img {
 				max-width: 100%;
+				border-bottom: 0.3rem solid #EB3E34;
 			}
 			.post__title, .post__subtitle, .post__content {
 				padding: 0 5px;
@@ -34,6 +35,9 @@ const Post = ({ post }) => (
 				color: rgb(112,112,112);
 			}
 			@media (min-width:768px) {
+				.post__img {
+					border-bottom-width: 0.5rem;
+				}
 				.post__container {
 					max-width: 75%;
 					margin: 0 auto;
@@ -48,6 +52,7 @@ const Post = ({ post }) => (
 			<h3 className="post__title">{post.title}</h3>
 			<h6 className="post__subtitle text-muted">{helpers.toRelativeTime(post.publishedDate)}{post.author ? ` by ${post.author.name.first} ${post.author.name.last}` : ''}</h6>
 			<div className="post__content" dangerouslySetInnerHTML={post.content.extended.html ? { __html: post.content.extended.html } : { __html: post.content.extended }} />
+			<AdBanner />
 		</div>
 	</Fragment>
 );

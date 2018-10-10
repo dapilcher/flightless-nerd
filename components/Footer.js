@@ -6,8 +6,8 @@ const Footer = () => (
 			.footer {
 				width: 100%;
 				background-color: #586CFF;
-				// background-image: linear-gradient(to bottom right, #586CFF, #2539CC);
-				background: url("https://www.transparenttextures.com/patterns/cubes.png"), linear-gradient(to bottom right, #586CFF, #2539CC);
+				background-image: linear-gradient(to bottom right, #586CFF, #2539CC);
+				background: linear-gradient(to bottom right, #586CFF4D, #2539CCCC), url("https://www.transparenttextures.com/patterns/cubes.png"), linear-gradient(to bottom right, #586CFF, #2539CC);
 				border-top: 0.5rem solid #EB3E34;
 				padding: 1rem 0;
 				display: flex;

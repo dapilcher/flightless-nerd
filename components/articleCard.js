@@ -108,28 +108,26 @@ const ArticleCard = ({ post }) => (
 				}
 			}
 		`}</style>
-		<div className="article-card pointer">
-			<div className="article-card-img-container">
-				<Link href={`/post?id=${post._id}`}>
+		<Link href={`/post?id=${post._id}`}>
+			<div className="article-card pointer">
+				<div className="article-card-img-container">
 					{post.image ?
 						<img className="article-card-img" src={post.image.secure_url} alt={post.title} /> :
 						<div className="article-card-img-placeholder pointer"><span>FN</span></div>
 					}
-				</Link>
-			</div>
-			<div className="article-card-body">
-				<Link href={`/post?id=${post._id}`} prefetch>
+				</div>
+				<div className="article-card-body">
 					<h5 className="article-card-title">{post.title}</h5>
-				</Link>
-				<h6 className="article-card-subtitle">
-					{helpers.toRelativeTime(post.publishedDate)}
-				</h6>
-				{/* <div
+					<h6 className="article-card-subtitle">
+						{helpers.toRelativeTime(post.publishedDate)}
+					</h6>
+					{/* <div
 					className="article-card-text"
 					dangerouslySetInnerHTML={post.content.brief.html ? { __html: post.content.brief.html } : { __html: post.content.brief }}
 				/> */}
+				</div>
 			</div>
-		</div>
+		</Link>
 	</React.Fragment>
 );
 
