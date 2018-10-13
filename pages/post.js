@@ -2,7 +2,10 @@ import { Component, Fragment } from "react";
 import axios from "axios";
 import fetch from 'isomorphic-unfetch';
 import helpers from '../helpers';
+import WithRecentsSidebar from '../components/WithRecentsSidebar';
+import ResponsiveWidthContainer from '../components/ResponsiveWidthContainer'
 import AdBanner from '../components/AdBanner';
+import Title from '../components/Title';
 
 const Post = ({ post }) => (
 	<Fragment>
@@ -16,9 +19,10 @@ const Post = ({ post }) => (
 			.post__img {
 				max-width: 100%;
 				border-bottom: 0.3rem solid #EB3E34;
+				margin-bottom: 1rem;
 			}
 			.post__title, .post__subtitle, .post__content {
-				padding: 0 5px;
+				padding: 0 7px;
 			}
 			.post__title, .post__subtitle {
 				font-family: Montserrat;
@@ -26,6 +30,8 @@ const Post = ({ post }) => (
 			}
 			.post__content {
 				font-family: Raleway;
+				line-height: 1.7rem;
+				font-size: 1.1rem;
 			}
 			.post__title {
 				font-size: 1.25rem;
@@ -34,26 +40,25 @@ const Post = ({ post }) => (
 				font-size: 0.9rem;
 				color: rgb(112,112,112);
 			}
+			@media (min-width:576px) {
+				.post__title, .post__subtitle, .post__content {
+					padding: 0;
+				}
+			}
 			@media (min-width:768px) {
 				.post__img {
 					border-bottom-width: 0.5rem;
 				}
 				.post__container {
-					max-width: 75%;
-					margin: 0 auto;
+					// max-width: 75%;
 				}
 			}
 		`}</style>
-		<div className="post__container">
-			<AdBanner />
-			{post.image ?
-				<img className="post__img" src={post.image.secure_url} alt={post.title} /> :
-				''}
-			<h3 className="post__title">{post.title}</h3>
-			<h6 className="post__subtitle text-muted">{helpers.toRelativeTime(post.publishedDate)}{post.author ? ` by ${post.author.name.first} ${post.author.name.last}` : ''}</h6>
-			<div className="post__content" dangerouslySetInnerHTML={post.content.extended.html ? { __html: post.content.extended.html } : { __html: post.content.extended }} />
-			<AdBanner />
-		</div>
+		{post.image ?
+			<img className="post__img" src={post.image.secure_url} alt={post.title} /> :
+			''}
+		<Title title={post.title} subtitle={`${helpers.toRelativeTime(post.publishedDate)}${post.author ? ` by ${post.author.name.first} ${post.author.name.last}` : ''}`} />
+		<div className="post__content" dangerouslySetInnerHTML={post.content.extended.html ? { __html: post.content.extended.html } : { __html: post.content.extended }} />
 	</Fragment>
 );
 
@@ -68,13 +73,29 @@ class PostContainer extends Component {
 
 	render() {
 		return (
-			<div className="container">
-				{this.props.post.Error ? (
-					<p>Could not find post</p>
-				) : (
-						<Post post={this.props.post[0]} />
-					)}
-			</div>
+			<Fragment>
+				<style jsx>{`
+			.post__container {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				color: #333;
+			}
+			`}</style>
+				<div className="post__container">
+					<ResponsiveWidthContainer>
+						<AdBanner />
+						<WithRecentsSidebar>
+							{this.props.post.Error ? (
+								<p>Could not find post</p>
+							) : (
+									<Post post={this.props.post[0]} />
+								)}
+						</WithRecentsSidebar>
+						<AdBanner />
+					</ResponsiveWidthContainer>
+				</div>
+			</Fragment>
 		);
 	}
 }

@@ -16,19 +16,22 @@ const Footer = () => (
 				text-align: center;
 				color: #eee
 			}
-			.footer-img {
+			.footer__img {
 				max-width: 8rem;
 				margin-bottom: 1rem;
 			}
-			.container {
+			.footer__date {
+				margin: 0;
+			}
+			.footer__container {
 				width: 100%;
 			}
 		`}</style>
-		<footer className="footer container">
+		<footer className="footer footer__container">
 			{/* <div className="container">
-				<img className="footer-img" src="/static/images/Austrich_circle_cropped.png" alt="Flightless Nerd" />
+				<img className="footer__img" src="/static/images/Austrich_circle_cropped.png" alt="Flightless Nerd" />
 			</div> */}
-			<p>&copy; {new Date().getFullYear()}</p>
+			<p className="footer__date">&copy; {new Date().getFullYear()}</p>
 		</footer>
 	</React.Fragment>
 );

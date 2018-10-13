@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 const helpers = require("../helpers");
+import Title from './Title';
 
 const ArticleCard = ({ post }) => (
 	<React.Fragment>
@@ -60,7 +61,7 @@ const ArticleCard = ({ post }) => (
 			.pointer {
 				cursor: pointer;
 			}
-			@media (min-width: 768px) {
+			@media (min-width: 685px) {
 				.article-card {
 					flex-direction: column;
 					margin: 0;
@@ -69,6 +70,11 @@ const ArticleCard = ({ post }) => (
 					border-radius: 1rem 1rem 1rem 0;
 					align-items: start;
 					box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+					transition: 100ms;
+				}
+				.article-card:hover {
+					transform-origin: 50% 10%;
+					transform: scale(1.02) rotate(-0.5deg);
 				}
 				.article-card-img-container {
 					max-width: 100%;
@@ -96,16 +102,16 @@ const ArticleCard = ({ post }) => (
 					display: block;
 				}
 			}
-			@media (min-width: 685px) {
-				.article-card {
-					flex-direction: column;
-					margin: 0;
-					padding-bottom: 0;
-					border: 1px solid #586CFF;
-					border-radius: 1rem 1rem 1rem 0;
-					align-items: start;
-					box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-				}
+			// @media (min-width: 685px) {
+			// 	.article-card {
+			// 		flex-direction: column;
+			// 		margin: 0;
+			// 		padding-bottom: 0;
+			// 		border: 1px solid #586CFF;
+			// 		border-radius: 1rem 1rem 1rem 0;
+			// 		align-items: start;
+			// 		// box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+			// 	}
 			}
 		`}</style>
 		<Link href={`/post?id=${post._id}`}>
@@ -117,10 +123,11 @@ const ArticleCard = ({ post }) => (
 					}
 				</div>
 				<div className="article-card-body">
-					<h5 className="article-card-title">{post.title}</h5>
+					{/* <h5 className="article-card-title">{post.title}</h5>
 					<h6 className="article-card-subtitle">
 						{helpers.toRelativeTime(post.publishedDate)}
-					</h6>
+					</h6> */}
+					<Title title={post.title} subtitle={helpers.toRelativeTime(post.publishedDate)} />
 					{/* <div
 					className="article-card-text"
 					dangerouslySetInnerHTML={post.content.brief.html ? { __html: post.content.brief.html } : { __html: post.content.brief }}

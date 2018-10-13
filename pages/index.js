@@ -4,6 +4,7 @@ import ArticleCard from "../components/ArticleCard";
 import ArticleCardGrid from "../components/ArticleCardGrid";
 import Carousel from "../components/Carousel";
 import AdBanner from '../components/AdBanner';
+import SectionDivider from '../components/SectionDivider';
 
 class App extends Component {
 	static async getInitialProps() {
@@ -75,6 +76,8 @@ class App extends Component {
 						.post-cards {
 							grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 						}
+					}
+					@media (min-width: 685px) {
 						.post-card:not(:last-child) {
 							border-bottom: none;
 						}
@@ -93,23 +96,13 @@ class App extends Component {
 							<Carousel posts={this.props.posts.filter(post => post.isFeatured)} />
 						</div>
 						<div className="row">
-							<div className="section-header">
+							<SectionDivider text="Latest Updates" />
+							{/* <div className="section-header">
 								<div className="section-title">
 									<span>Latest Updates</span>
 								</div>
-							</div>
-							<ArticleCardGrid posts={this.props.posts} />
-							{/* <div className="post-cards__container">
-								<div className="post-cards">
-									{this.props.posts.map((post, i) => {
-										return (
-											<div className="post-card" key={i}>
-												<ArticleCard post={post} />
-											</div>
-										);
-									})}
-								</div>
 							</div> */}
+							<ArticleCardGrid posts={this.props.posts} />
 						</div>
 						<AdBanner />
 					</div>

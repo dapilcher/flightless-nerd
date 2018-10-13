@@ -18,6 +18,8 @@ const ArticleCardGrid = ({ posts }) => (
       .post-cards {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       }
+    }
+    @media (min-width: 685px) {
       .post-card:not(:last-child) {
         border-bottom: none;
       }

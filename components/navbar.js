@@ -4,6 +4,7 @@ const Navbar = ({ navbarItemRef, navbarSticky }) => (
 	<React.Fragment>
 		<style jsx>{`
 		.navbar {
+			overflow: hidden;
 			width: 100%;
 			display: flex;
 			flex-direction: column;
@@ -12,17 +13,6 @@ const Navbar = ({ navbarItemRef, navbarSticky }) => (
 			font-size: 1rem;
 			text-shadow: 5px 5px 20px rgba(0,0,0,0.5);
 		}
-		.navbar__brand {
-			position: absolute;
-			top:5px;
-			left:2rem;
-			z-index: 100;
-		}
-
-		.navbar__brand__img {
-			max-width: 5rem;
-		}
-		
 		.navbar__items {
 			display: flex;
 			flex-direction: row;
@@ -30,7 +20,6 @@ const Navbar = ({ navbarItemRef, navbarSticky }) => (
 			align-items: flex-end;
 			width: 100%;
 		}
-		
 		.navbar__item {
 			padding: 1rem 1rem 0.5rem 1rem;
 		}
@@ -39,14 +28,36 @@ const Navbar = ({ navbarItemRef, navbarSticky }) => (
 			background-color: #EB3E34;
 			// background-color: #D2251B;
 		}
-
 		.navbar__link {
 			color: #eee;
 		}
 		.navbar__link:hover {
 			text-decoration: none;
 		}
-
+		.navbar__dropdown__content__container {
+			display: none;
+		}
+		.navbar__dropdown__content {
+			display: flex;
+			flex-direction: column;
+			margin-top: 0.5rem;
+			margin-left: -1rem;
+			// padding: 1rem;
+			position: absolute;
+			min-width: 8rem;
+			z-index: 1;
+		}
+		.navbar__dropdown__link {
+			background-color: #EB3E34;
+			padding: 0.5rem 1rem;
+		}
+		.navbar__dropdown:hover .navbar__dropdown__content__container,
+		.navbar__dropdown__content__container:hover .navbar__dropdown__content__container {
+			display: block;
+		}
+		.navbar__dropdown__link:hover {
+			background: #D2251B;
+		}
 		@media (min-width: 992px) {
 			.navbar {
 				flex-direction: row;
@@ -66,17 +77,25 @@ const Navbar = ({ navbarItemRef, navbarSticky }) => (
 				</div>
 				<div className="navbar__item">
 					<Link href="/">
-						<a className="navbar__link">News</a>
+						<a className="navbar__link">Articles</a>
 					</Link>
+				</div>
+				<div className="navbar__item navbar__dropdown">
+					<span className="navbar__link">Media</span>
+					<div className="navbar__dropdown__content__container">
+						<div className="navbar__dropdown__content">
+							<Link href="/">
+								<a className="navbar__link navbar__dropdown__link">Videos</a>
+							</Link>
+							<Link href="/">
+								<a className="navbar__link navbar__dropdown__link">Podcast</a>
+							</Link>
+						</div>
+					</div>
 				</div>
 				<div className="navbar__item">
 					<Link href="/">
-						<a className="navbar__link">Reviews</a>
-					</Link>
-				</div>
-				<div className="navbar__item">
-					<Link href="/">
-						<a className="navbar__link">Podcast</a>
+						<a className="navbar__link">Contact Us</a>
 					</Link>
 				</div>
 			</nav>
