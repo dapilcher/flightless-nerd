@@ -9,7 +9,7 @@ import SectionDivider from '../components/SectionDivider';
 class App extends Component {
 	static async getInitialProps() {
 		let response = await axios.get(
-			`${process.env.HOST_URL || "http://localhost:3000/"}api/posts`
+			`${process.env.HOST_URL}api/posts`
 		);
 		return { posts: response.data };
 	}

@@ -65,7 +65,7 @@ const Post = ({ post }) => (
 class PostContainer extends Component {
 	static async getInitialProps({ query }) {
 		const response = await fetch(
-			`${process.env.HOST_URL || "http://localhost:3000/"}api/post/${query.id}`
+			`${process.env.HOST_URL}api/post/${query.id}`
 		);
 		const data = await response.json();
 		return { post: data };
