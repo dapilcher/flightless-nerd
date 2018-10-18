@@ -1,4 +1,4 @@
-1. Make sure you have Node installed:
+1. Make sure you have [Node](https://nodejs.org/en/) installed:
 
 	`node --version`
 
