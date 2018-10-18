@@ -4,28 +4,6 @@ import Navbar from './Navbar';
 import ResponsiveWidthContainer from './ResponsiveWidthContainer';
 
 class Header extends Component {
-  state = {
-    navbarSticky: false,
-  }
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = (e) => {
-    if (this.navbarItem != null) {
-      if (window.pageYOffset > this.navbarItem.offsetTop) {
-        if (!this.state.navbarSticky) this.setState({ navbarSticky: true });
-      } else {
-        if (this.state.navbarSticky) this.setState({ navbarSticky: false });
-      }
-    }
-  }
-
-
   render() {
     return (
       <Fragment>
@@ -45,10 +23,6 @@ class Header extends Component {
           transition: 300ms linear;
           box-shadow: 0 1px 20px rgba(0,0,0,0.5);
         }
-        .sticky {
-          position: sticky;
-          top: 0;
-        }
         .header {
           display: flex;
           flex-direction: column;
@@ -64,11 +38,11 @@ class Header extends Component {
           }
         }
         `}</style>
-        <header className={`header__container ${this.state.navbarSticky && 'sticky'}`}>
+        <header className="header__container">
           <ResponsiveWidthContainer>
             <div className="header">
-              <Logo showLogo={!this.state.navbarSticky} />
-              <Navbar navbarItemRef={e => (this.navbarItem = e)} navbarSticky={this.state.navbarSticky} />
+              <Logo />
+              <Navbar />
             </div>
           </ResponsiveWidthContainer>
         </header>

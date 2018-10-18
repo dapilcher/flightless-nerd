@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Navbar = ({ navbarItemRef, navbarSticky }) => (
+const Navbar = () => (
 	<React.Fragment>
 		<style jsx>{`
 		.navbar {
@@ -70,7 +70,7 @@ const Navbar = ({ navbarItemRef, navbarSticky }) => (
 		`}</style>
 		<div className="navbar">
 			<nav className="navbar__items">
-				<div className="navbar__item" ref={navbarItemRef}>
+				<div className="navbar__item">
 					<Link href="/">
 						<a className="navbar__link">Home</a>
 					</Link>
