@@ -1,5 +1,6 @@
 import { Fragment, Component } from "react";
 import axios from "axios";
+import fetch from 'isomorphic-unfetch';
 import ArticleCard from "../components/ArticleCard";
 import ArticleCardGrid from "../components/ArticleCardGrid";
 import Carousel from "../components/Carousel";
@@ -8,10 +9,11 @@ import SectionDivider from '../components/SectionDivider';
 
 class App extends Component {
 	static async getInitialProps() {
-		let response = await axios.get(
-			`${process.env.HOST_URL}api/posts`
+		let response = await fetch(
+			`${process.env.HOST_URL || '/'}api/posts`
 		);
-		return { posts: response.data };
+		const data = await response.json();
+		return { posts: data };
 	}
 
 	render() {
@@ -91,7 +93,7 @@ class App extends Component {
 					`}</style>
 				<main>
 					<div className="container">
-						<AdBanner />
+						{/* <AdBanner /> */}
 						<div className="row">
 							<Carousel posts={this.props.posts.filter(post => post.isFeatured)} />
 						</div>
@@ -104,7 +106,7 @@ class App extends Component {
 							</div> */}
 							<ArticleCardGrid posts={this.props.posts} />
 						</div>
-						<AdBanner />
+						{/* <AdBanner /> */}
 					</div>
 				</main>
 			</Fragment>

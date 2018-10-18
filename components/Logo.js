@@ -26,6 +26,9 @@ const Logo = ({ showLogo }) => (
       .logo-img {
         max-width: 4rem;
         margin: 1rem;
+        padding: 0;
+        background-color: none;
+        background-image: none;
         border-radius: 50%;
         box-shadow: 3px 3px 20px rgba(0,0,0,0.5);
       }

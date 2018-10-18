@@ -66,7 +66,7 @@ const ArticleCard = ({ post }) => (
 					flex-direction: column;
 					margin: 0;
 					padding-bottom: 0;
-					border: 1px solid #586CFF;
+					border-left: 2px solid #586CFF;
 					border-radius: 1rem 1rem 1rem 0;
 					align-items: start;
 					box-shadow: 1px 1px 10px rgba(0,0,0,0.5);

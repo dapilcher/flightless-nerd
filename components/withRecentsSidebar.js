@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import ResponsiveWidthContainer from './ResponsiveWidthContainer'
 
 const WithRecentsSidebar = props => (
 	<Fragment>
@@ -6,6 +7,7 @@ const WithRecentsSidebar = props => (
 		.with-sidebar__container {
 			display: flex;
 			flex-direction: row;
+			max-width: 100%;
 		}
 		.left {
 			flex: 3;
@@ -34,13 +36,13 @@ const WithRecentsSidebar = props => (
 				display: flex;
 				max-width: 100%;
 				flex-direction: column;
-				margin: 0;
-				border-left: 1px solid #586CFF;
+				margin: 1rem 0;
+				border-left: 2px solid #586CFF;
 				border-radius: 1rem 1rem 1rem 0;
 				align-items: start;
 				background-color: #eee;
 				color: #333;
-				// box-shadow: -1px -1px 10px rgba(0,0,0,0.5);
+				box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
 			}
 			.sidebar__inner {
 				padding: 1.5rem;
