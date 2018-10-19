@@ -11,11 +11,10 @@ const Post = ({ post }) => (
 		<style jsx global>{`
 		img {
 			max-width: 100%;
-			padding: 0.5rem;
-			// box-shadow: 0 0 20px rgba(0,0,0,0.5);
-			// background-image: linear-gradient(#eee8, #FFE838);
-			background-color: #FFE838;
+			padding: 0;
+			border: 0.5rem solid #FFE838;
 			margin: 0.5rem 0;
+			box-shadow: 0 0 20px rgba(0,0,0,0.5);
 		}
 		p {
 			font-family: Raleway;
@@ -30,7 +29,9 @@ const Post = ({ post }) => (
 				padding: 0;
 			}
 			img {
+				box-shadow: 0 0 20px rgba(0,0,0,0.5) inset;
 				padding: 1rem;
+				border-width: 0.5rem;
 			}
 		}
 		`}</style>
@@ -43,6 +44,7 @@ const Post = ({ post }) => (
 		}
 		.post__img {
 			max-width: 100%;
+			border: none;
 			border-bottom: 0.3rem solid #EB3E34;
 			margin: 0;
 			margin-bottom: 1rem;

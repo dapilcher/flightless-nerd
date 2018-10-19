@@ -40,6 +40,7 @@ const ArticleCard = ({ post }) => (
 				padding: 5px;
 				margin: auto 0;
 				color: #333;
+				max-width: 50%;
 			}
 			.article-card-title, .article-card-subtitle {
 				font-family: Montserrat;
@@ -86,7 +87,7 @@ const ArticleCard = ({ post }) => (
 				.article-card-body {
 					padding: 10px;
 					margin: 0;
-					width: 100%;
+					max-width: 100%;
 					background-color: #eee;
 					border-radius: 0 0 1rem 0;
 				}

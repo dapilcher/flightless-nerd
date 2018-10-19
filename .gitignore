@@ -32,3 +32,5 @@ node_modules
 
 dump
 .next
+
+ecosystem.config.js
