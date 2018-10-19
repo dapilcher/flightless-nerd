@@ -14,7 +14,7 @@ const keystone = require("keystone");
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
 
-const port = process.env.NODE_ENV === 'production' ? 80 : 3000;
+const port = process.env.PORT;
 keystone.init({
 	port,
 	name: "Flightless Nerd",
