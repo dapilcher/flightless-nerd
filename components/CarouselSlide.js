@@ -26,7 +26,7 @@ const Slide = ({ sliding, post }) => (
         padding: 0.5rem;
         border-radius: 1rem 1rem 1rem 0;
         // border-bottom: 2px solid #ffe838;
-        border-left: 2px solid #ffe838;
+        // border-left: 2px solid #ffe838;
       }
       .slide-text-content {
         display: none;

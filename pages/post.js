@@ -12,7 +12,7 @@ const Post = ({ post }) => (
 		img {
 			max-width: 100%;
 			padding: 0;
-			border: 0.5rem solid #FFE838;
+			// border: 0.5rem solid #FFE838;
 			margin: 0.5rem 0;
 			box-shadow: 0 0 20px rgba(0,0,0,0.5);
 		}
@@ -22,14 +22,15 @@ const Post = ({ post }) => (
 			font-size: 1.1rem;
 			color: #333;
 			margin: 1rem 0;
-			padding: 0 7px;
+			padding: 0 10px;
+			text-align: justify;
 		}
 		@media (min-width: 576px) {
 			p {
 				padding: 0;
 			}
 			img {
-				box-shadow: 0 0 20px rgba(0,0,0,0.5) inset;
+				box-shadow: 0 0 20px rgba(0,0,0,0.5);
 				padding: 1rem;
 				border-width: 0.5rem;
 			}

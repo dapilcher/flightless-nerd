@@ -32,14 +32,14 @@ const Footer = () => (
 				width: 100%;
 				background-color: #586CFF;
 				background-image: linear-gradient(to bottom right, #586CFF, #2539CC);
-				background: linear-gradient(to bottom right, #586CFF4D, #2539CCCC), url("https://www.transparenttextures.com/patterns/cubes.png"), linear-gradient(to bottom right, #586CFF, #2539CC);
+				// background: linear-gradient(to bottom right, #586CFF4D, #2539CCCC), url("https://www.transparenttextures.com/patterns/cubes.png"), linear-gradient(to bottom right, #586CFF, #2539CC);
 				border-top: 0.5rem solid #EB3E34;
 				padding: 1rem 0;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				text-align: center;
-				color: #eee
+				align-items: center;
+				color: #eee;
 			}
 			.footer__img {
 				max-width: 8rem;
@@ -47,6 +47,7 @@ const Footer = () => (
 			}
 			.footer__date {
 				margin: 0;
+				color: #eee;
 			}
 			.footer__container {
 				width: 100%;
