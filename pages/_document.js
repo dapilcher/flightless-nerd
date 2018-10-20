@@ -21,6 +21,9 @@ export default class MyDocument extends Document {
 					<link rel="icon" type="image/x-icon" href="/static/images/Austrich_favicon.png" />
 					<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Raleway:400|Bangers" rel="stylesheet"></link>
 				</Head>
+				<style jsx global>{`
+				overflow-x: hidden;
+				`}</style>
 				<body>
 					<Main />
 					<NextScript />
