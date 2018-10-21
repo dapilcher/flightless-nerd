@@ -27,6 +27,7 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node keystone.js",
-    "build": "next build"
+    "build": "next build",
+    "deploy": "pm2 deploy ecosystem.config.js production"
   }
 }
