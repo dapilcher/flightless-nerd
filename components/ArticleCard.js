@@ -79,10 +79,13 @@ const ArticleCard = ({ post }) => (
 				}
 				.article-card-img-container {
 					max-width: 100%;
+					padding: 0;
 				}
 				.article-card-img,
 				.article-card-img-placeholder {
 					border-radius: 1rem 1rem 0 0;
+					padding: 0;
+					margin: 0;
 				}
 				.article-card-body {
 					padding: 10px;

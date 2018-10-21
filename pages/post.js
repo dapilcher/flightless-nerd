@@ -90,14 +90,24 @@ const Post = ({ post }) => (
 
 class PostContainer extends Component {
 	static async getInitialProps({ query }) {
-		const response = await fetch(
-			`${process.env.HOST_URL || '/'}api/post/${query.id}`
-		);
-		const data = await response.json();
-		return { post: data };
+		const singlePost = await fetch(`${process.env.HOST_URL || '/'}api/post/${query.id}`).then(res => res.json());
+		const recentPosts = await fetch(`${process.env.HOST_URL || '/'}api/posts?limit=3`).then(res => res.json());
+
+		let response = {};
+
+		// Promise.all([singlePostPromise, recentPostsPromise])
+		// 	.then(values => {
+		// 		return { ...values };
+		// 	})
+		// 	.catch(error => {
+		// 		return { error };
+		// 	});
+
+		return { singlePost, recentPosts };
 	}
 
 	render() {
+		const { singlePost, recentPosts } = this.props;
 		return (
 			<Fragment>
 				<style jsx>{`
@@ -110,11 +120,11 @@ class PostContainer extends Component {
 			`}</style>
 				<div className="post__container">
 					<ResponsiveWidthContainer>
-						<WithRecentsSidebar>
-							{this.props.post.Error ? (
+						<WithRecentsSidebar recents={recentPosts}>
+							{singlePost.Error ? (
 								<p>Could not find post</p>
 							) : (
-									<Post post={this.props.post[0]} />
+									<Post post={singlePost[0]} />
 								)}
 						</WithRecentsSidebar>
 					</ResponsiveWidthContainer>

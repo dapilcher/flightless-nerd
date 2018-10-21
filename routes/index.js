@@ -28,13 +28,19 @@ exports = module.exports = nextApp => keystoneApp => {
 	keystoneApp.all('/api*', keystone.middleware.cors);
 
 	keystoneApp.get("/api/posts", (req, res, next) => {
-		console.log("in /api/posts");
+		let limit = 100;
+		if (req.query && req.query.limit) {
+			limit = parseInt(req.query.limit);
+			console.log(`query limit = ${limit}`)
+		}
 		const Post = keystone.list("Post");
 		Post.model
 			.find()
 			.where("state", "published")
 			.populate('author')
+			.populate('categories')
 			.sort("-publishedDate")
+			.limit(limit)
 			.exec(function (err, results) {
 				if (err) throw err;
 				res.json(results);
@@ -48,6 +54,7 @@ exports = module.exports = nextApp => keystoneApp => {
 			.find()
 			.where("_id", postId)
 			.populate('author')
+			.populate('categories')
 			.exec(function (err, results) {
 				if (err) res.json({ Error: err });
 				res.json(results);
