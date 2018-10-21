@@ -42,7 +42,6 @@ exports = module.exports = nextApp => keystoneApp => {
 	});
 
 	keystoneApp.get("/api/post/:id", (req, res, next) => {
-		console.log(`in /api/post/id -- id: ${req.params.id}`);
 		const Post = keystone.list("Post");
 		const postId = req.params.id;
 		Post.model

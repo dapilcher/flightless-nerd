@@ -14,9 +14,9 @@ var Post = new keystone.List('Post', {
 Post.add({
 	title: { type: String, required: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
-	author: { type: Types.Relationship, ref: 'User', index: true },
+	author: { type: Types.Relationship, ref: 'Author', index: true },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
-	image: { type: Types.CloudinaryImage },
+	image: { type: Types.CloudinaryImage, folder: 'flightlessnerd', autoCleanup: true, select: true, selectPrefix: 'flightlessnerd' },
 	content: {
 		brief: { type: Types.Markdown, height: 150 },
 		extended: { type: Types.Markdown, height: 400 },
@@ -30,4 +30,5 @@ Post.schema.virtual('content.full').get(function () {
 });
 
 Post.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
+Post.defaultSort = '-publishedDate';
 Post.register();

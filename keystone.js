@@ -15,12 +15,13 @@ const keystone = require("keystone");
 // and documentation.
 
 const port = process.env.PORT;
+
 keystone.init({
 	port,
 	name: "Flightless Nerd",
 	brand: "Flightless Nerd",
 	"auto update": true,
-	session: true,
+	"session store": "mongo",
 	auth: true,
 	"user model": "User",
 	mongo: process.env.MONGO_URI || "mongodb://localhost:27017"
@@ -42,6 +43,7 @@ app.prepare().then(() => {
 	// Configure the navigation bar in Keystone's Admin UI
 	keystone.set("nav", {
 		posts: ["posts", "post-categories"],
+		authors: "authors",
 		users: "users"
 	});
 

@@ -28,7 +28,7 @@ User.schema.virtual('fullName').get(function () {
 /**
  * Relationships
  */
-User.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
+// User.relationship({ ref: 'Author', path: 'posts', refPath: 'user' });
 
 
 /**
