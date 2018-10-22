@@ -31,7 +31,7 @@ const Logo = ({ showLogo }) => (
         box-shadow: 3px 3px 20px rgba(0,0,0,0.5);
       }
       .logo-title {
-        font-weight: 300;
+        // font-weight: 300;
         font-size: 3rem;
         font-family: 'Bangers';
         text-shadow: 3px 3px 20px rgba(0,0,0,0.5);

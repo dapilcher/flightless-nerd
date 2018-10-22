@@ -14,6 +14,13 @@ const ArticleCardGrid = ({ posts }) => (
     .post-card:not(:last-child) {
       border-bottom: 1px solid #EB3E34;
     }
+    #no-posts {
+      font-family: Raleway;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0 10px 1rem 10px;
+      margin-bottom: 1rem;
+    }
     @media (min-width: 768px) {
       .post-cards {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -24,9 +31,14 @@ const ArticleCardGrid = ({ posts }) => (
         border-bottom: none;
       }
     }
+    @media (min-width: 568px) {
+      #no-posts {
+        margin: 0 0 1rem 0;
+      }
+    }
     `}</style>
     <div className="post-cards__container">
-      <div className="post-cards">
+      {posts.length > 0 ? <div className="post-cards">
         {posts.map((post, i) => {
           return (
             <div className="post-card" key={i}>
@@ -34,7 +46,8 @@ const ArticleCardGrid = ({ posts }) => (
             </div>
           );
         })}
-      </div>
+      </div> :
+        <h4 id="no-posts">No posts available...</h4>}
     </div>
   </Fragment>
 )

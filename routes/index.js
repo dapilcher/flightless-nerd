@@ -47,6 +47,16 @@ exports = module.exports = nextApp => keystoneApp => {
 			});
 	});
 
+	keystoneApp.get("/api/categories", (req, res, next) => {
+		const PostCategory = keystone.list("PostCategory");
+		PostCategory.model
+			.find()
+			.exec(function (err, results) {
+				if (err) throw err;
+				res.json(results);
+			});
+	});
+
 	keystoneApp.get("/api/post/:id", (req, res, next) => {
 		const Post = keystone.list("Post");
 		const postId = req.params.id;
@@ -59,6 +69,27 @@ exports = module.exports = nextApp => keystoneApp => {
 				if (err) res.json({ Error: err });
 				res.json(results);
 			});
+	});
+
+	keystoneApp.get("/api/author/:id", (req, res, next) => {
+		const Author = keystone.list("Author");
+		const Post = keystone.list("Post");
+		const authorId = req.params.id;
+		const author = Author.model
+			.find()
+			.where("_id", authorId)
+			.exec(function (err, results) {
+				if (err) res.json({ Error: err });
+				res.json(results);
+			});
+		const posts = Post.model
+			.find()
+			.where("author", authorId)
+			.exec(function (err, results) {
+				if (err) res.json({ Error: err });
+				return JSON.parse(results)
+			});
+		res.json({ ...author, posts })
 	});
 
 	keystoneApp.get("*", (req, res) => {

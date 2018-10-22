@@ -65,7 +65,7 @@ const Footer = () => (
 				padding: 1rem;
 				box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
 				border-radius: 1rem 1rem 1rem 0;
-				border-left: 2px solid #eee;
+				// border-left: 2px solid #eee;
 			}
 			.footer__social__item {
 				color: #eee;

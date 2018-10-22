@@ -76,11 +76,11 @@ const Navbar = () => (
 					</Link>
 				</div>
 				<div className="navbar__item">
-					<Link href="/">
+					<Link href="/articles">
 						<a className="navbar__link">Articles</a>
 					</Link>
 				</div>
-				<div className="navbar__item navbar__dropdown">
+				{/* <div className="navbar__item navbar__dropdown">
 					<span className="navbar__link">Media</span>
 					<div className="navbar__dropdown__content__container">
 						<div className="navbar__dropdown__content">
@@ -97,7 +97,7 @@ const Navbar = () => (
 					<Link href="/">
 						<a className="navbar__link">Contact Us</a>
 					</Link>
-				</div>
+				</div> */}
 			</nav>
 		</div>
 	</React.Fragment>

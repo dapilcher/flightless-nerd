@@ -93,16 +93,6 @@ class PostContainer extends Component {
 		const singlePost = await fetch(`${process.env.HOST_URL || '/'}api/post/${query.id}`).then(res => res.json());
 		const recentPosts = await fetch(`${process.env.HOST_URL || '/'}api/posts?limit=3`).then(res => res.json());
 
-		let response = {};
-
-		// Promise.all([singlePostPromise, recentPostsPromise])
-		// 	.then(values => {
-		// 		return { ...values };
-		// 	})
-		// 	.catch(error => {
-		// 		return { error };
-		// 	});
-
 		return { singlePost, recentPosts };
 	}
 
