@@ -1,4 +1,5 @@
 import { Component, Fragment } from 'react';
+import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
@@ -83,6 +84,9 @@ class Articles extends Component {
     const { posts, categories } = this.props;
     return (
       <Fragment>
+        <Head>
+          <title>{`Flightless Nerd - Articles`}</title>
+        </Head>
         <style jsx>{`
         margin-top: 1rem;
         h1 {

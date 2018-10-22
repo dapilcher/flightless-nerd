@@ -1,6 +1,8 @@
-import React from 'react'
-import App, { Container } from 'next/app'
+import React, { Fragment } from 'react';
+import App, { Container } from 'next/app';
+import { Head } from 'next/document';
 import Page from "../components/Page";
+import Meta from "../components/Meta";
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -18,6 +20,7 @@ export default class MyApp extends App {
 
     return (
       <Container>
+        <Meta />
         <Page>
           <Component {...pageProps} />
         </Page>

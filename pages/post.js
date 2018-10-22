@@ -1,4 +1,5 @@
 import { Component, Fragment } from "react";
+import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
 import ReactMarkdown from 'react-markdown/';
 import helpers from '../helpers';
@@ -100,6 +101,9 @@ class PostContainer extends Component {
 		const { singlePost, recentPosts } = this.props;
 		return (
 			<Fragment>
+				<Head>
+					<title>{singlePost[0].title}</title>
+				</Head>
 				<style jsx>{`
 			.post__container {
 				display: flex;
