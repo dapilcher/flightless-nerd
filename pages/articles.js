@@ -1,7 +1,7 @@
 import { Component, Fragment } from 'react';
 import fetch from 'isomorphic-unfetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import ArticleCardGrid from '../components/ArticleCardGrid';
 
 const Checkbox = ({ id, name, checked = true, onChange }) => (
@@ -69,11 +69,6 @@ class Articles extends Component {
     this.setState({ filters })
   }
 
-  toggleFilters = e => {
-    e.preventDefault();
-    // let filters = 
-  }
-
   toggleChecked = (e, id) => {
     console.log('toggling');
     e.preventDefault();
@@ -134,7 +129,7 @@ class Articles extends Component {
         }
         `}</style>
         <h1>Articles</h1>
-        <h3 onClick={this.toggleFilters}>Filters <FontAwesomeIcon icon={faCaretDown} /></h3>
+        <h3>Filters<FontAwesomeIcon icon={faFilter} style={{ fontSize: '1rem', color: '#586CFF' }} /></h3>
         <form id="form__filters" data-expand={true}>
           {categories.filter(cat1 => posts.some(post => post.categories.some(cat2 => cat1._id === cat2._id))).map(cat => (
             <Checkbox
