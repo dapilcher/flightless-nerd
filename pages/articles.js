@@ -106,7 +106,9 @@ class Articles extends Component {
           grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
           justify-items: center;
           align-items: center;
+          padding-bottom: 1rem;
           grid-gap: 10px;
+          border-bottom: 1px solid #EB3E34;
           margin: 1rem 0;
           height: 0;
           display: none;
@@ -129,7 +131,7 @@ class Articles extends Component {
         }
         `}</style>
         <h1>Articles</h1>
-        <h3>Filters<FontAwesomeIcon icon={faFilter} style={{ fontSize: '1rem', color: '#586CFF' }} /></h3>
+        <h3>Filters</h3>
         <form id="form__filters" data-expand={true}>
           {categories.filter(cat1 => posts.some(post => post.categories.some(cat2 => cat1._id === cat2._id))).map(cat => (
             <Checkbox
