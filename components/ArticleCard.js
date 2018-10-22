@@ -90,6 +90,7 @@ const ArticleCard = ({ post }) => (
 				.article-card-body {
 					padding: 10px;
 					margin: 0;
+					width: 100%;
 					max-width: 100%;
 					background-color: #eee;
 					border-radius: 0 0 1rem 0;
