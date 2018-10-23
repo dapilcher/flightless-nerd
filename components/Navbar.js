@@ -28,7 +28,7 @@ const Navbar = () => (
 			background-color: #EB3E34;
 			// background-color: #D2251B;
 		}
-		.navbar__link {
+		.navbar__item .navbar__link {
 			color: #eee;
 		}
 		.navbar__link:hover {
@@ -70,16 +70,16 @@ const Navbar = () => (
 		`}</style>
 		<div className="navbar">
 			<nav className="navbar__items">
-				<div className="navbar__item">
-					<Link href="/">
+				<Link href="/">
+					<div className="navbar__item">
 						<a className="navbar__link">Home</a>
-					</Link>
-				</div>
-				<div className="navbar__item">
-					<Link href="/articles">
+					</div>
+				</Link>
+				<Link href="/articles">
+					<div className="navbar__item">
 						<a className="navbar__link">Articles</a>
-					</Link>
-				</div>
+					</div>
+				</Link>
 				{/* <div className="navbar__item navbar__dropdown">
 					<span className="navbar__link">Media</span>
 					<div className="navbar__dropdown__content__container">
