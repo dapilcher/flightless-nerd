@@ -64,7 +64,7 @@ class Articles extends Component {
     this.props.categories.forEach(cat => {
       // post.categories.forEach(cat => {
       if (cat._id in filters) return;
-      filters[cat._id] = true;
+      filters[cat._id] = false;
       // })
     });
     this.setState({ filters })
@@ -146,7 +146,10 @@ class Articles extends Component {
               onChange={this.toggleChecked} />
           ))}
         </form>
-        <ArticleCardGrid posts={posts.filter(post => post.categories.some(cat => this.state.filters[cat._id]))} />
+        <ArticleCardGrid
+          posts={Object.values(this.state.filters).some(val => val) ?
+            posts.filter(post => post.categories.some(cat => this.state.filters[cat._id])) :
+            posts} />
       </Fragment>
     )
   }
