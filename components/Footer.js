@@ -84,7 +84,7 @@ const Footer = () => (
 			<div className="footer__social__container__wrapper">
 				<div className="footer__social__container">
 					{social.map(network => (
-						<a href={network.url} className="footer__social__link" key={network.network}>
+						<a href={network.url} className="footer__social__link" target="_blank" key={network.network}>
 							<span className="fa-layers footer__social__item">
 								<FontAwesomeIcon icon={network.icon} transform="right-1 down-1" style={{ color: 'rgba(0,0,0,0.1)' }} />
 								<FontAwesomeIcon icon={network.icon} />
