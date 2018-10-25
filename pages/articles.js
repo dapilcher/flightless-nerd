@@ -2,7 +2,7 @@ import { Component, Fragment } from 'react';
 import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import ArticleCardGrid from '../components/ArticleCardGrid';
 
 const Checkbox = ({ id, name, checked = true, onChange }) => (
@@ -71,67 +71,49 @@ class Articles extends Component {
 
   toggleFilters = e => {
     e.preventDefault();
-    // this.formRef.dataset.expand = !this.formRef.dataset.expand;
-    // let showFilters = this.state.showFilters;
-    // showFilters = !showFilters;
-    // this.setState({ showFilters });
 
-    var section = this.formRef;
-    var isCollapsed = section.getAttribute('data-collapsed') === 'true';
+    let section = this.formRef;
+    let icon = this.iconRef;
+    let isCollapsed = section.getAttribute('data-collapsed') === 'true';
 
     if (isCollapsed) {
       this.expandSection(section)
-      section.setAttribute('data-collapsed', 'false')
     } else {
       this.collapseSection(section)
     }
   }
 
   collapseSection = (element) => {
-    // get the height of the element's inner content, regardless of its actual size
-    var sectionHeight = element.scrollHeight;
+    let sectionHeight = element.scrollHeight;
 
-    // temporarily disable all css transitions
-    var elementTransition = element.style.transition;
+    let elementTransition = element.style.transition;
     element.style.transition = '';
 
-    // on the next frame (as soon as the previous style change has taken effect),
-    // explicitly set the element's height to its current pixel height, so we 
-    // aren't transitioning out of 'auto'
     requestAnimationFrame(function () {
       element.style.height = sectionHeight + 'px';
       element.style.transition = elementTransition;
 
-      // on the next frame (as soon as the previous style change has taken effect),
-      // have the element transition to height: 0
       requestAnimationFrame(function () {
         element.style.height = 0 + 'px';
       });
     });
 
-    // mark the section as "currently collapsed"
     element.setAttribute('data-collapsed', 'true');
   }
 
   expandSection = (element) => {
-    // get the height of the element's inner content, regardless of its actual size
-    var sectionHeight = element.scrollHeight;
+    let sectionHeight = element.scrollHeight;
 
-    // have the element transition to the height of its inner content
     element.style.height = sectionHeight + 'px';
 
     function func(e) {
-      // remove this event listener so it only gets triggered once
       element.removeEventListener('transitionend', func);
 
-      // remove "height" from the element's inline styles, so it can return to its initial value
       element.style.height = null;
     }
 
-    // when the next css transition finishes (which should be the one we just triggered)
     element.addEventListener('transitionend', func);
 
-    // mark the section as "currently not collapsed"
     element.setAttribute('data-collapsed', 'false');
   }
 
@@ -195,8 +177,13 @@ class Articles extends Component {
         }
         `}</style>
         <h1>Articles</h1>
-        <h3><button className="filters__title" onClick={this.toggleFilters}><FontAwesomeIcon icon={faFilter} size="sm" /> Filters</button></h3>
-        <div className="filters__form__wrapper" data-collapse={true} ref={el => this.formRef = el}>
+        <h3>
+          <button className="filters__title" onClick={this.toggleFilters}>
+            <span ref={el => this.iconRef = el}><FontAwesomeIcon icon={faAngleDown} size="sm" /></span>
+            {' Filters'}
+          </button>
+        </h3>
+        <div className="filters__form__wrapper" ref={el => this.formRef = el} style={{ height: '0px' }} data-collapsed="true">
           <form id="filters__form">
             {categories.filter(cat1 => posts.some(post => post.categories.some(cat2 => cat1._id === cat2._id))).map(cat => (
               <Checkbox
