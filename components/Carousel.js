@@ -81,6 +81,7 @@ class Carousel extends React.Component {
             width: auto;
             margin-top: -22px;
             padding: 1rem 0.5rem;
+            // background: #FFE83866;
             background: rgba(255,255,255,0.4);
             font-weight: bold;
             font-size: 1rem;
@@ -92,6 +93,7 @@ class Carousel extends React.Component {
             border-radius: 3px 0 0 3px;
           }
           .prev:hover, .next:hover {
+            // background: #FFE838CC;
             background: rgba(255,255,255,0.8);
           }
           .dots {
@@ -106,12 +108,14 @@ class Carousel extends React.Component {
             height: 0.5rem;
             width: 0.5rem;
             margin: 0 0.5rem;
+            // background: #FFE83866;
             background: rgba(255,255,255,0.4);
             border-radius: 50%;
             display: inline-block;
             transition: 0.5s ease;
           }
           .dot-active, .dot:hover {
+            // background: #FFE838CC;
             background: rgba(255,255,255,0.8);
           }
 
