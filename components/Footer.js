@@ -40,6 +40,7 @@ const Footer = () => (
 				justify-content: center;
 				align-items: center;
 				color: #eee;
+				margin-top: auto;
 			}
 			.footer__img {
 				max-width: 8rem;

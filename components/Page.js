@@ -14,6 +14,7 @@ class Page extends Component {
         justify-content: center;
 
         .page {
+          min-height: 100vh;
           display: flex;
           flex-direction: column;
           align-items: center;
