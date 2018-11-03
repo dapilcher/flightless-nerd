@@ -8,7 +8,7 @@ import ArticleCardGrid from '../components/ArticleCardGrid';
 const Checkbox = ({ id, name, checked = true, onChange }) => (
   <Fragment>
     <style jsx>{`
-    button {
+    .filters__button {
       background-color: #eee;
       color: #333;
       font-family: Montserrat;
@@ -19,19 +19,20 @@ const Checkbox = ({ id, name, checked = true, onChange }) => (
       outline: none;
       margin: 0;
     }
-    button:hover {
+    .filters__button:hover {
       transform: scale(1.03);
       box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
     }
-    button:focus {
+    .filters__button:focus {
       outline: none;
     }
-    button[data-checked='true'] {
+    .filters__button[data-checked='true'] {
       background-color: #EB3E34;
       color: #eee;
     }
     `}</style>
     <button
+      className="filters__button"
       data-id={id}
       data-checked={checked}
       onClick={(e) => onChange(e, id)}

@@ -19,6 +19,15 @@
  */
 
 const keystone = require("keystone");
+const crypto = require('crypto');
+const fetch = require('isomorphic-unfetch');
+
+var Mailchimp = require('mailchimp-api-v3')
+
+// var mailchimp = new Mailchimp(api_key);
+// const getConfig = require('next/config');
+
+// const { serverRuntimeConfig, publicRuntimeConfig } = require('next/config').getConfig();
 
 // Setup Route Bindings
 exports = module.exports = nextApp => keystoneApp => {
@@ -26,6 +35,8 @@ exports = module.exports = nextApp => keystoneApp => {
 	const handle = nextApp.getRequestHandler();
 
 	keystoneApp.all('/api*', keystone.middleware.cors);
+
+	// Get all posts
 
 	keystoneApp.get("/api/posts", (req, res, next) => {
 		let limit = 100;
@@ -47,6 +58,8 @@ exports = module.exports = nextApp => keystoneApp => {
 			});
 	});
 
+	// Get post categories
+
 	keystoneApp.get("/api/categories", (req, res, next) => {
 		const PostCategory = keystone.list("PostCategory");
 		PostCategory.model
@@ -56,6 +69,8 @@ exports = module.exports = nextApp => keystoneApp => {
 				res.json(results);
 			});
 	});
+
+	// Get post by id
 
 	keystoneApp.get("/api/post/id/:id", (req, res, next) => {
 		const Post = keystone.list("Post");
@@ -71,6 +86,8 @@ exports = module.exports = nextApp => keystoneApp => {
 			});
 	});
 
+	// Get post by slug
+
 	keystoneApp.get("/api/post/slug/:slug", (req, res, next) => {
 		const Post = keystone.list("Post");
 		const postSlug = req.params.slug;
@@ -84,6 +101,8 @@ exports = module.exports = nextApp => keystoneApp => {
 				res.json(results);
 			});
 	});
+
+	// Get author data and their posts
 
 	keystoneApp.get("/api/author/:id", (req, res, next) => {
 		const Author = keystone.list("Author");
@@ -105,6 +124,8 @@ exports = module.exports = nextApp => keystoneApp => {
 			});
 		res.json({ ...author, posts })
 	});
+
+	// Contributor form submit
 
 	keystoneApp.post("/api/contributor", (req, res, next) => {
 		const Contributor = keystone.list("Contributor");
@@ -138,6 +159,94 @@ exports = module.exports = nextApp => keystoneApp => {
 			}
 			else res.status(200).send({ status: 'success' });
 		});
+	});
+
+	// Email subscriber form submit
+
+	keystoneApp.post("/api/email", async (req, res, next) => {
+		console.log('in /api/email')
+		if (!req.body.email) res.send({ error: "Incomplete data set" });
+		const { email } = req.body;
+		// const data = {
+		// 	email_address: email,
+		// 	status: 'subscribed'
+		// }
+
+		const mailchimp = new Mailchimp(process.env.MAILCHIMP_API_KEY);
+		// const mailchimpBaseUrl = process.env.MAILCHIMP_BASE_URL;
+
+		try {
+			// console.log('server try block');
+			const listId = process.env.MAILCHIMP_LIST_ID;
+			const emailHash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
+
+			// let subscribed = false;
+
+			const data = {
+				email_address: email,
+				status: "subscribed",
+				status_if_new: "subscribed"
+			}
+
+			// check if member exists
+			mailchimp.get(`/lists/${listId}/members/${emailHash}`)
+				.then(response => {
+					console.log(`\nMailchimp get response:\n${JSON.stringify(response)}\n`);
+					if (response.status === "subscribed") {
+						// subscribed = true;
+						res.send({ error: `Email ${email} already subscribed` });
+					} else {
+						mailchimp.request({
+							method: 'put',
+							path: '/lists/{list_id}/members/{subscriber_hash}',
+							path_params: {
+								list_id: listId,
+								subscriber_hash: emailHash
+							},
+							body: data,
+						},
+							(error, result) => {
+								if (error) {
+									console.log(`\nMailchimp put error:\n${JSON.stringify(error)}\n`);
+									res.send({ error: error.title });
+								}
+								else {
+									console.log(`\nMailchimp put success:\n${JSON.stringify(result)}\n`);
+									res.send({ success: result })
+								}
+							}
+						);
+					}
+				})
+				.catch(error => {
+					console.log(`\nMailchimp get catch:\n${error}\n`);
+					// res.send({ error: `Error retrieving email` });
+					mailchimp.request({
+						method: 'put',
+						path: '/lists/{list_id}/members/{subscriber_hash}',
+						path_params: {
+							list_id: listId,
+							subscriber_hash: emailHash
+						},
+						body: data,
+					},
+						(error, result) => {
+							if (error) {
+								console.log(`\nMailchimp put error:\n${JSON.stringify(error)}\n`);
+								res.send({ error: error.title });
+							}
+							else {
+								console.log(`\nMailchimp put success:\n${JSON.stringify(result)}\n`);
+								res.send({ success: result })
+							}
+						}
+					);
+				});
+
+		} catch (error) {
+			console.log(`\nMailchimp catch block:\n${error}\n`);
+			res.send({ error: error.message })
+		}
 	});
 
 	// Serve robotx.txt
