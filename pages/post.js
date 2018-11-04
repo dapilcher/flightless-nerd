@@ -6,6 +6,7 @@ import helpers from '../helpers';
 import WithRecentsSidebar from '../components/WithRecentsSidebar';
 import ResponsiveWidthContainer from '../components/ResponsiveWidthContainer'
 import Title from '../components/Title';
+import CategoryTagList from '../components/CategoryTagList';
 
 const Post = ({ post }) => (
 	<Fragment>
@@ -79,6 +80,7 @@ const Post = ({ post }) => (
 		{post.image ?
 			<img className="post__img" src={post.image.secure_url} alt={post.title} /> :
 			''}
+		<CategoryTagList cats={post.categories} />
 		<Title title={post.title} subtitle={`${helpers.toRelativeTime(post.publishedDate)}${post.author ? ` by ${post.author.name.first} ${post.author.name.last}` : ''}`} />
 		{post.content.extended.md ?
 			<ReactMarkdown

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 const helpers = require("../helpers");
 import Title from './Title';
+import CategoryTagList from './CategoryTagList';
 
 const ArticleCard = ({ post }) => (
 	<React.Fragment>
@@ -128,15 +129,8 @@ const ArticleCard = ({ post }) => (
 					}
 				</div>
 				<div className="article-card-body">
-					{/* <h5 className="article-card-title">{post.title}</h5>
-					<h6 className="article-card-subtitle">
-						{helpers.toRelativeTime(post.publishedDate)}
-					</h6> */}
+					<CategoryTagList cats={post.categories} />
 					<Title title={post.title} subtitle={helpers.toRelativeTime(post.publishedDate)} />
-					{/* <div
-					className="article-card-text"
-					dangerouslySetInnerHTML={post.content.brief.html ? { __html: post.content.brief.html } : { __html: post.content.brief }}
-				/> */}
 				</div>
 			</div>
 		</Link>

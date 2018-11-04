@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CategoryTagList from './CategoryTagList';
 
 const Slide = ({ sliding, post }) => (
   <React.Fragment>
@@ -60,6 +61,7 @@ const Slide = ({ sliding, post }) => (
         <span className="slide-text-content"
           dangerouslySetInnerHTML={post.content.brief.html ? { __html: post.content.brief.html } : { __html: post.content.brief }}
         ></span>
+        <CategoryTagList cats={post.categories} />
       </div>
     </div>
   </React.Fragment>
