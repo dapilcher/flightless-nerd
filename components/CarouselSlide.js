@@ -70,7 +70,7 @@ const Slide = ({ sliding, post }) => (
           dangerouslySetInnerHTML={post.content.brief.html ? { __html: post.content.brief.html } : { __html: post.content.brief }}
         ></span>
         <div className="hide__smol">
-          <CategoryTagList cats={post.categories} />
+          <CategoryTagList categories={post.categories} />
         </div>
       </div>
     </div>

@@ -119,7 +119,7 @@ const ArticleCard = ({ post }) => (
 					}
 				</div>
 				<div className="article-card-body">
-					<CategoryTagList cats={post.categories} />
+					<CategoryTagList categories={post.categories} />
 					<Title title={post.title} subtitle={helpers.toRelativeTime(post.publishedDate)} />
 				</div>
 			</div>

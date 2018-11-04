@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import CategoryTag from './CategoryTag';
 
-const CategoryTagList = ({ cats }) => (
+const CategoryTagList = ({ categories }) => (
   <Fragment>
     <style jsx>{`
     .tags__container {
@@ -11,7 +11,7 @@ const CategoryTagList = ({ cats }) => (
     }
     `}</style>
     <div className="tags__container">
-      {cats.map(cat => <CategoryTag key={cat.id} text={cat.name} />)}
+      {categories.map(cat => <CategoryTag key={cat._id} text={cat.name} />)}
     </div>
   </Fragment>
 );
