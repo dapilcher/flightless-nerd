@@ -8,14 +8,15 @@ const CategoryTag = ({ text }) => (
       font-size: 0.8rem;
       color: #eee;
       max-width: 100%;
+      margin-bottom: 5px;
     }
     .tag__container:not(:first-child) {
       margin-left: 5px;
     }
     .tag__inner {
-      border-radius: 3px;
+      border-radius: 0.8rem 0.8rem 0.8rem 0;
       background-color: #EB3E34;
-      padding: 3px;
+      padding: 5px;
     }
     `}</style>
     <div className="tag__container">

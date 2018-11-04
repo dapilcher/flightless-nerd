@@ -3,6 +3,11 @@ import CategoryTagList from './CategoryTagList';
 
 const Slide = ({ sliding, post }) => (
   <React.Fragment>
+    <style global jsx>{`
+    p {
+      margin-bottom: 0.5rem;
+    }
+    `}</style>
     <style jsx>{`
       // max-width: 100%;
       .slide-img {
@@ -23,13 +28,13 @@ const Slide = ({ sliding, post }) => (
         left: 0;
         bottom: 0;
         background-color: rgba(0,0,0,0.5);
-        // background-color: #EB3E34cc;
         padding: 0.5rem;
         border-radius: 1rem 1rem 1rem 0;
-        // border-bottom: 2px solid #ffe838;
-        // border-left: 2px solid #ffe838;
       }
       .slide-text-content {
+        display: none;
+      }
+      .hide__smol {
         display: none;
       }
       @media (min-width: 768px) {
@@ -50,6 +55,9 @@ const Slide = ({ sliding, post }) => (
           font-size: 2rem;
           font-weight: 400;
         }
+        .hide__smol {
+          display: block;
+        }
       }
     `}</style>
     <div className={`carousel-slide ${sliding ? 'sliding' : ''}`}>
@@ -61,7 +69,9 @@ const Slide = ({ sliding, post }) => (
         <span className="slide-text-content"
           dangerouslySetInnerHTML={post.content.brief.html ? { __html: post.content.brief.html } : { __html: post.content.brief }}
         ></span>
-        <CategoryTagList cats={post.categories} />
+        <div className="hide__smol">
+          <CategoryTagList cats={post.categories} />
+        </div>
       </div>
     </div>
   </React.Fragment>

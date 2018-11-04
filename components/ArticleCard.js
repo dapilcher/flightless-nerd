@@ -11,6 +11,7 @@ const ArticleCard = ({ post }) => (
 				max-width: 100%;
 				display: flex;
 				flex-direction: row;
+				align-items: center;
 				font-size: 14px;
 				margin: 0 10px;
 				padding-bottom: 1rem;
@@ -38,7 +39,7 @@ const ArticleCard = ({ post }) => (
 			.article-card-body {
 				display: flex;
 				flex-direction: column;
-				padding: 5px;
+				padding: 0 10px;
 				margin: auto 0;
 				color: #333;
 				max-width: 50%;
@@ -107,17 +108,6 @@ const ArticleCard = ({ post }) => (
 				.article-card-text {
 					display: block;
 				}
-			}
-			// @media (min-width: 685px) {
-			// 	.article-card {
-			// 		flex-direction: column;
-			// 		margin: 0;
-			// 		padding-bottom: 0;
-			// 		border: 1px solid #586CFF;
-			// 		border-radius: 1rem 1rem 1rem 0;
-			// 		align-items: start;
-			// 		// box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-			// 	}
 			}
 		`}</style>
 		<Link href={`/post?id=${post._id}`}>

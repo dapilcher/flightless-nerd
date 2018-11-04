@@ -6,7 +6,7 @@ const Title = ({ title, subtitle }) => (
     .title, .subtitle {
       font-family: Montserrat;
       font-weight: 500;
-      padding: 0 7px;
+      // padding: 0 7px;
     }			
     .title {
       font-size: 1.25rem;
