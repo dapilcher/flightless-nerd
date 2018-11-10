@@ -1,9 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { initGA, logPageView } from '../analytics';
 import ResponsiveWidthContainer from './ResponsiveWidthContainer';
 
 class Page extends Component {
+  componentDidMount() {
+    if (process.env.NODE_ENV === 'production') {
+      if (!window.GA_INITIALIZED) {
+        initGA();
+        window.GA_INITIALIZED = true;
+      }
+      logPageView();
+    }
+  }
   render() {
     return (
       <Fragment>
