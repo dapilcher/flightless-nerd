@@ -53,17 +53,11 @@ const Post = ({ post }) => (
 			margin-bottom: 1rem;
 			padding: 0;
 		}
-		.post__content {
-			padding: 0 7px;
-		}
-		.post__content  p {
-			font-family: Raleway;
-			line-height: 1.7rem;
-			font-size: 1.1rem;
-			padding: 0 5px;
+		.post__title {
+			padding: 0 10px;
 		}
 		@media (min-width:576px) {
-			.post__content {
+			.post__title {
 				padding: 0;
 			}
 		}
@@ -80,8 +74,10 @@ const Post = ({ post }) => (
 		{post.image ?
 			<img className="post__img" src={post.image.secure_url} alt={post.title} /> :
 			''}
-		<CategoryTagList cats={post.categories} />
-		<Title title={post.title} subtitle={`${helpers.toRelativeTime(post.publishedDate)}${post.author ? ` by ${post.author.name.first} ${post.author.name.last}` : ''}`} />
+		<div className="post__title">
+			<CategoryTagList categories={post.categories} />
+			<Title title={post.title} subtitle={`${helpers.toRelativeTime(post.publishedDate)}${post.author ? ` by ${post.author.name.first} ${post.author.name.last}` : ''}`} />
+		</div>
 		{post.content.extended.md ?
 			<ReactMarkdown
 				className="post__content"
