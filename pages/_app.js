@@ -3,6 +3,9 @@ import App, { Container } from 'next/app';
 import { Head } from 'next/document';
 import Page from "../components/Page";
 import Meta from "../components/Meta";
+import NextSeo from 'next-seo';
+
+import seoConfig from '../seo.config';
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -21,6 +24,7 @@ export default class MyApp extends App {
     return (
       <Container>
         <Meta />
+        <NextSeo config={seoConfig} />
         <Page>
           <Component {...pageProps} />
         </Page>

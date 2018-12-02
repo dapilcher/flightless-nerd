@@ -1,12 +1,62 @@
 import { Component, Fragment } from "react";
 import Head from 'next/head';
+import NextSeo from 'next-seo';
 import fetch from 'isomorphic-unfetch';
 import ReactMarkdown from 'react-markdown/';
+
 import helpers from '../helpers';
 import WithRecentsSidebar from '../components/WithRecentsSidebar';
 import ResponsiveWidthContainer from '../components/ResponsiveWidthContainer'
 import Title from '../components/Title';
 import CategoryTagList from '../components/CategoryTagList';
+
+const createConfig = post => {
+	return {
+		title: `Flightless Nerd | ${post.title}`,
+		description: !post.seo ?
+			'Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.' :
+			(post.seo.description && post.seo.description !== "") ?
+				post.seo.description :
+				'Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.',
+		openGraph: {
+			type: 'article',
+			locale: 'en_US',
+			url: `https://www.flightlessnerd.com/post?id=${post._id}`,
+			title: `Flightless Nerd | ${post.title}`,
+			description: !post.seo ?
+				'Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.' :
+				post.seo.description ?
+					post.seo.description :
+					'Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.',
+			defaultImageWidth: 1200,
+			defaultImageHeight: 1200,
+			images: [post.image ?
+				{
+					url: post.image.secure_url,
+					width: post.image.width,
+					height: post.image.height,
+					alt: post.title,
+				} :
+				{
+					url: 'https://www.flightlessnerd.com/static/images/Austrich_circle_cropped.png',
+					width: 917,
+					height: 921,
+					alt: 'Flightless Nerd',
+				},
+			],
+			site_name: 'Flightless Nerd',
+		},
+		twitter: {
+			site: '@FlightlessNews',
+			handle: !post.author ?
+				'@FlightlessNews' :
+				(post.author.social && post.author.social.twitterHandle !== "") ?
+					post.author.social.twitterHandle :
+					'@FlightlessNews',
+			cardType: 'summary_large_image',
+		},
+	}
+};
 
 const Post = ({ post }) => (
 	<Fragment>
@@ -89,19 +139,22 @@ const Post = ({ post }) => (
 
 class PostContainer extends Component {
 	static async getInitialProps({ query }) {
-		const singlePost = await fetch(`${process.env.HOST_URL || '/'}api/post/${query.id}`).then(res => res.json());
+		const post = await fetch(`${process.env.HOST_URL || '/'}api/post/${query.id}`).then(res => res.json());
 		const recentPosts = await fetch(`${process.env.HOST_URL || '/'}api/posts?limit=3`).then(res => res.json());
 
-		return { singlePost, recentPosts };
+		const seoConfig = createConfig(post[0]);
+
+		return { post, recentPosts, seoConfig };
 	}
 
 	render() {
-		const { singlePost, recentPosts } = this.props;
+		const { post, recentPosts, seoConfig } = this.props;
 		return (
 			<Fragment>
 				<Head>
-					<title>{singlePost[0].title}</title>
+					<title>{post[0].title}</title>
 				</Head>
+				<NextSeo config={seoConfig} />
 				<style jsx>{`
 			.post__container {
 				display: flex;
@@ -113,10 +166,10 @@ class PostContainer extends Component {
 				<div className="post__container">
 					<ResponsiveWidthContainer>
 						<WithRecentsSidebar recents={recentPosts}>
-							{singlePost.Error ? (
+							{post.Error ? (
 								<p>Could not find post</p>
 							) : (
-									<Post post={singlePost[0]} />
+									<Post post={post[0]} />
 								)}
 						</WithRecentsSidebar>
 					</ResponsiveWidthContainer>
