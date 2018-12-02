@@ -9,6 +9,7 @@ import WithRecentsSidebar from '../components/WithRecentsSidebar';
 import ResponsiveWidthContainer from '../components/ResponsiveWidthContainer'
 import Title from '../components/Title';
 import CategoryTagList from '../components/CategoryTagList';
+import AboutAuthor from '../components/AboutAuthor';
 
 const createConfig = post => {
 	return {
@@ -172,7 +173,11 @@ class PostContainer extends Component {
 							{post.Error ? (
 								<p>Could not find post</p>
 							) : (
-									<Post post={post[0]} />
+									<>
+										<Post post={post[0]} />
+
+										<AboutAuthor author={post[0].author} />
+									</>
 								)}
 						</WithRecentsSidebar>
 					</ResponsiveWidthContainer>
