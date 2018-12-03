@@ -77,6 +77,9 @@ const Post = ({ post }) => (
 			padding: 0 10px;
 			text-align: justify;
 		}
+		h1, h2, h3, h4, h5, h6 {
+			font-family: Montserrat;
+		}
 		@media (min-width: 576px) {
 			p {
 				padding: 0;
