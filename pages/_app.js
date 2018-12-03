@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import App, { Container } from 'next/app';
-import { Head } from 'next/document';
+import Router from 'next/router';
+import NextSeo from 'next-seo';
 import Page from "../components/Page";
 import Meta from "../components/Meta";
-import NextSeo from 'next-seo';
 
+import { initGA, logPageView } from '../analytics';
 import seoConfig from '../seo.config';
 
 export default class MyApp extends App {
@@ -16,6 +17,12 @@ export default class MyApp extends App {
     }
 
     return { pageProps }
+  }
+
+  componentDidMount() {
+    initGA();
+    logPageView();
+    Router.router.events.on('routeChangeComplete', logPageView);
   }
 
   render() {
