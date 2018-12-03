@@ -9,7 +9,19 @@ io.metric({
 	value: function () {
 		return process.env.NODE_ENV;
 	}
-})
+});
+io.metric({
+	name: 'GA_TRACKER',
+	value: function () {
+		return process.env.GA_TRACKER;
+	}
+});
+io.metric({
+	name: 'FB_APP_ID',
+	value: function () {
+		return process.env.FB_APP_ID;
+	}
+});
 
 // Next app
 const next = require("next");
