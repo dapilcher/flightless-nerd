@@ -41,6 +41,7 @@ keystone.init({
 	port,
 	name: "Flightless Nerd",
 	brand: "Flightless Nerd",
+	static: require('path').join(__dirname, 'static'),
 	"auto update": true,
 	"session store": "mongo",
 	auth: true,

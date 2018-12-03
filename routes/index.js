@@ -92,6 +92,37 @@ exports = module.exports = nextApp => keystoneApp => {
 		res.json({ ...author, posts })
 	});
 
+	// Serve robotx.txt
+	const robotsOptions = {
+		root: __dirname + '/static/',
+		headers: {
+			'Content-Type': 'text/plain;charset=UTF-8',
+		}
+	};
+	keystoneApp.get('/robots.txt', (req, res) => (
+		res.status(200).sendFile('robots.txt', robotsOptions)
+	));
+
+	// Serve sitemap
+	// const sitemapOptions = {
+	// 	root: __dirname + '/static/',
+	// 	headers: {
+	// 		'Content-Type': 'text/xml;charset=UTF-8',
+	// 	}
+	// };
+
+	// keystoneApp.get('/sitemap.xml', (req, res) => (
+	// 	res.status(200).sendFile('sitemap.xml', sitemapOptions)
+	// ));
+
+	// Serve favicon
+	// const faviconOptions = {
+	// 	root: __dirname + '/static/'
+	// };
+	// keystoneApp.get('/favicon.ico', (req, res) => (
+	// 	res.status(200).sendFile('favicon.ico', faviconOptions)
+	// ));
+
 	keystoneApp.get("*", (req, res) => {
 		return handle(req, res);
 	});
