@@ -2,6 +2,15 @@
 // customising the .env file in your project's root folder.
 require("dotenv").config();
 
+// pm2 monitoring
+const io = require('@pm2/io');
+io.metric({
+	name: 'NODE_ENV',
+	value: function () {
+		return process.env.NODE_ENV;
+	}
+})
+
 // Next app
 const next = require("next");
 const dev = process.env.NODE_ENV !== "production";
