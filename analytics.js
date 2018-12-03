@@ -1,8 +1,11 @@
-const ReactGA = require('react-ga');
+import ReactGA from 'react-ga';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
 
 exports.initGA = () => {
   // console.log('GA init')
-  ReactGA.initialize(process.env.GA_TRACKER);
+  ReactGA.initialize(publicRuntimeConfig.gaTracker);
 }
 
 exports.logPageView = () => {

@@ -1,4 +1,7 @@
 import Head from 'next/head';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
 
 const Meta = () => (
   <Head>
@@ -10,7 +13,7 @@ const Meta = () => (
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-reboot.min.css" />
     <link rel="icon" type="image/x-icon" href="/static/images/Austrich_favicon.png" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Raleway:400|Bangers" rel="stylesheet"></link>
-    <meta property="fb:app_id" content={process.env.FB_APP_ID || '00000'} />
+    <meta property="fb:app_id" content={publicRuntimeConfig.fbAppId || '00000'} />
   </Head>
 )
 
