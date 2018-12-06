@@ -10,6 +10,7 @@ import ResponsiveWidthContainer from '../components/ResponsiveWidthContainer'
 import Title from '../components/Title';
 import CategoryTagList from '../components/CategoryTagList';
 import AboutAuthor from '../components/AboutAuthor';
+import SocialShare from '../components/SocialShare';
 
 const createConfig = post => {
 	return {
@@ -109,6 +110,21 @@ const Post = ({ post }) => (
 			justify-content: center;
 			color: #333;
 		}
+		.post__social-share {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+			grid-gap: 1rem;
+			padding: 1rem 10px;
+		}
+		.post__social-share > * {
+			outline: none;
+		}
+		.post__social-share > *:hover:not(:active) {
+			opacity: 0.75;
+		}
+		.post__social-share__button__wrapper {
+			cursor: pointer;
+		}
 		.post__img {
 			max-width: 100%;
 			border: none;
@@ -123,6 +139,9 @@ const Post = ({ post }) => (
 		@media (min-width:576px) {
 			.post__title {
 				padding: 0;
+			}
+			.post__social-share {
+				padding: 1rem 0;
 			}
 		}
 		@media (min-width:768px) {
@@ -142,6 +161,7 @@ const Post = ({ post }) => (
 			<CategoryTagList categories={post.categories} />
 			<Title title={post.title} subtitle={`${helpers.toRelativeTime(post.publishedDate)}${post.author ? ` by ${post.author.name.first} ${post.author.name.last}` : ''}`} />
 		</div>
+		<SocialShare title={post.title} id={post._id} />
 		{post.content.extended.md ?
 			<ReactMarkdown
 				className="post__content"
