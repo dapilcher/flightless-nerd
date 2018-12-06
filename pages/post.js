@@ -62,6 +62,16 @@ const createConfig = post => {
 const Post = ({ post }) => (
 	<Fragment>
 		<style jsx global>{`
+		iframe {
+			max-width: 100%;
+		}
+		p a {
+			color: #586CFF;
+		}
+		p a:hover {
+			color: #2539CC;
+			text-decoration: underline;
+		}
 		img {
 			max-width: 100%;
 			padding: 0;
@@ -175,7 +185,6 @@ class PostContainer extends Component {
 							) : (
 									<>
 										<Post post={post[0]} />
-
 										<AboutAuthor author={post[0].author} />
 									</>
 								)}
