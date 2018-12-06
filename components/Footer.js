@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faTwitter, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faTwitter, faInstagram, faYoutube, faTwitch } from '@fortawesome/free-brands-svg-icons';
 
 const social = [
 	{
@@ -12,6 +12,11 @@ const social = [
 		network: 'Twitter',
 		icon: faTwitter,
 		url: 'https://twitter.com/FlightlessNews',
+	},
+	{
+		network: 'Twitch',
+		icon: faTwitch,
+		url: 'https://twitch.tv/flightless_nerd',
 	},
 	{
 		network: 'Instagram',

@@ -33,7 +33,7 @@ const TwitchLink = ({ channel }) => (
     }
     `}</style>
     <h5>
-      <FontAwesomeIcon icon={faTwitch} /> <a href={`https://twitch.com/${channel}`}>{`${channel}`}</a>
+      <FontAwesomeIcon icon={faTwitch} /> <a href={`https://twitch.tv/${channel}`}>{`${channel}`}</a>
     </h5>
   </>
 )
