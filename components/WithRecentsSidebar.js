@@ -10,7 +10,7 @@ const WithRecentsSidebar = ({ children, recents }) => (
 			max-width: 100%;
 		}
 		.left {
-			flex: 3;
+			flex: 7;
 		}
 		.right {
 			display: none;
@@ -26,7 +26,7 @@ const WithRecentsSidebar = ({ children, recents }) => (
 			}
 			.right {
 				display: block;
-				flex: 1;
+				flex: 3;
 				margin-left: 1.5rem;
 			}
 			.left {
