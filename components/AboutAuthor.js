@@ -5,6 +5,10 @@ import { faTwitter, faTwitch } from '@fortawesome/free-brands-svg-icons';
 const TwitterLink = ({ handle }) => (
   <>
     <style jsx>{`
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+    }
     a {
       color: #eee;
       text-decoration: none;
@@ -23,6 +27,10 @@ const TwitterLink = ({ handle }) => (
 const TwitchLink = ({ channel }) => (
   <>
     <style jsx>{`
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+    }
     a {
       color: #eee;
       text-decoration: none;
@@ -62,7 +70,7 @@ const AboutAuthor = ({ author }) => (
         color: #eee;
         text-decoration: none;
       }
-      p {
+      p, h1, h2, h3, h4, h5, h6 {
         margin: 0;
         padding: 0;
       }
