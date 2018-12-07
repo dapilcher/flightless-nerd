@@ -15,7 +15,7 @@ const TwitterLink = ({ handle }) => (
     }
     `}</style>
     <h5>
-      <FontAwesomeIcon icon={faTwitter} /> <a href={`https://twitter.com/${handle}`}>{`@${handle}`}</a>
+      <FontAwesomeIcon style={{ color: '#eee' }} icon={faTwitter} /> <a href={`https://twitter.com/${handle}`}>{`@${handle}`}</a>
     </h5>
   </>
 )
@@ -33,7 +33,7 @@ const TwitchLink = ({ channel }) => (
     }
     `}</style>
     <h5>
-      <FontAwesomeIcon icon={faTwitch} /> <a href={`https://twitch.tv/${channel}`}>{`${channel}`}</a>
+      <FontAwesomeIcon style={{ color: '#eee' }} icon={faTwitch} /> <a href={`https://twitch.tv/${channel}`}>{`${channel}`}</a>
     </h5>
   </>
 )
@@ -42,9 +42,6 @@ const AboutAuthor = ({ author }) => (
   <Fragment>
     <style jsx>{`
       .about-author {
-				// display: flex;
-				// flex-direction: row;
-        // justify-content: center;
         display: grid;
         grid-gap: 1rem;
         grid-template-columns: 100px 1fr;
@@ -56,7 +53,6 @@ const AboutAuthor = ({ author }) => (
 				box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
         border-radius: 1rem 1rem 1rem 0;
         margin: 2rem 10px;
-				// border-left: 2px solid #eee;
       }
       a {
         color: #eee;
@@ -69,6 +65,8 @@ const AboutAuthor = ({ author }) => (
       p {
         margin: 0;
         padding: 0;
+      }
+      p, h1, h2, h3, h4, h5, h6{
         color: #eee;
       }
       .about-author__img {

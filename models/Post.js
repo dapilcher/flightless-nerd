@@ -20,7 +20,13 @@ Post.add({
 	image: { type: Types.CloudinaryImage, folder: 'flightlessnerd', autoCleanup: true, select: true, selectPrefix: 'flightlessnerd' },
 	content: {
 		brief: { type: Types.Markdown, height: 90 },
-		extended: { type: Types.Markdown, height: 400 },
+		extended: {
+			type: Types.Markdown, height: 400, sanitizeOptions: {
+				allowedTags: false,
+				allowedAttributes: false,
+				allowedIframeHostnames: ['www.youtube.com']
+			}
+		},
 	},
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true },
 	isFeatured: { type: Boolean },

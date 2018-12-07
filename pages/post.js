@@ -66,6 +66,27 @@ const Post = ({ post }) => (
 		iframe {
 			max-width: 100%;
 		}
+		.embed-container {
+			margin-top: 1rem;
+			margin-bottom: 2rem;
+			position: relative;
+			padding-bottom: 56.25%;
+			height: 0;
+			// overflow: hidden;
+			max-width: 100%;
+		}
+		.embed-container iframe,
+		.embed-container object,
+		.embed-container embed {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		hr {
+			margin: 2rem 0;
+		}
 		p a {
 			color: #586CFF;
 		}
@@ -84,16 +105,24 @@ const Post = ({ post }) => (
 			font-family: Raleway;
 			line-height: 1.8rem;
 			font-size: 1.1rem;
+			text-align: justify;
+		}
+		p, h1, h2, h3, h4, h5, h6 {
 			color: #333;
 			margin: 1rem 0;
 			padding: 0 10px;
-			text-align: justify;
 		}
 		h1, h2, h3, h4, h5, h6 {
 			font-family: Montserrat;
 		}
 		@media (min-width: 576px) {
-			p {
+			iframe {
+				margin: 1rem 0;
+			}
+			.embed-container {
+				margin-bottom: 3rem;
+			}
+			p, h1, h2, h3, h4, h5, h6 {
 				padding: 0;
 			}
 			img {
@@ -154,7 +183,7 @@ const Post = ({ post }) => (
 			}
 		}
 		`}</style>
-		{post.image ?
+		{(post.image && post.image.secure_url) ?
 			<img className="post__img" src={post.image.secure_url} alt={post.title} /> :
 			''}
 		<div className="post__title">

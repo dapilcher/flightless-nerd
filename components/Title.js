@@ -7,7 +7,10 @@ const Title = ({ title, subtitle }) => (
       font-family: Montserrat;
       font-weight: 500;
       // padding: 0 7px;
-    }			
+    }
+    h4, h4 {
+      margin: 0;
+    }
     .title {
       font-size: 1.25rem;
       color: #333;
