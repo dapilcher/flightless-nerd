@@ -110,7 +110,7 @@ const ArticleCard = ({ post }) => (
 				}
 			}
 		`}</style>
-		<Link href={`/post?id=${post._id}`}>
+		<Link href={`/post?id=${post._id}`} prefetch={post.isFeatured}>
 			<div className="article-card pointer">
 				<div className="article-card-img-container">
 					{post.image ?
