@@ -1,2 +1,3 @@
 User-Agent: *
-Disallow:
+Disallow: /keystone
+Disallow: /podcast
