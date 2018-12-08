@@ -2,11 +2,16 @@ import React, { Fragment } from 'react';
 import App, { Container } from 'next/app';
 import Router from 'next/router';
 import NextSeo from 'next-seo';
+import getConfig from 'next/config';
 import Page from "../components/Page";
 import Meta from "../components/Meta";
 
-import { initGA, logPageView } from '../analytics';
+
+import * as prodlytics from '../analytics';
+import * as devlytics from '../devlytics'
 import seoConfig from '../seo.config';
+
+const { publicRuntimeConfig } = getConfig();
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -20,9 +25,10 @@ export default class MyApp extends App {
   }
 
   componentDidMount() {
-    initGA();
-    logPageView();
-    Router.router.events.on('routeChangeComplete', logPageView);
+    const analytics = publicRuntimeConfig.nodeEnv === 'production' ? prodlytics : devlytics;
+    analytics.initGA();
+    analytics.logPageView();
+    Router.router.events.on('routeChangeComplete', analytics.logPageView);
   }
 
   render() {
