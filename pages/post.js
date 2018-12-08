@@ -202,7 +202,13 @@ const Post = ({ post }) => (
 
 class PostContainer extends Component {
 	static async getInitialProps({ query }) {
-		const post = await fetch(`${process.env.HOST_URL || '/'}api/post/${query.id}`).then(res => res.json());
+		let post = {};
+
+		if (query.id) {
+			post = await fetch(`${process.env.HOST_URL || '/'}api/post/id/${query.id}`).then(res => res.json());
+		} else if (query.slug) {
+			post = await fetch(`${process.env.HOST_URL || '/'}api/post/slug/${query.slug}`).then(res => res.json());
+		}
 		const recentPosts = await fetch(`${process.env.HOST_URL || '/'}api/posts?limit=3`).then(res => res.json());
 
 		const seoConfig = createConfig(post[0]);

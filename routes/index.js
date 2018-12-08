@@ -57,12 +57,26 @@ exports = module.exports = nextApp => keystoneApp => {
 			});
 	});
 
-	keystoneApp.get("/api/post/:id", (req, res, next) => {
+	keystoneApp.get("/api/post/id/:id", (req, res, next) => {
 		const Post = keystone.list("Post");
 		const postId = req.params.id;
 		Post.model
 			.find()
 			.where("_id", postId)
+			.populate('author')
+			.populate('categories')
+			.exec(function (err, results) {
+				if (err) res.json({ Error: err });
+				res.json(results);
+			});
+	});
+
+	keystoneApp.get("/api/post/slug/:slug", (req, res, next) => {
+		const Post = keystone.list("Post");
+		const postSlug = req.params.slug;
+		Post.model
+			.find()
+			.where("slug", postSlug)
 			.populate('author')
 			.populate('categories')
 			.exec(function (err, results) {
@@ -122,6 +136,12 @@ exports = module.exports = nextApp => keystoneApp => {
 	// keystoneApp.get('/favicon.ico', (req, res) => (
 	// 	res.status(200).sendFile('favicon.ico', faviconOptions)
 	// ));
+
+	keystoneApp.get("/post/:slug", (req, res) => {
+		const mergedQuery = Object.assign({}, req.query, req.params);
+		console.log(`\nSlug URL: ${JSON.stringify(mergedQuery)}`);
+		return nextApp.render(req, res, '/post', mergedQuery);
+	})
 
 	keystoneApp.get("*", (req, res) => {
 		return handle(req, res);

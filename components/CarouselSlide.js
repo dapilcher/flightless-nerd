@@ -61,11 +61,11 @@ const Slide = ({ sliding, post }) => (
       }
     `}</style>
     <div className={`carousel-slide ${sliding ? 'sliding' : ''}`}>
-      <Link href={`/post?id=${post._id}`}>
+      <Link href={`/post?slug=${post.slug}`} as={`/post/${post.slug}`}>
         <a><img className="slide-img" src={post.image.secure_url} alt={post.title} /></a>
       </Link>
       <div className="slide-text-box">
-        <Link href={`/post?id=${post._id}`}><a className="slide-text-title">{post.title}</a></Link>
+        <Link href={`/post?slug=${post.slug}`} as={`/post/${post.slug}`}><a className="slide-text-title">{post.title}</a></Link>
         <span className="slide-text-content"
           dangerouslySetInnerHTML={post.content.brief.html ? { __html: post.content.brief.html } : { __html: post.content.brief }}
         ></span>
