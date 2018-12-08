@@ -12,14 +12,20 @@ const Title = ({ title, subtitle }) => (
       margin: 0;
     }
     .title {
-      font-size: 1.25rem;
+      font-size: 1rem;
       color: #333;
     }
     .subtitle {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: rgb(112,112,112);
     }
-    @media (min-width: 576px) {
+    @media (min-width: 685px) {
+      .title {
+        font-size: 1.25rem;
+      }
+      .subtitle {
+        font-size: 0.9rem;
+      }
       .title, .subtitle {
         padding: 0;
       }

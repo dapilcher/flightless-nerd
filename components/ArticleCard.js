@@ -17,11 +17,11 @@ const ArticleCard = ({ post }) => (
 				padding-bottom: 1rem;
 			}
 			.article-card-img-container {
-				width: 50vw;
+				width: 42vw;
 			}
 			.article-card-img,
 			.article-card-img-placeholder {
-				max-width: 100%;
+				max-width: 42vw;
 				border-radius: 1rem 1rem 1rem 0;
 			}
 			.article-card-img-placeholder {
@@ -42,7 +42,7 @@ const ArticleCard = ({ post }) => (
 				padding: 0 10px;
 				margin: auto 0;
 				color: #333;
-				max-width: 50%;
+				max-width: 58vw;
 			}
 			.article-card-title, .article-card-subtitle {
 				font-family: Montserrat;
@@ -80,11 +80,13 @@ const ArticleCard = ({ post }) => (
 					transform: scale(1.02) rotate(-0.5deg);
 				}
 				.article-card-img-container {
+					width: 100%;
 					max-width: 100%;
 					padding: 0;
 				}
 				.article-card-img,
 				.article-card-img-placeholder {
+					max-width: 100%;
 					border-radius: 1rem 1rem 0 0;
 					padding: 0;
 					margin: 0;
