@@ -81,6 +81,11 @@ const Navbar = () => (
 						<a className="navbar__link">Articles</a>
 					</div>
 				</Link>
+				<Link href="/podcast">
+					<div className="navbar__item">
+						<a className="navbar__link">Podcast</a>
+					</div>
+				</Link>
 				{/* <div className="navbar__item navbar__dropdown">
 					<span className="navbar__link">Media</span>
 					<div className="navbar__dropdown__content__container">
