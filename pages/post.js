@@ -14,7 +14,7 @@ import SocialShare from '../components/SocialShare';
 
 const createConfig = post => {
 	return {
-		title: `Flightless Nerd | ${post.title}`,
+		title: `${post.title}`,
 		description: !post.seo ?
 			'Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.' :
 			(post.seo.description && post.seo.description !== "") ?
@@ -24,7 +24,7 @@ const createConfig = post => {
 			type: 'article',
 			locale: 'en_US',
 			url: `https://www.flightlessnerd.com/post?id=${post._id}`,
-			title: `Flightless Nerd | ${post.title}`,
+			title: `${post.title}`,
 			description: !post.seo ?
 				'Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.' :
 				post.seo.description ?
