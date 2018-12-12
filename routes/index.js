@@ -106,6 +106,40 @@ exports = module.exports = nextApp => keystoneApp => {
 		res.json({ ...author, posts })
 	});
 
+	keystoneApp.post("/api/contributor", (req, res, next) => {
+		const Contributor = keystone.list("Contributor");
+		console.log('in /api/contributor');
+
+
+		if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.description || !req.body.releases) {
+			console.log('incomplete data set');
+			return res.status(418).send({ error: 'Please fill out all fields' });
+		}
+
+		const { firstName, lastName, email, description, releases } = req.body;
+		const name = `${firstName} ${lastName}`;
+
+		const data = {
+			name,
+			email,
+			description,
+			releases,
+			submitDate: new Date(),
+			contacted: false
+		};
+		// console.log(`data: ${JSON.stringify(data)}`)
+
+		const newContributor = new Contributor.model();
+		Contributor.updateItem(newContributor, data, error => {
+			// console.log('update item');
+			if (error) {
+				// console.log(`update item error: ${JSON.stringify(error)}`)
+				res.status(500).send({ error: error.detail });
+			}
+			else res.status(200).send({ status: 'success' });
+		});
+	});
+
 	// Serve robotx.txt
 	const robotsOptions = {
 		root: __dirname + '/static/',
