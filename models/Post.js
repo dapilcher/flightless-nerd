@@ -29,7 +29,7 @@ Post.add({
 		},
 	},
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true },
-	isFeatured: { type: Boolean },
+	isFeatured: { type: Boolean, label: "Featured" },
 	seo: {
 		description: { type: Types.Textarea, height: 90, label: "SEO Description" },
 	}
@@ -47,6 +47,6 @@ Post.schema.pre('save', function (next) {
 	next();
 });
 
-Post.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
+Post.defaultColumns = 'title, state|10%, isFeatured|10%, author|20%, publishedDate|20%';
 Post.defaultSort = '-publishedDate';
 Post.register();
