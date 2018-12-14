@@ -74,7 +74,7 @@ class Contributeform extends Component {
     }
   }
   render() {
-    const { loading } = this.state
+    const { loading, submitted } = this.state
     return (
       <Fragment>
         <style jsx>{`
@@ -220,7 +220,9 @@ class Contributeform extends Component {
                   />
                 </label>
 
-                <button type="submit" id="submit">{loading ? 'Submitting...' : 'Submit'}</button>
+                <button type="submit" id="submit" disabled={submitted}>
+                  {submitted ? 'Submitted' : loading ? 'Submitting...' : 'Submit'}
+                </button>
               </div>
             </fieldset>
           </form>
