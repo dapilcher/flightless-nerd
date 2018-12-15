@@ -1,9 +1,41 @@
 import { Fragment } from 'react';
+import Head from 'next/head';
+import NextSeo from 'next-seo';
 
 import ContributeForm from '../components/ContributeForm';
 
+const seoConfig = {
+  title: 'Flightless Nerd | Contribute',
+  description: 'Join the Flightless Nerd team and enjoy the creative freedom to share your thoughts and opinions as a contributor.',
+  openGraph: {
+    type: 'article',
+    locale: 'en_US',
+    url: `https://www.flightlessnerd.com/contribute`,
+    title: 'Flightless Nerd | Contribute',
+    description: 'Join the Flightless Nerd team and enjoy the creative freedom to share your thoughts and opinions as a contributor.',
+    defaultImageWidth: 1200,
+    defaultImageHeight: 1200,
+    images: {
+      url: 'https://www.flightlessnerd.com/static/images/Austrich_circle_cropped.png',
+      width: 917,
+      height: 921,
+      alt: 'Flightless Nerd',
+    },
+    site_name: 'Flightless Nerd',
+  },
+  twitter: {
+    site: '@FlightlessNews',
+    handle: '@FlightlessNews',
+    cardType: 'summary',
+  },
+};
+
 const Contribute = () => (
   <Fragment>
+    <Head>
+      <title>Flightless Nerd | Contribute</title>
+    </Head>
+    <NextSeo config={seoConfig} />
     <style jsx>{`
       .contribute__container {
         font-family: Raleway;
