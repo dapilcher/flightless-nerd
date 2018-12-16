@@ -1,5 +1,14 @@
 import React, { Fragment, Component } from 'react';
 
+import getConfig from 'next/config';
+
+import * as prodlytics from '../analytics';
+import * as devlytics from '../devlytics'
+
+const { publicRuntimeConfig } = getConfig();
+
+const analytics = publicRuntimeConfig.nodeEnv === 'production' ? prodlytics : devlytics;
+
 const FlashMessage = ({ type, message }) => (
   <Fragment>
     <style jsx>{`
@@ -36,7 +45,10 @@ class Contributeform extends Component {
     this.setState({ [name]: value });
   }
   handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    analytics.logEvent('Click', 'Contribute form submit');
+
     this.setState({ loading: true, error: null, success: null });
     const data = { ...this.state }
 
@@ -53,7 +65,10 @@ class Contributeform extends Component {
 
       // console.log('past request');
 
-      if (response.error) this.setState({ loading: false, error: response.error });
+      if (response.error) {
+        this.setState({ loading: false, error: response.error });
+        analytics.logException(`Contribute form error: ${response.error}`);
+      }
 
       else {
         this.setState({
@@ -71,6 +86,7 @@ class Contributeform extends Component {
     } catch (error) {
       // console.log('try catch error');
       this.setState({ loading: false, error });
+      analytics.logException(`Contribute form error: ${error}`);
     }
   }
   render() {
