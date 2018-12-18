@@ -1,6 +1,13 @@
 import React, { Component, Fragment } from 'react';
-
+import getConfig from 'next/config';
 import FlashMessage from '../components/FlashMessage';
+import * as prodlytics from '../analytics';
+import * as devlytics from '../devlytics'
+
+const { publicRuntimeConfig } = getConfig();
+
+const analytics = publicRuntimeConfig.nodeEnv === 'production' ? prodlytics : devlytics;
+
 
 class SubscribeForm extends Component {
   state = {
@@ -17,6 +24,7 @@ class SubscribeForm extends Component {
   }
   handleSubmit = async e => {
     e.preventDefault();
+    analytics.logEvent('Click', 'Email subscribe form submit');
     this.setState({ loading: false, submitted: false, error: null, success: '' });
     const data = {
       email: this.state.email,
@@ -34,7 +42,10 @@ class SubscribeForm extends Component {
 
       // console.log('past request');
 
-      if (response.error) this.setState({ loading: false, error: response.error });
+      if (response.error) {
+        this.setState({ loading: false, error: response.error });
+        analytics.logException(`Email subscribe error: ${response.error}`);
+      }
 
       else {
         this.setState({
@@ -47,6 +58,7 @@ class SubscribeForm extends Component {
       }
     } catch (error) {
       // console.log('try catch error');
+      analytics.logException(`Email subscribe error: ${error}`);
       this.setState({ loading: false, error });
     }
   }
