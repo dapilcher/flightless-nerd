@@ -84,7 +84,6 @@ const Footer = () => (
 			width: 100%;
 			background-color: #586CFF;
 			background-image: linear-gradient(to bottom right, #586CFF, #2539CC);
-			// background: linear-gradient(to bottom right, #586CFF4D, #2539CCCC), url("https://www.transparenttextures.com/patterns/cubes.png"), linear-gradient(to bottom right, #586CFF, #2539CC);
 			border-top: 0.5rem solid #EB3E34;
 			padding: 1rem 0;
 			margin-top: auto;
@@ -92,12 +91,18 @@ const Footer = () => (
 			display: flex;
 			justify-content: center;
 		}
-		.footer__container__inner {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
+		.footer__container__grid {
+			// display: flex;
+			// flex-direction: row;
+			// justify-content: space-between;
+			// align-items: center;
 			color: #eee;
+			display: grid;
+			grid-gap: 10px;
+			grid-template-columns: auto;
+			grid-template-rows: repeat(3, minmax(auto,1fr));
+			grid-template-areas: "footer-img" "subscribe-form" "social-links";
+			place-items: center;
 		}
 		.block {
 			flex: 1;
@@ -117,18 +122,37 @@ const Footer = () => (
 			margin: 0;
 			color: #eee;
 		}
+		#footer__social-links {
+			grid-area: social-links
+		}
+		#footer__img {
+			grid-area: footer-img
+		}
+		#footer__subscribe-form {
+			grid-area: subscribe-form
+		}
+		@media (min-width: 992px) {
+			.footer__container__grid {
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-rows: auto;
+				grid-template-areas: "social-links footer-img subscribe-form";
+			}
+		}
 		`}</style>
 		<footer className="footer__container">
 			<ResponsiveWidthContainer>
-				<div className="footer__container__inner">
-					<div className="block">
+				<div className="footer__container__grid">
+					<div className="block"
+						id="footer__social-links">
 						<SocialLinks />
 						<p className="footer__date">&copy; {new Date().getFullYear()}</p>
 					</div>
-					<div className="block">
+					<div className="block"
+						id="footer__img">
 						<img className="footer__img" src="/static/images/Austrich_circle_cropped.png" alt="Flightless Nerd" />
 					</div>
-					<div className="block">
+					<div className="block"
+						id="footer__subscribe-form">
 						<SubscribeForm />
 					</div>
 				</div>
