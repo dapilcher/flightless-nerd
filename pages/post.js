@@ -96,12 +96,20 @@ const Post = ({ post }) => (
 				color: #2539cc;
 				text-decoration: underline;
 			}
+			figure {
+				margin: 1rem 0;
+			}
 			img {
 				max-width: 100%;
 				padding: 0;
-				// border: 0.5rem solid #FFE838;
-				margin: 0.5rem 0;
 				box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+			}
+			figcaption {
+				padding-top: 0.7rem;
+				font-family: Raleway;
+				color: #505050;
+				font-style: italic;
+				text-align: center;
 			}
 			p {
 				font-family: Raleway;
@@ -153,10 +161,12 @@ const Post = ({ post }) => (
 				h6 {
 					padding: 0;
 				}
-				img {
-					box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+				figure {
 					padding: 1rem;
 					border-width: 0.5rem;
+				}
+				figcaption {
+					text-align: left;
 				}
 			}
 		`}</style>
