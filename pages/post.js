@@ -101,11 +101,12 @@ const Post = ({ post }) => (
 			}
 			img {
 				max-width: 100%;
+				margin: 1rem 0;
 				padding: 0;
 				box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 			}
 			figcaption {
-				padding-top: 0.7rem;
+				padding-top: 0.5rem;
 				font-family: Raleway;
 				color: #505050;
 				font-style: italic;
