@@ -115,7 +115,8 @@ const Post = ({ post }) => (
 			h3,
 			h4,
 			h5,
-			h6 {
+			h6,
+			blockquote {
 				color: #333;
 				margin: 1rem 0;
 				padding: 0 10px;
@@ -125,8 +126,16 @@ const Post = ({ post }) => (
 			h3,
 			h4,
 			h5,
-			h6 {
+			h6,
+			blockquote {
 				font-family: Montserrat;
+			}
+			blockquote {
+				color: #505050;
+				border-left: 0.3rem solid #eb3e34;
+				font-size: 1.5rem;
+				font-style: italic;
+				margin: 2rem 1rem;
 			}
 			@media (min-width: 576px) {
 				iframe {
