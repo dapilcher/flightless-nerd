@@ -106,7 +106,7 @@ const Post = ({ post }) => (
 				box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 			}
 			figcaption {
-				padding-top: 0.5rem;
+				padding-top: 0.3rem;
 				font-family: Raleway;
 				color: #505050;
 				font-style: italic;
@@ -148,7 +148,9 @@ const Post = ({ post }) => (
 			}
 			@media (min-width: 576px) {
 				iframe {
-					margin: 1rem 0;
+					 {
+						/* margin: 1rem 0; */
+					}
 				}
 				.embed-container {
 					margin-bottom: 3rem;
