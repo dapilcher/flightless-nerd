@@ -64,6 +64,15 @@ const createConfig = post => {
 
 const Post = ({ post }) => (
 	<Fragment>
+		{post.meta.requiresTwitter && (
+			<Head>
+				<script
+					async
+					src="https://platform.twitter.com/widgets.js"
+					charset="utf-8"
+				/>
+			</Head>
+		)}
 		<style jsx global>{`
 			iframe {
 				max-width: 100%;
@@ -96,7 +105,7 @@ const Post = ({ post }) => (
 				color: #2539cc;
 				text-decoration: underline;
 			}
-			.post-img {
+			.post-image {
 				margin: 1rem 0;
 				max-width: 100%;
 			}
@@ -291,13 +300,6 @@ class PostContainer extends Component {
 			<Fragment>
 				<Head>
 					<title>{post[0].title}</title>
-					{post[0].meta.requiresTwitter && (
-						<script
-							async
-							src="https://platform.twitter.com/widgets.js"
-							charset="utf-8"
-						/>
-					)}
 				</Head>
 				<NextSeo config={seoConfig} />
 				<style jsx>{`
