@@ -96,7 +96,7 @@ const Post = ({ post }) => (
 				color: #2539cc;
 				text-decoration: underline;
 			}
-			figure {
+			.post-image {
 				margin: 1rem 0;
 			}
 			img {
@@ -125,7 +125,7 @@ const Post = ({ post }) => (
 			h4,
 			h5,
 			h6,
-			blockquote {
+			.blockquote {
 				color: #333;
 				margin: 1rem 0;
 				padding: 0 10px;
@@ -136,10 +136,10 @@ const Post = ({ post }) => (
 			h4,
 			h5,
 			h6,
-			blockquote {
+			.blockquote {
 				font-family: Montserrat;
 			}
-			blockquote {
+			.blockquote {
 				color: #505050;
 				border-left: 0.3rem solid #eb3e34;
 				font-size: 1.5rem;
@@ -164,7 +164,7 @@ const Post = ({ post }) => (
 				h6 {
 					padding: 0;
 				}
-				figure {
+				.post-image {
 					padding: 1rem;
 					border-width: 0.5rem;
 				}
@@ -251,6 +251,13 @@ const Post = ({ post }) => (
 			<div
 				className="post__content"
 				dangerouslySetInnerHTML={{ __html: post.content.extended }}
+			/>
+		)}
+		{post.meta.requiresTwitter && (
+			<script
+				async
+				src="https://platform.twitter.com/widgets.js"
+				charset="utf-8"
 			/>
 		)}
 	</Fragment>
