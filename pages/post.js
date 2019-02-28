@@ -105,7 +105,7 @@ const Post = ({ post }) => (
 				color: #2539cc;
 				text-decoration: underline;
 			}
-			.post-image {
+			.post-img {
 				margin: 1rem 0;
 				max-width: 100%;
 			}
