@@ -156,6 +156,9 @@ const Post = ({ post }) => (
 				font-style: italic;
 				margin: 2rem 1rem;
 			}
+			.twitter-tweet {
+				margin: 2rem 0 !important;
+			}
 			@media (min-width: 576px) {
 				.embed-container {
 					margin-bottom: 3rem;
