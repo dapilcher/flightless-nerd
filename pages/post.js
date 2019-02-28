@@ -96,8 +96,9 @@ const Post = ({ post }) => (
 				color: #2539cc;
 				text-decoration: underline;
 			}
-			.post-image {
+			.post-img {
 				margin: 1rem 0;
+				max-width: 100%;
 			}
 			img {
 				max-width: 100%;
@@ -145,6 +146,12 @@ const Post = ({ post }) => (
 				font-size: 1.5rem;
 				font-style: italic;
 				margin: 2rem 1rem;
+			}
+			.twitter-tweet {
+				 {
+					/* max-width: 100%;
+				margin: 2rem auto !important; */
+				}
 			}
 			@media (min-width: 576px) {
 				iframe {
