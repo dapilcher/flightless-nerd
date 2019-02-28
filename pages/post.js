@@ -253,13 +253,6 @@ const Post = ({ post }) => (
 				dangerouslySetInnerHTML={{ __html: post.content.extended }}
 			/>
 		)}
-		{post.meta.requiresTwitter && (
-			<script
-				async
-				src="https://platform.twitter.com/widgets.js"
-				charset="utf-8"
-			/>
-		)}
 	</Fragment>
 );
 
@@ -291,6 +284,13 @@ class PostContainer extends Component {
 			<Fragment>
 				<Head>
 					<title>{post[0].title}</title>
+					{post[0].meta.requiresTwitter && (
+						<script
+							async
+							src="https://platform.twitter.com/widgets.js"
+							charset="utf-8"
+						/>
+					)}
 				</Head>
 				<NextSeo config={seoConfig} />
 				<style jsx>{`
