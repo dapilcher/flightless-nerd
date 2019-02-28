@@ -156,18 +156,7 @@ const Post = ({ post }) => (
 				font-style: italic;
 				margin: 2rem 1rem;
 			}
-			.twitter-tweet {
-				 {
-					/* max-width: 100%;
-				margin: 2rem auto !important; */
-				}
-			}
 			@media (min-width: 576px) {
-				iframe {
-					 {
-						/* margin: 1rem 0; */
-					}
-				}
 				.embed-container {
 					margin-bottom: 3rem;
 				}
@@ -180,7 +169,7 @@ const Post = ({ post }) => (
 				h6 {
 					padding: 0;
 				}
-				.post-image {
+				.post-img {
 					padding: 1rem;
 					border-width: 0.5rem;
 				}
