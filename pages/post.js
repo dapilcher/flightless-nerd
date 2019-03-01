@@ -248,7 +248,7 @@ const Post = ({ post }) => (
 				}`}
 			/>
 		</div>
-		<SocialShare title={post.title} id={post._id} />
+		<SocialShare title={post.title} slug={post.slug} />
 		{post.content.extended.md ? (
 			<ReactMarkdown
 				className="post__content"
