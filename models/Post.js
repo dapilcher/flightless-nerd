@@ -49,6 +49,7 @@ Post.add({
 		requiresTwitter: { type: Boolean, label: "Contains Twitter Embeds" }
 	},
 	categories: { type: Types.Relationship, ref: "PostCategory", many: true },
+	topic: { type: Types.Relationship, ref: "PostTopic", many: false },
 	isFeatured: { type: Boolean, label: "Featured" },
 	seo: {
 		description: { type: Types.Textarea, height: 90, label: "SEO Description" }
