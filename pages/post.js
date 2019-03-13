@@ -154,10 +154,15 @@ const Post = ({ post }) => (
 				border-left: 0.3rem solid #eb3e34;
 				font-size: 1.5rem;
 				font-style: italic;
-				margin: 2rem 1rem;
+				margin: 2rem 2rem;
 			}
 			.twitter-tweet {
 				margin: 2rem auto !important;
+			}
+			@media (min-width: 992px) {
+				.blockquote {
+					margin: 2rem 5rem;
+				}
 			}
 			@media (min-width: 576px) {
 				.embed-container {
