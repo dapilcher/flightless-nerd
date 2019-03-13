@@ -159,6 +159,11 @@ const Post = ({ post }) => (
 			.twitter-tweet {
 				margin: 2rem auto !important;
 			}
+			p > em,
+			li > em {
+				font-family: Montserrat;
+				color: #eb3e34;
+			}
 			@media (min-width: 992px) {
 				.blockquote {
 					margin: 2rem 5rem;
