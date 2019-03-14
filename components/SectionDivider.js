@@ -6,6 +6,7 @@ const SectionDivider = ({ text }) => (
 			.section__header {
 				width: 100%;
 				height: auto;
+				margin: 2rem 0 1rem 0;
 				font-size: 2rem;
 				text-align: center;
 				font-family: Bangers;
@@ -15,6 +16,9 @@ const SectionDivider = ({ text }) => (
 				color: #333;
 				flex-basis: 100%;
 				align-items: center;
+			}
+			.section__title h1 {
+				font-size: 2rem;
 			}
 			.section__title::before,
 			.section__title::after {
