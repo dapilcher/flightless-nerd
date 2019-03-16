@@ -2,13 +2,13 @@ import React, { Fragment } from "react";
 import App, { Container } from "next/app";
 import Router from "next/router";
 import NextSeo from "next-seo";
-import withFbq from "next-fbq";
 import getConfig from "next/config";
 import Page from "../components/Page";
 import Meta from "../components/Meta";
 
-import * as prodlytics from "../analytics";
-import * as devlytics from "../devlytics";
+import * as prodlytics from "../utils/analytics";
+import * as devlytics from "../utils/devlytics";
+import withFbq from "../components/withFbq";
 import seoConfig from "../seo.config";
 
 const { publicRuntimeConfig: envars } = getConfig();
