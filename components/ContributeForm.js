@@ -2,8 +2,8 @@ import React, { Fragment, Component } from "react";
 
 import getConfig from "next/config";
 
-import * as prodlytics from "../util/analytics";
-import * as devlytics from "../util/devlytics";
+import * as prodlytics from "../utils/analytics";
+import * as devlytics from "../utils/devlytics";
 
 const { publicRuntimeConfig } = getConfig();
 
