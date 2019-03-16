@@ -10,10 +10,10 @@ export default class MyDocument extends Document {
 
 	render() {
 		return (
-			<html>
+			<html lang="en-US">
 				<Head />
 				<style jsx global>{`
-				overflow-x: hidden;
+					overflow-x: hidden;
 				`}</style>
 				<body>
 					<Main />
