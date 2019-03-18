@@ -27,8 +27,10 @@ class Page extends Component {
 						display: flex;
 						flex-direction: column;
 						align-items: center;
-						background: linear-gradient(#eee8, #ddd8),
-							url("/static/images/clean-textile.png");
+						background: linear-gradient(#eee8, #ddd8);
+						 {
+							/* url("/static/images/clean-textile.png"); */
+						}
 					}
 				`}</style>
 				<div className="page">

@@ -73,19 +73,26 @@ class SubscribeForm extends Component {
 					.subscribe-form {
 						display: flex;
 						flex-direction: column;
+						max-width: 30rem;
+						margin: 0 1rem;
+						box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+						border-radius: 1rem 1rem 1rem 0;
 					}
 					.subscribe-form__container {
 						font-family: Montserrat;
 						width: 100%;
 						text-align: center;
+						max-width: 100%;
+						margin: 2rem 0;
 					}
 					.subscribe-form__button,
 					.subscribe-form__input {
-						margin: 0.25rem 0;
-						padding: 0.25rem;
-						border-radius: 3px;
+						margin: 0 0;
+						padding: 0.5rem;
 						max-width: 100%;
-						box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+					}
+					.subscribe-form__button {
+						border-radius: 0 0 1rem 0;
 					}
 					.subscribe-form__button:focus,
 					.subscribe-form__input:focus {
@@ -98,7 +105,8 @@ class SubscribeForm extends Component {
 						font-weight: 500;
 					}
 					.subscribe-form__button:hover {
-						transform: scale(1.02);
+						background-color: #d2251b;
+						cursor: pointer;
 					}
 					.subscribe-form__button:active {
 						transform: translateY(1px);
@@ -106,6 +114,7 @@ class SubscribeForm extends Component {
 					.subscribe-form__input {
 						border: none;
 						text-align: center;
+						border-radius: 1rem 1rem 0 0;
 					}
 					.subscribe-form__link {
 						letter-spacing: 1px;
@@ -115,6 +124,11 @@ class SubscribeForm extends Component {
 					}
 					.subscribe-form__link a {
 						color: #eb3e34;
+					}
+					@media (min-width: 576px) {
+						.subscribe-form {
+							margin: 0 auto;
+						}
 					}
 				`}</style>
 				<form
@@ -133,7 +147,7 @@ class SubscribeForm extends Component {
 								className="subscribe-form__input"
 								type="email"
 								name="email"
-								placeholder="Sign up for Email updates"
+								placeholder="Sign up for Email updates!"
 								value={this.state.email}
 								onChange={this.handleChange}
 							/>
@@ -142,11 +156,7 @@ class SubscribeForm extends Component {
 								className="subscribe-form__button"
 								disabled={submitted}
 							>
-								{submitted
-									? "Submitted!"
-									: loading
-									? "Sending..."
-									: "Sign me up!"}
+								{submitted ? "Submitted!" : loading ? "Sending..." : "Submit"}
 							</button>
 						</div>
 					</fieldset>
