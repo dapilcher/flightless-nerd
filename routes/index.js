@@ -19,10 +19,10 @@
  */
 
 const keystone = require("keystone");
-const crypto = require('crypto');
-const fetch = require('isomorphic-unfetch');
+const crypto = require("crypto");
+const fetch = require("isomorphic-unfetch");
 
-var Mailchimp = require('mailchimp-api-v3')
+var Mailchimp = require("mailchimp-api-v3");
 
 // var mailchimp = new Mailchimp(api_key);
 // const getConfig = require('next/config');
@@ -34,7 +34,7 @@ exports = module.exports = nextApp => keystoneApp => {
 	// Next request handler
 	const handle = nextApp.getRequestHandler();
 
-	keystoneApp.all('/api*', keystone.middleware.cors);
+	keystoneApp.all("/api*", keystone.middleware.cors);
 
 	// Get all posts
 
@@ -42,17 +42,17 @@ exports = module.exports = nextApp => keystoneApp => {
 		let limit = 100;
 		if (req.query && req.query.limit) {
 			limit = parseInt(req.query.limit);
-			console.log(`query limit = ${limit}`)
+			console.log(`query limit = ${limit}`);
 		}
 		const Post = keystone.list("Post");
 		Post.model
 			.find()
 			.where("state", "published")
-			.populate('author')
-			.populate('categories')
+			.populate("author")
+			.populate("categories")
 			.sort("-publishedDate")
 			.limit(limit)
-			.exec(function (err, results) {
+			.exec(function(err, results) {
 				if (err) throw err;
 				res.json(results);
 			});
@@ -62,12 +62,10 @@ exports = module.exports = nextApp => keystoneApp => {
 
 	keystoneApp.get("/api/categories", (req, res, next) => {
 		const PostCategory = keystone.list("PostCategory");
-		PostCategory.model
-			.find()
-			.exec(function (err, results) {
-				if (err) throw err;
-				res.json(results);
-			});
+		PostCategory.model.find().exec(function(err, results) {
+			if (err) throw err;
+			res.json(results);
+		});
 	});
 
 	// Get post by id
@@ -78,9 +76,10 @@ exports = module.exports = nextApp => keystoneApp => {
 		Post.model
 			.find()
 			.where("_id", postId)
-			.populate('author')
-			.populate('categories')
-			.exec(function (err, results) {
+			.where("state", "published")
+			.populate("author")
+			.populate("categories")
+			.exec(function(err, results) {
 				if (err) res.json({ Error: err });
 				res.json(results);
 			});
@@ -94,9 +93,10 @@ exports = module.exports = nextApp => keystoneApp => {
 		Post.model
 			.find()
 			.where("slug", postSlug)
-			.populate('author')
-			.populate('categories')
-			.exec(function (err, results) {
+			.where("state", "published")
+			.populate("author")
+			.populate("categories")
+			.exec(function(err, results) {
 				if (err) res.json({ Error: err });
 				res.json(results);
 			});
@@ -111,30 +111,35 @@ exports = module.exports = nextApp => keystoneApp => {
 		const author = Author.model
 			.find()
 			.where("_id", authorId)
-			.exec(function (err, results) {
+			.exec(function(err, results) {
 				if (err) res.json({ Error: err });
 				res.json(results);
 			});
 		const posts = Post.model
 			.find()
 			.where("author", authorId)
-			.exec(function (err, results) {
+			.exec(function(err, results) {
 				if (err) res.json({ Error: err });
-				return JSON.parse(results)
+				return JSON.parse(results);
 			});
-		res.json({ ...author, posts })
+		res.json({ ...author, posts });
 	});
 
 	// Contributor form submit
 
 	keystoneApp.post("/api/contributor", (req, res, next) => {
 		const Contributor = keystone.list("Contributor");
-		console.log('in /api/contributor');
+		console.log("in /api/contributor");
 
-
-		if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.description || !req.body.releases) {
-			console.log('incomplete data set');
-			return res.status(418).send({ error: 'Please fill out all fields' });
+		if (
+			!req.body.firstName ||
+			!req.body.lastName ||
+			!req.body.email ||
+			!req.body.description ||
+			!req.body.releases
+		) {
+			console.log("incomplete data set");
+			return res.status(418).send({ error: "Please fill out all fields" });
 		}
 
 		const { firstName, lastName, email, description, releases } = req.body;
@@ -156,15 +161,14 @@ exports = module.exports = nextApp => keystoneApp => {
 			if (error) {
 				// console.log(`update item error: ${JSON.stringify(error)}`)
 				res.status(500).send({ error: error.detail });
-			}
-			else res.status(200).send({ status: 'success' });
+			} else res.status(200).send({ status: "success" });
 		});
 	});
 
 	// Email subscriber form submit
 
 	keystoneApp.post("/api/email", async (req, res, next) => {
-		console.log('in /api/email')
+		console.log("in /api/email");
 		if (!req.body.email) res.send({ error: "Incomplete data set" });
 		const { email } = req.body;
 		// const data = {
@@ -178,7 +182,10 @@ exports = module.exports = nextApp => keystoneApp => {
 		try {
 			// console.log('server try block');
 			const listId = process.env.MAILCHIMP_LIST_ID;
-			const emailHash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
+			const emailHash = crypto
+				.createHash("md5")
+				.update(email.toLowerCase())
+				.digest("hex");
 
 			// let subscribed = false;
 
@@ -186,33 +193,40 @@ exports = module.exports = nextApp => keystoneApp => {
 				email_address: email,
 				status: "subscribed",
 				status_if_new: "subscribed"
-			}
+			};
 
 			// check if member exists
-			mailchimp.get(`/lists/${listId}/members/${emailHash}`)
+			mailchimp
+				.get(`/lists/${listId}/members/${emailHash}`)
 				.then(response => {
-					console.log(`\nMailchimp get response:\n${JSON.stringify(response)}\n`);
+					console.log(
+						`\nMailchimp get response:\n${JSON.stringify(response)}\n`
+					);
 					if (response.status === "subscribed") {
 						// subscribed = true;
 						res.send({ error: `Email ${email} already subscribed` });
 					} else {
-						mailchimp.request({
-							method: 'put',
-							path: '/lists/{list_id}/members/{subscriber_hash}',
-							path_params: {
-								list_id: listId,
-								subscriber_hash: emailHash
+						mailchimp.request(
+							{
+								method: "put",
+								path: "/lists/{list_id}/members/{subscriber_hash}",
+								path_params: {
+									list_id: listId,
+									subscriber_hash: emailHash
+								},
+								body: data
 							},
-							body: data,
-						},
 							(error, result) => {
 								if (error) {
-									console.log(`\nMailchimp put error:\n${JSON.stringify(error)}\n`);
+									console.log(
+										`\nMailchimp put error:\n${JSON.stringify(error)}\n`
+									);
 									res.send({ error: error.title });
-								}
-								else {
-									console.log(`\nMailchimp put success:\n${JSON.stringify(result)}\n`);
-									res.send({ success: result })
+								} else {
+									console.log(
+										`\nMailchimp put success:\n${JSON.stringify(result)}\n`
+									);
+									res.send({ success: result });
 								}
 							}
 						);
@@ -221,44 +235,47 @@ exports = module.exports = nextApp => keystoneApp => {
 				.catch(error => {
 					console.log(`\nMailchimp get catch:\n${error}\n`);
 					// res.send({ error: `Error retrieving email` });
-					mailchimp.request({
-						method: 'put',
-						path: '/lists/{list_id}/members/{subscriber_hash}',
-						path_params: {
-							list_id: listId,
-							subscriber_hash: emailHash
+					mailchimp.request(
+						{
+							method: "put",
+							path: "/lists/{list_id}/members/{subscriber_hash}",
+							path_params: {
+								list_id: listId,
+								subscriber_hash: emailHash
+							},
+							body: data
 						},
-						body: data,
-					},
 						(error, result) => {
 							if (error) {
-								console.log(`\nMailchimp put error:\n${JSON.stringify(error)}\n`);
+								console.log(
+									`\nMailchimp put error:\n${JSON.stringify(error)}\n`
+								);
 								res.send({ error: error.title });
-							}
-							else {
-								console.log(`\nMailchimp put success:\n${JSON.stringify(result)}\n`);
-								res.send({ success: result })
+							} else {
+								console.log(
+									`\nMailchimp put success:\n${JSON.stringify(result)}\n`
+								);
+								res.send({ success: result });
 							}
 						}
 					);
 				});
-
 		} catch (error) {
 			console.log(`\nMailchimp catch block:\n${error}\n`);
-			res.send({ error: error.message })
+			res.send({ error: error.message });
 		}
 	});
 
 	// Serve robotx.txt
 	const robotsOptions = {
-		root: __dirname + '/static/',
+		root: __dirname + "/static/",
 		headers: {
-			'Content-Type': 'text/plain;charset=UTF-8',
+			"Content-Type": "text/plain;charset=UTF-8"
 		}
 	};
-	keystoneApp.get('/robots.txt', (req, res) => (
-		res.status(200).sendFile('robots.txt', robotsOptions)
-	));
+	keystoneApp.get("/robots.txt", (req, res) =>
+		res.status(200).sendFile("robots.txt", robotsOptions)
+	);
 
 	// Serve sitemap
 	// const sitemapOptions = {
@@ -283,8 +300,8 @@ exports = module.exports = nextApp => keystoneApp => {
 	keystoneApp.get("/post/:slug", (req, res) => {
 		const mergedQuery = Object.assign({}, req.query, req.params);
 		console.log(`\nSlug URL: ${JSON.stringify(mergedQuery)}`);
-		return nextApp.render(req, res, '/post', mergedQuery);
-	})
+		return nextApp.render(req, res, "/post", mergedQuery);
+	});
 
 	keystoneApp.get("*", (req, res) => {
 		return handle(req, res);
