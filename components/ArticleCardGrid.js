@@ -1,5 +1,9 @@
 import { Fragment } from "react";
+import Link from "next/link";
 import ArticleCard from "./ArticleCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import Button from "./Button";
 
 const ArticleCardGrid = ({ posts, count = 6 }) => {
 	if (count > 0) {
@@ -8,6 +12,11 @@ const ArticleCardGrid = ({ posts, count = 6 }) => {
 	return (
 		<Fragment>
 			<style jsx>{`
+				.post-cards__container {
+					diplay: flex;
+					flex-direction: column;
+					justify-content: center;
+				}
 				.post-cards {
 					padding: 1rem 0;
 					display: grid;
@@ -24,6 +33,12 @@ const ArticleCardGrid = ({ posts, count = 6 }) => {
 					font-weight: 400;
 					margin: 0 10px 1rem 10px;
 					margin-bottom: 1rem;
+				}
+				.more-posts__button__container {
+					display: grid;
+				}
+				.more-posts__button {
+					margin: 2rem auto;
 				}
 				@media (min-width: 768px) {
 					.post-cards {
@@ -43,15 +58,28 @@ const ArticleCardGrid = ({ posts, count = 6 }) => {
 			`}</style>
 			<div className="post-cards__container">
 				{posts.length > 0 ? (
-					<div className="post-cards">
-						{posts.map((post, i) => {
-							return (
-								<div className="post-card" key={i}>
-									<ArticleCard post={post} />
+					<Fragment>
+						<div className="post-cards">
+							{posts.map((post, i) => {
+								return (
+									<div className="post-card" key={i}>
+										<ArticleCard post={post} />
+									</div>
+								);
+							})}
+						</div>
+						{count > 0 && (
+							<div className="more-posts__button__container">
+								<div className="more-posts__button">
+									<Link href="/articles">
+										<Button>
+											See more <FontAwesomeIcon icon={faArrowRight} />
+										</Button>
+									</Link>
 								</div>
-							);
-						})}
-					</div>
+							</div>
+						)}
+					</Fragment>
 				) : (
 					<h4 id="no-posts">No posts available...</h4>
 				)}
