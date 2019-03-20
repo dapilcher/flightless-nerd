@@ -13,23 +13,25 @@ import AboutAuthor from "../components/AboutAuthor";
 import SocialShare from "../components/SocialShare";
 
 const createConfig = post => {
+	const DEFAULT_DESC =
+		"Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.";
 	return {
-		title: `${post.title}`,
+		title: `${post.title} | Flightless Nerd`,
 		description: !post.seo
-			? "Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday."
+			? DEFAULT_DESC
 			: post.seo.description && post.seo.description !== ""
 			? post.seo.description
-			: "Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.",
+			: DEFAULT_DESC,
 		openGraph: {
 			type: "article",
 			locale: "en_US",
 			url: `https://www.flightlessnerd.com/post/${post.slug}`,
 			title: `${post.title}`,
 			description: !post.seo
-				? "Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday."
+				? DEFAULT_DESC
 				: post.seo.description
 				? post.seo.description
-				: "Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.",
+				: DEFAULT_DESC,
 			defaultImageWidth: 1200,
 			defaultImageHeight: 1200,
 			images: [
