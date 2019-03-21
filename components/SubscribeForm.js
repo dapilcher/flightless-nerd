@@ -83,7 +83,7 @@ class SubscribeForm extends Component {
 						width: 100%;
 						text-align: center;
 						max-width: 100%;
-						margin: 2rem 0;
+						margin-top: 2rem;
 					}
 					.subscribe-form__button,
 					.subscribe-form__input {

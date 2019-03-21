@@ -13,17 +13,38 @@ var Post = new keystone.List("Post", {
 
 Post.add({
 	title: { type: String, required: true },
+	type: {
+		type: Types.Select,
+		options: "podcast, article",
+		default: "article",
+		index: true
+	},
 	state: {
 		type: Types.Select,
 		options: "draft, published, archived",
 		default: "draft",
 		index: true
 	},
-	author: { type: Types.Relationship, ref: "Author", index: true },
+	author: {
+		type: Types.Relationship,
+		ref: "Author",
+		index: true,
+		dependsOn: { type: ["article"] }
+	},
+	epNumber: {
+		type: Number,
+		dependsOn: { type: ["podcast"] },
+		label: "Episode Number"
+	},
+	audioUrl: {
+		type: String,
+		dependsOn: { type: ["podcast"] },
+		label: "Audio Source"
+	},
 	publishedDate: {
 		type: Types.Datetime,
 		index: true,
-		dependsOn: { state: "published" }
+		dependsOn: { state: ["published"] }
 	},
 	modifiedDate: { type: Types.Datetime, hidden: true },
 	image: {
@@ -31,7 +52,8 @@ Post.add({
 		folder: "flightlessnerd",
 		autoCleanup: true,
 		select: true,
-		selectPrefix: "flightlessnerd"
+		selectPrefix: "flightlessnerd",
+		dependsOn: { type: ["article"] }
 	},
 	content: {
 		brief: { type: Types.Markdown, height: 90 },

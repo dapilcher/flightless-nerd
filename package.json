@@ -23,7 +23,9 @@
     "react-dom": "^16.4.1",
     "react-facebook-pixel": "^0.1.2",
     "react-ga": "^2.5.3",
+    "react-icons": "^3.5.0",
     "react-markdown": "^4.0.3",
+    "react-player": "^1.9.3",
     "react-share": "^2.4.0",
     "styled-components": "^3.4.9"
   },
