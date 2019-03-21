@@ -68,6 +68,22 @@ exports = module.exports = nextApp => keystoneApp => {
 		});
 	});
 
+	// Get posts by type
+
+	keystoneApp.get("/api/posts/type/:type", (req, res, next) => {
+		const Post = keystone.list("Post");
+		const postType = req.params.type;
+		Post.model
+			.find()
+			.where("type", postType)
+			.populate("author")
+			.populate("categories")
+			.exec(function(err, results) {
+				if (err) throw err;
+				res.json(results);
+			});
+	});
+
 	// Get post by id
 
 	keystoneApp.get("/api/post/id/:id", (req, res, next) => {

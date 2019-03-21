@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 const helpers = require("../helpers");
-import Title from './Title';
-import CategoryTagList from './CategoryTagList';
+import Title from "./Title";
+import CategoryTagList from "./CategoryTagList";
 
 const ArticleCard = ({ post }) => (
 	<React.Fragment>
@@ -25,8 +25,8 @@ const ArticleCard = ({ post }) => (
 				border-radius: 1rem 1rem 1rem 0;
 			}
 			.article-card-img-placeholder {
-				background-color: #586CFF;
-        background-image: linear-gradient(to bottom right, #586CFF, #2539CC);
+				background-color: #586cff;
+				background-image: linear-gradient(to bottom right, #586cff, #2539cc);
 				color: white;
 				height: 100%;
 				text-align: center;
@@ -44,7 +44,8 @@ const ArticleCard = ({ post }) => (
 				color: #333;
 				max-width: 58vw;
 			}
-			.article-card-title, .article-card-subtitle {
+			.article-card-title,
+			.article-card-subtitle {
 				font-family: Montserrat;
 			}
 			.article-card-body > h5 {
@@ -56,7 +57,7 @@ const ArticleCard = ({ post }) => (
 				font-size: 0.8rem;
 			}
 			.article-card-subtitle {
-				color: rgb(112,112,112);
+				color: rgb(112, 112, 112);
 			}
 			.article-card-text {
 				display: none;
@@ -72,7 +73,7 @@ const ArticleCard = ({ post }) => (
 					// border-left: 2px solid #586CFF;
 					border-radius: 1rem 1rem 1rem 0;
 					align-items: start;
-					box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+					box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 					transition: 100ms;
 				}
 				.article-card:hover {
@@ -112,17 +113,37 @@ const ArticleCard = ({ post }) => (
 				}
 			}
 		`}</style>
-		<Link href={`/post?slug=${post.slug}`} as={`/post/${post.slug}`} prefetch={post.isFeatured}>
+		<Link
+			href={`/post?slug=${post.slug}`}
+			as={`/post/${post.slug}`}
+			prefetch={post.isFeatured}
+		>
 			<div className="article-card pointer">
 				<div className="article-card-img-container">
-					{post.image ?
-						<img className="article-card-img" src={post.image.secure_url} alt={post.title} /> :
-						<div className="article-card-img-placeholder pointer"><span>FN</span></div>
-					}
+					{post.image ? (
+						<img
+							className="article-card-img"
+							src={post.image.secure_url}
+							alt={post.title}
+						/>
+					) : post.type && post.type === "podcast" ? (
+						<img
+							className="article-card-img"
+							src="https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg"
+							alt={post.title}
+						/>
+					) : (
+						<div className="article-card-img-placeholder pointer">
+							<span>FN</span>
+						</div>
+					)}
 				</div>
 				<div className="article-card-body">
 					<CategoryTagList categories={post.categories} />
-					<Title title={post.title} subtitle={helpers.toRelativeTime(post.publishedDate)} />
+					<Title
+						title={post.title}
+						subtitle={helpers.toRelativeTime(post.publishedDate)}
+					/>
 				</div>
 			</div>
 		</Link>

@@ -11,6 +11,7 @@ const WithRecentsSidebar = ({ children, recents }) => (
 				max-width: 100%;
 			}
 			.left {
+				max-width: 100%;
 				flex: 7;
 			}
 			.right {
@@ -19,7 +20,7 @@ const WithRecentsSidebar = ({ children, recents }) => (
 			.sidebar {
 				display: none;
 			}
-			@media (min-width: 768px) {
+			@media (min-width: 992px) {
 				ul {
 					list-style-type: none;
 					margin: 0;

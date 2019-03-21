@@ -4,6 +4,7 @@ import ArticleCardGrid from "../components/ArticleCardGrid";
 import Carousel from "../components/Carousel";
 import SectionDivider from "../components/SectionDivider";
 import SubscribeForm from "../components/SubscribeForm";
+import PodcastPlayer from "../components/PodcastPlayer";
 
 class App extends Component {
 	static async getInitialProps() {
@@ -51,12 +52,12 @@ class App extends Component {
 							<SubscribeForm />
 						</div>
 						<div className="row">
-							<SectionDivider text="Latest Updates" />
-							<ArticleCardGrid posts={this.props.posts} />
+							<SectionDivider text="From the Podcast" />
+							<PodcastPlayer />
 						</div>
 						<div className="row">
-							<SectionDivider text="Recent Podcast Episodes" />
-							<PodcastPlayer />
+							<SectionDivider text="Latest Updates" />
+							<ArticleCardGrid posts={this.props.posts} />
 						</div>
 					</div>
 				</main>

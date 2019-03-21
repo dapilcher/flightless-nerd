@@ -11,6 +11,7 @@ import Title from "../components/Title";
 import CategoryTagList from "../components/CategoryTagList";
 import AboutAuthor from "../components/AboutAuthor";
 import SocialShare from "../components/SocialShare";
+import Player from "../components/Player";
 
 const createConfig = post => {
 	const DEFAULT_DESC =
@@ -40,6 +41,14 @@ const createConfig = post => {
 							url: post.image.secure_url,
 							width: post.image.width,
 							height: post.image.height,
+							alt: post.title
+					  }
+					: post.type === "podcast"
+					? {
+							url:
+								"https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg",
+							width: 1280,
+							height: 720,
 							alt: post.title
 					  }
 					: {
@@ -248,6 +257,12 @@ const Post = ({ post }) => (
 		`}</style>
 		{post.image && post.image.secure_url ? (
 			<img className="post__img" src={post.image.secure_url} alt={post.title} />
+		) : post.type === "podcast" ? (
+			<img
+				className="post__img"
+				src="https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg"
+				alt={post.title}
+			/>
 		) : (
 			""
 		)}
@@ -263,6 +278,7 @@ const Post = ({ post }) => (
 			/>
 		</div>
 		<SocialShare title={post.title} slug={post.slug} />
+		{post.audioUrl && <Player show={post} />}
 		{post.content.extended.md ? (
 			<ReactMarkdown
 				className="post__content"
@@ -324,7 +340,9 @@ class PostContainer extends Component {
 							) : (
 								<>
 									<Post post={post[0]} />
-									<AboutAuthor author={post[0].author} />
+									{post[0].type === "article" && (
+										<AboutAuthor author={post[0].author} />
+									)}
 								</>
 							)}
 						</WithRecentsSidebar>
