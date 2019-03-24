@@ -36,6 +36,7 @@
     "lint": "eslint .",
     "start": "node keystone.js",
     "build": "next build",
-    "deploy": "pm2 deploy ecosystem.config.js production"
+    "deploy:prod": "pm2 deploy ecosystem.config.js production",
+    "deploy:staging": "pm2 deploy ecosystem.config.js staging"
   }
 }
