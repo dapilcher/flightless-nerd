@@ -59,6 +59,10 @@ class App extends Component {
 							<SectionDivider text="Latest Updates" />
 							<ArticleCardGrid posts={this.props.posts} />
 						</div>
+						<div className="row">
+							<SectionDivider text="Recent Podcast Episodes" />
+							<PodcastPlayer />
+						</div>
 					</div>
 				</main>
 			</Fragment>
