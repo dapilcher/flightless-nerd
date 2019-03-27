@@ -7,6 +7,7 @@ const Button = ({
 	style = {},
 	disabled = false,
 	theme = "red",
+	classNames = "",
 	children
 }) => {
 	let lightColor = "#eb3e34";
@@ -56,7 +57,7 @@ const Button = ({
 				}
 			`}</style>
 			<button
-				className="button"
+				className={`button ${classNames}`}
 				style={style}
 				onClick={onClick}
 				disabled={disabled}
