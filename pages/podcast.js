@@ -24,6 +24,13 @@ const seoConfig = {
 		images: [
 			{
 				url:
+					"https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg",
+				width: 1280,
+				height: 720,
+				alt: "The Flightless Nerd Podcast"
+			},
+			{
+				url:
 					"https://www.flightlessnerd.com/static/images/Austrich_circle_cropped.png",
 				width: 917,
 				height: 921,
