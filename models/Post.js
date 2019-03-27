@@ -31,6 +31,12 @@ Post.add({
 		index: true,
 		dependsOn: { type: ["article"] }
 	},
+	hosts: {
+		type: Types.Relationship,
+		ref: "Author",
+		dependsOn: { type: ["podcast"] },
+		many: true
+	},
 	epNumber: {
 		type: Number,
 		dependsOn: { type: ["podcast"] },
@@ -95,6 +101,6 @@ Post.schema.pre("save", function(next) {
 });
 
 Post.defaultColumns =
-	"title, state|10%, isFeatured|10%, author|20%, publishedDate|20%";
+	"title, type|10%, state|10%, isFeatured|10%, author|20%, publishedDate|20%";
 Post.defaultSort = "-publishedDate";
 Post.register();

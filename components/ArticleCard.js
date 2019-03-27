@@ -141,7 +141,11 @@ const ArticleCard = ({ post }) => (
 				<div className="article-card-body">
 					<CategoryTagList categories={post.categories} />
 					<Title
-						title={post.title}
+						title={`${
+							post.type === "podcast" && post.epNumber
+								? `Ep ${post.epNumber} - `
+								: ""
+						}${post.title}`}
 						subtitle={helpers.toRelativeTime(post.publishedDate)}
 					/>
 				</div>

@@ -3,6 +3,7 @@ import Head from "next/head";
 import fetch from "isomorphic-unfetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { FaAngleDown } from "react-icons/fa";
 import ArticleCardGrid from "../components/ArticleCardGrid";
 
 const Checkbox = ({ id, name, checked = true, onChange }) => (
@@ -48,12 +49,14 @@ class Articles extends Component {
 		showFilters: true
 	};
 	static async getInitialProps() {
-		const posts = await fetch(`${process.env.HOST_URL || "/"}api/posts`).then(
+		let posts = await fetch(`${process.env.HOST_URL || "/"}api/posts`).then(
 			res => res.json()
 		);
 		const categories = await fetch(
 			`${process.env.HOST_URL || "/"}api/categories`
 		).then(res => res.json());
+
+		posts = posts.filter(post => post.type && post.type !== "podcast");
 
 		return { posts, categories };
 	}
@@ -186,7 +189,7 @@ class Articles extends Component {
 				<h3>
 					<button className="filters__title" onClick={this.toggleFilters}>
 						<span ref={el => (this.iconRef = el)}>
-							<FontAwesomeIcon icon={faAngleDown} size="sm" />
+							<FaAngleDown />
 						</span>
 						{" Filters"}
 					</button>
