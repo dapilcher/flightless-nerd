@@ -76,8 +76,10 @@ exports = module.exports = nextApp => keystoneApp => {
 		Post.model
 			.find()
 			.where("type", postType)
-			.populate("author")
+			.populate("authors")
+			.populate("hosts")
 			.populate("categories")
+			.sort("-publishedDate")
 			.exec(function(err, results) {
 				if (err) throw err;
 				res.json(results);
@@ -94,6 +96,7 @@ exports = module.exports = nextApp => keystoneApp => {
 			.where("_id", postId)
 			.where("state", "published")
 			.populate("author")
+			.populate("hosts")
 			.populate("categories")
 			.exec(function(err, results) {
 				if (err) res.json({ Error: err });
@@ -111,6 +114,7 @@ exports = module.exports = nextApp => keystoneApp => {
 			.where("slug", postSlug)
 			.where("state", "published")
 			.populate("author")
+			.populate("hosts")
 			.populate("categories")
 			.exec(function(err, results) {
 				if (err) res.json({ Error: err });

@@ -2,16 +2,11 @@ import { Component, Fragment } from "react";
 import Head from "next/head";
 import NextSeo from "next-seo";
 import fetch from "isomorphic-unfetch";
-// import ReactMarkdown from 'react-markdown/';
+import { FaItunes } from "react-icons/fa";
 
-// import helpers from '../helpers';
-import WithRecentsSidebar from "../components/WithRecentsSidebar";
-import ResponsiveWidthContainer from "../components/ResponsiveWidthContainer";
-import ArticleCardGrid from "../components/ArticleCardGrid";
-// import Title from '../components/Title';
-// import CategoryTagList from '../components/CategoryTagList';
-// import AboutAuthor from '../components/AboutAuthor';
-// import SocialShare from '../components/SocialShare';
+import PodcastList from "../components/PodcastList";
+import Button from "../components/Button";
+import SectionDivider from "../components/SectionDivider";
 
 const seoConfig = {
 	title: `The Flightless Nerd Podcast | Flightless Nerd`,
@@ -27,6 +22,13 @@ const seoConfig = {
 		defaultImageWidth: 917,
 		defaultImageHeight: 921,
 		images: [
+			{
+				url:
+					"https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg",
+				width: 1280,
+				height: 720,
+				alt: "The Flightless Nerd Podcast"
+			},
 			{
 				url:
 					"https://www.flightlessnerd.com/static/images/Austrich_circle_cropped.png",
@@ -46,19 +48,15 @@ const seoConfig = {
 
 class Podcast extends Component {
 	static async getInitialProps({ query }) {
-		const recentPosts = await fetch(
-			`${process.env.HOST_URL || "/"}api/posts?limit=3`
-		).then(res => res.json());
-
 		const podcasts = await fetch(
 			`${process.env.HOST_URL || "/"}api/posts/type/podcast`
 		).then(res => res.json());
 
-		return { recentPosts, podcasts };
+		return { podcasts };
 	}
 
 	render() {
-		const { podcasts, recentPosts } = this.props;
+		const { podcasts } = this.props;
 		return (
 			<Fragment>
 				<Head>
@@ -83,6 +81,15 @@ class Podcast extends Component {
 						margin: 0 10px;
 						text-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 					}
+					.podcast__image {
+						max-width: 100%;
+						border-bottom: 0.3rem solid #eb3e34;
+					}
+					@media (min-width: 768px) {
+						.podcast__image {
+							border-bottom-width: 0.5rem;
+						}
+					}
 					@media (min-width: 576px) {
 						h1 {
 							font-size: 3rem;
@@ -93,13 +100,19 @@ class Podcast extends Component {
 						}
 					}
 				`}</style>
+				<img
+					className="podcast__image"
+					src="https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg"
+				/>
 				<div className="podcast__container">
-					<ResponsiveWidthContainer>
-						<WithRecentsSidebar recents={recentPosts}>
-							<h1>The Flightless Nerd Podcast</h1>
-							<ArticleCardGrid posts={podcasts} count={0} />
-						</WithRecentsSidebar>
-					</ResponsiveWidthContainer>
+					<div className="buttons">
+						<Button theme="blue" style={{ fontSize: "1.2rem" }}>
+							<FaItunes style={{ fontSize: "2rem" }} />
+							{" Listen on iTunes"}
+						</Button>
+					</div>
+					<SectionDivider text="Episodes" />
+					<PodcastList posts={podcasts} count={0} />
 				</div>
 			</Fragment>
 		);
