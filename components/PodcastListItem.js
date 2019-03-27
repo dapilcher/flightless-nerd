@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import { FaTwitter, FaPlay, FaItunesNote } from "react-icons/fa";
+import { FaTwitter, FaPlay } from "react-icons/fa";
 import Button from "./Button";
 
 const PodcastListItem = ({ episode }) => (
@@ -10,11 +10,11 @@ const PodcastListItem = ({ episode }) => (
 			.episode-list-item {
 				margin-top: 1rem;
 				display: grid;
-				grid-column-gap: 2rem;
+				grid-column-gap: 1rem;
 				grid-row-gap: 1rem;
-				grid-template-columns: auto;
-				grid-template-rows: repeat(4, auto);
-				grid-template-areas: "button" "title" "details" "hosts";
+				grid-template-columns: 50px auto;
+				grid-template-rows: repeat(3, auto);
+				grid-template-areas: "button title" "details details" "hosts hosts";
 				padding: 1rem 0;
 				border-bottom: 1px solid #eb3e34;
 			}
