@@ -7,6 +7,7 @@ import { FaItunes } from "react-icons/fa";
 import PodcastList from "../components/PodcastList";
 import Button from "../components/Button";
 import SectionDivider from "../components/SectionDivider";
+import Player from "../components/Player";
 
 const seoConfig = {
 	title: `The Flightless Nerd Podcast | Flightless Nerd`,
@@ -55,6 +56,19 @@ class Podcast extends Component {
 		return { podcasts };
 	}
 
+	constructor(props) {
+		super(props);
+		let currentEpisode = props.podcasts ? props.podcasts[0].epNumber : 1;
+		this.state = {
+			currentEpisode
+		};
+	}
+
+	updateCurrentEpisode = epNumber => {
+		console.log("updating episode: ", epNumber);
+		this.setState({ currentEpisode: epNumber });
+	};
+
 	render() {
 		const { podcasts } = this.props;
 		return (
@@ -85,6 +99,9 @@ class Podcast extends Component {
 						max-width: 100%;
 						border-bottom: 0.3rem solid #eb3e34;
 					}
+					.buttons {
+						margin-bottom: 1rem;
+					}
 					@media (min-width: 768px) {
 						.podcast__image {
 							border-bottom-width: 0.5rem;
@@ -104,6 +121,11 @@ class Podcast extends Component {
 					className="podcast__image"
 					src="https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg"
 				/>
+				<Player
+					show={
+						podcasts.filter(ep => ep.epNumber === this.state.currentEpisode)[0]
+					}
+				/>
 				<div className="podcast__container">
 					<div className="buttons">
 						<Button theme="blue" style={{ fontSize: "1.2rem" }}>
@@ -112,7 +134,11 @@ class Podcast extends Component {
 						</Button>
 					</div>
 					<SectionDivider text="Episodes" />
-					<PodcastList posts={podcasts} count={0} />
+					<PodcastList
+						posts={podcasts}
+						count={0}
+						updateCurrentEpisode={this.updateCurrentEpisode}
+					/>
 				</div>
 			</Fragment>
 		);

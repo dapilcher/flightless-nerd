@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { FaTwitter, FaPlay } from "react-icons/fa";
 import Button from "./Button";
 
-const PodcastListItem = ({ episode }) => (
+const PodcastListItem = ({ episode, updateCurrentEpisode }) => (
 	<Fragment>
 		<style jsx>{`
 			.episode-list-item {
@@ -55,7 +55,7 @@ const PodcastListItem = ({ episode }) => (
 		`}</style>
 		<div className="episode-list-item">
 			<div className="episode__play-pause__button">
-				<Button>
+				<Button onClick={updateCurrentEpisode}>
 					<FaPlay />
 				</Button>
 			</div>
