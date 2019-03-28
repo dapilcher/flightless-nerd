@@ -1,13 +1,13 @@
 import { Component, Fragment } from "react";
-import ReactPlayer from "react-player";
 import {
 	FaPlay,
 	FaPause,
 	FaRss,
 	FaArrowDown,
-	FaShareAlt
+	FaShareAlt,
+	FaUndo,
+	FaRedo
 } from "react-icons/fa";
-import Button from "../components/Button";
 import formatTime from "../utils/formatTime";
 
 class Player extends Component {
@@ -28,7 +28,8 @@ class Player extends Component {
 			duration: 0,
 			currentTime: lastPlayed,
 			playbackRate: 1,
-			timeWasLoaded: lastPlayed !== 0
+			timeWasLoaded: lastPlayed !== 0,
+			rssCopied: false
 		};
 	}
 
@@ -103,6 +104,22 @@ class Player extends Component {
 		}
 	};
 
+	jumpForward = () => {
+		let newTime = this.audio.currentTime + 10;
+		if (newTime >= this.audio.duration) newTime = this.audio.duration;
+		this.setState({ currentTime: newTime });
+		this.audio.currentTime = newTime;
+		this.progress.value = newTime / this.audio.duration;
+	};
+
+	jumpBack = () => {
+		let newTime = this.audio.currentTime - 10;
+		if (newTime <= 0) newTime = 0;
+		this.setState({ currentTime: newTime });
+		this.audio.currentTime = newTime;
+		this.progress.value = newTime / this.audio.duration;
+	};
+
 	render() {
 		const { show } = this.props;
 		return (
@@ -124,7 +141,7 @@ class Player extends Component {
 						justify-content: center;
 					}
 					.player__section__info {
-						border-bottom: 8px solid #eb3e34;
+						border-bottom: .3rem solid #eb3e34;
 						background-color: #586cff;
 						background-image: linear-gradient(
 							to bottom right,
@@ -141,7 +158,7 @@ class Player extends Component {
 						grid-area: playPause;
 					}
 					.player__button {
-						font-size: 1.3rem;
+						font-size: 1rem;
 						height: 100%;
 						max-width: 100%;
 						border: none;
@@ -152,9 +169,9 @@ class Player extends Component {
 					.player__button:hover {
 						background-color: #d2251b;
 					}
-					.player__play-pause__button:hover,
-					.player__play-pause__button:focus,
-					.player__play-pause__button:active {
+					.player__button:hover,
+					.player__button:focus,
+					.player__button:active {
 						outline: none;
 					}
 					.player__progress[value] {
@@ -162,6 +179,7 @@ class Player extends Component {
 						appearance: none;
 						width: 100%;
 						height: 10px;
+						margin: .5rem 0;
 					}
 					.player__progress[value]::-webkit-progress-bar {
 						background-color: #eee;
@@ -185,6 +203,25 @@ class Player extends Component {
 						margin-left: 3px;
 						flex: 1;
 					}
+					.below__progress {
+						display: flex;
+						flex-direction: row;
+						width: 100%;
+						justify-content: space-around;
+					}
+					.player__time-jump {
+						background: none;
+						border: none;
+						color: #eee;
+					}
+					.player__time-jump:hover,
+					.player__time-jump:active,
+					.player__time-jump:focus {
+						outline: none;
+					}
+					.pointer {
+						cursor: pointer;
+					}
 					@media (min-width: 768px) {
 						.player__container {
 							grid-template-columns: auto 1fr 10rem;
@@ -193,19 +230,22 @@ class Player extends Component {
 						}
 						.player__section__info {
 							margin: 0 3px;
+							border-bottom-width: .5rem;
+						}
+						.player__button {
+							font-size: 1.3rem;
 						}
 						.play-pause__button {
 							border-radius: 1rem 0 0 0;
 						}
-						.player__buttons .player__button:last-child {
+						.player__button__share {
 							border-radius: 0 1rem 1rem 0;
 						}
-					}
 				`}</style>
 				<div className="player__container">
 					<div className="player__section player__play-pause__button__container">
 						<button
-							className="player__button play-pause__button"
+							className="player__button play-pause__button pointer"
 							onClick={this.togglePlay}
 						>
 							{this.state.playing ? <FaPause /> : <FaPlay />}
@@ -220,19 +260,40 @@ class Player extends Component {
 							max="1"
 							onClick={this.seek}
 						/>
-						<span>
-							{formatTime(this.state.currentTime)}/
-							{formatTime(this.state.duration)}
-						</span>
+						<div className="below__progress">
+							<button
+								className="player__time-jump pointer"
+								onClick={this.jumpBack}
+							>
+								<FaUndo /> 10
+							</button>
+							<div>
+								{formatTime(this.state.currentTime)}/
+								{formatTime(this.state.duration)}
+							</div>
+							<button
+								className="player__time-jump pointer"
+								onClick={this.jumpForward}
+							>
+								<FaRedo /> 10
+							</button>
+						</div>
 					</div>
 					<div className="player__section player__buttons">
-						<button className="player__button">
-							<FaRss />
-						</button>
-						<button className="player__button">
-							<FaArrowDown />
-						</button>
-						<button className="player__button">
+						<a href="https://flightlessnerd.libsyn.com/rss" target="_blank">
+							<button
+								className="player__button player__button__rss pointer"
+								onClick={this.copyRss}
+							>
+								<FaRss />
+							</button>
+						</a>
+						<a href={show.audioUrl} download>
+							<button className="player__button player__button__download pointer">
+								<FaArrowDown />
+							</button>
+						</a>
+						<button className="player__button player__button__share pointer">
 							<FaShareAlt />
 						</button>
 					</div>
@@ -250,32 +311,3 @@ class Player extends Component {
 	}
 }
 export default Player;
-
-// import { Component, Fragment } from "react";
-// import ReactPlayer from "react-player";
-
-// class Player extends Component {
-// 	render() {
-// 		const { show } = this.props;
-// 		return (
-// 			<Fragment>
-// 				<style jsx>{`
-// 					.player-wrapper {
-// 						height: 1rem;
-// 						max-width: 100vw;
-// 						margin: 2.5rem 0;
-// 					}
-// 				`}</style>
-// 				<div className="player-wrapper">
-// 					<ReactPlayer
-// 						width="100%"
-// 						height="100%"
-// 						url={show.audioUrl}
-// 						controls
-// 					/>
-// 				</div>
-// 			</Fragment>
-// 		);
-// 	}
-// }
-// export default Player;

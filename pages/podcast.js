@@ -8,6 +8,7 @@ import PodcastList from "../components/PodcastList";
 import Button from "../components/Button";
 import SectionDivider from "../components/SectionDivider";
 import Player from "../components/Player";
+import WithRecentsSidebar from "../components/WithRecentsSidebar";
 
 const seoConfig = {
 	title: `The Flightless Nerd Podcast | Flightless Nerd`,
@@ -53,7 +54,11 @@ class Podcast extends Component {
 			`${process.env.HOST_URL || "/"}api/posts/type/podcast`
 		).then(res => res.json());
 
-		return { podcasts };
+		const recents = await fetch(
+			`${process.env.HOST_URL || "/"}api/posts?limit=3`
+		).then(res => res.json());
+
+		return { podcasts, recents };
 	}
 
 	constructor(props) {
@@ -65,12 +70,11 @@ class Podcast extends Component {
 	}
 
 	updateCurrentEpisode = epNumber => {
-		console.log("updating episode: ", epNumber);
 		this.setState({ currentEpisode: epNumber });
 	};
 
 	render() {
-		const { podcasts } = this.props;
+		const { podcasts, recents } = this.props;
 		return (
 			<Fragment>
 				<Head>
@@ -117,29 +121,33 @@ class Podcast extends Component {
 						}
 					}
 				`}</style>
-				<img
-					className="podcast__image"
-					src="https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg"
-				/>
-				<Player
-					show={
-						podcasts.filter(ep => ep.epNumber === this.state.currentEpisode)[0]
-					}
-				/>
-				<div className="podcast__container">
-					<div className="buttons">
-						<Button theme="blue" style={{ fontSize: "1.2rem" }}>
-							<FaItunes style={{ fontSize: "2rem" }} />
-							{" Listen on iTunes"}
-						</Button>
-					</div>
-					<SectionDivider text="Episodes" />
-					<PodcastList
-						posts={podcasts}
-						count={0}
-						updateCurrentEpisode={this.updateCurrentEpisode}
+				<WithRecentsSidebar recents={recents}>
+					<img
+						className="podcast__image"
+						src="https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg"
 					/>
-				</div>
+					<Player
+						show={
+							podcasts.filter(
+								ep => ep.epNumber === this.state.currentEpisode
+							)[0]
+						}
+					/>
+					<div className="podcast__container">
+						<div className="buttons">
+							<Button theme="blue" style={{ fontSize: "1.2rem" }}>
+								<FaItunes style={{ fontSize: "2rem" }} />
+								{" Listen on iTunes"}
+							</Button>
+						</div>
+						<SectionDivider text="Episodes" />
+						<PodcastList
+							posts={podcasts}
+							count={0}
+							updateCurrentEpisode={this.updateCurrentEpisode}
+						/>
+					</div>
+				</WithRecentsSidebar>
 			</Fragment>
 		);
 	}
