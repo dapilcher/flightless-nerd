@@ -1,6 +1,13 @@
 import { Component, Fragment } from "react";
 import ReactPlayer from "react-player";
-import { FaPlay, FaPause } from "react-icons/fa";
+import {
+	FaPlay,
+	FaPause,
+	FaRss,
+	FaArrowDown,
+	FaShareAlt
+} from "react-icons/fa";
+import Button from "../components/Button";
 import formatTime from "../utils/formatTime";
 
 class Player extends Component {
@@ -24,6 +31,11 @@ class Player extends Component {
 			timeWasLoaded: lastPlayed !== 0
 		};
 	}
+
+	componentWillUpdate(nextProps, nextState) {
+		nextProps.show.epNumber !== this.props.show.epNumber;
+	}
+
 	componentDidUpdate(prevProps, prevState) {
 		if (this.props.show.epNumber !== prevProps.show.epNumber) {
 			const lp = localStorage.getItem(`lastPlayed${this.props.show.epNumber}`);
@@ -42,19 +54,38 @@ class Player extends Component {
 			);
 		}
 	}
-	togglePlay = () => {
+
+	componentDidMount() {
+		document.addEventListener("keydown", this.keyDownTogglePlay, false);
+	}
+	componentWillUnmount() {
+		document.removeEventListener("keydown", this.keyDownTogglePlay, false);
+	}
+
+	togglePlay = e => {
 		const method = this.state.playing ? "pause" : "play";
 		this.audio[method]();
 	};
+
+	keyDownTogglePlay = e => {
+		e.preventDefault();
+		console.log(e);
+		if (e.code != "Space") return;
+		const method = this.state.playing ? "pause" : "play";
+		this.audio[method]();
+	};
+
 	playPause = e => {
 		this.setState({ playing: !this.audio.paused });
 	};
+
 	seek = e => {
 		const percent = e.nativeEvent.offsetX / this.progress.offsetWidth;
 		this.setState({ currentTime: percent * this.audio.duration });
 		this.audio.currentTime = percent * this.audio.duration;
 		this.progress.value = percent / 100;
 	};
+
 	timeUpdate = e => {
 		// Check if the user already had a curent time
 		if (this.state.timeWasLoaded) {
@@ -71,6 +102,7 @@ class Player extends Component {
 			this.setState({ progressTime, currentTime, duration });
 		}
 	};
+
 	render() {
 		const { show } = this.props;
 		return (
@@ -78,17 +110,20 @@ class Player extends Component {
 				<style jsx>{`
 					.player__container {
 						max-width: 100%;
-						display: flex;
-						flex-direction: row;
+						display: grid;
+						grid-template-columns: 1fr 1fr;
+						grid-template-rows: auto auto;
+						grid-template-areas: "playPause buttons" "info info";
 						color: #eee;
 						font-family: Raleway;
+						margin-top: 1rem;
 					}
 					.player__section {
 						display: flex;
 						flex-direction: column;
 						justify-content: center;
 					}
-					.player__section__center {
+					.player__section__info {
 						border-bottom: 8px solid #eb3e34;
 						background-color: #586cff;
 						background-image: linear-gradient(
@@ -97,25 +132,30 @@ class Player extends Component {
 							#2539cc
 						);
 						flex: 1;
-						margin: 0 3px;
 						padding: 0.5rem 1rem;
 						align-items: center;
+						grid-area: info;
 					}
-					.player__section__left {
+					.player__play-pause__button__container {
 						align-items: stretch;
+						grid-area: playPause;
 					}
-					.play-pause__button {
-						font-size: 2rem;
+					.player__button {
+						font-size: 1.3rem;
 						height: 100%;
 						max-width: 100%;
 						border: none;
 						background-color: #eb3e34;
 						color: #eee;
-						border-radius: 1rem 0 0 0;
 						padding: 1rem;
 					}
-					.play-pause__button:hover {
+					.player__button:hover {
 						background-color: #d2251b;
+					}
+					.player__play-pause__button:hover,
+					.player__play-pause__button:focus,
+					.player__play-pause__button:active {
+						outline: none;
 					}
 					.player__progress[value] {
 						-webkit-appearance: none;
@@ -136,15 +176,43 @@ class Player extends Component {
 							#e6cf1f
 						);
 					}
+					.player__buttons {
+						display: flex;
+						flex-direction: row;
+						grid-area: buttons;
+					}
+					.player__buttons .player__button {
+						margin-left: 3px;
+						flex: 1;
+					}
+					@media (min-width: 768px) {
+						.player__container {
+							grid-template-columns: auto 1fr 10rem;
+							grid-template-rows: auto;
+							grid-template-areas: "playPause info buttons";
+						}
+						.player__section__info {
+							margin: 0 3px;
+						}
+						.play-pause__button {
+							border-radius: 1rem 0 0 0;
+						}
+						.player__buttons .player__button:last-child {
+							border-radius: 0 1rem 1rem 0;
+						}
+					}
 				`}</style>
 				<div className="player__container">
-					<div className="player__section player__section__left">
-						<button className="play-pause__button" onClick={this.togglePlay}>
+					<div className="player__section player__play-pause__button__container">
+						<button
+							className="player__button play-pause__button"
+							onClick={this.togglePlay}
+						>
 							{this.state.playing ? <FaPause /> : <FaPlay />}
 						</button>
 					</div>
-					<div className="player__section player__section__center">
-						<span>{show.title}</span>
+					<div className="player__section player__section__info">
+						<span>{`Ep ${show.epNumber} - ${show.title}`}</span>
 						<progress
 							ref={p => (this.progress = p)}
 							className="player__progress"
@@ -156,6 +224,17 @@ class Player extends Component {
 							{formatTime(this.state.currentTime)}/
 							{formatTime(this.state.duration)}
 						</span>
+					</div>
+					<div className="player__section player__buttons">
+						<button className="player__button">
+							<FaRss />
+						</button>
+						<button className="player__button">
+							<FaArrowDown />
+						</button>
+						<button className="player__button">
+							<FaShareAlt />
+						</button>
 					</div>
 				</div>
 				<audio

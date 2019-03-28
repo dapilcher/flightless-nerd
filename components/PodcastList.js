@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import PodcastListItem from "./PodcastListItem";
 
-const PodcastList = ({ posts }) => {
+const PodcastList = ({ posts, updateCurrentEpisode }) => {
 	return (
 		<Fragment>
 			<style jsx>{``}</style>
@@ -12,7 +12,13 @@ const PodcastList = ({ posts }) => {
 							{posts.map((post, i) => {
 								return (
 									<div className="list-item" key={i}>
-										<PodcastListItem episode={post} />
+										<PodcastListItem
+											episode={post}
+											updateCurrentEpisode={() => {
+												console.log("podcastlist component ", post.epNumber);
+												updateCurrentEpisode(post.epNumber);
+											}}
+										/>
 									</div>
 								);
 							})}

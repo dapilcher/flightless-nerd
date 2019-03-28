@@ -1,9 +1,7 @@
 import { Fragment } from "react";
 
 const Button = ({
-	onClick = () => {
-		console.log("boop!");
-	},
+	onClick,
 	style = {},
 	disabled = false,
 	theme = "red",
