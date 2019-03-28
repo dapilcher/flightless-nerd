@@ -57,23 +57,31 @@ class Player extends Component {
 	}
 
 	componentDidMount() {
-		document.addEventListener("keydown", this.keyDownTogglePlay, false);
+		document.addEventListener("keydown", this.checkKeydown, false);
 	}
 	componentWillUnmount() {
-		document.removeEventListener("keydown", this.keyDownTogglePlay, false);
+		document.removeEventListener("keydown", this.checkKeydown, false);
 	}
 
 	togglePlay = e => {
+		e.preventDefault();
 		const method = this.state.playing ? "pause" : "play";
 		this.audio[method]();
 	};
 
-	keyDownTogglePlay = e => {
-		e.preventDefault();
+	checkKeydown = e => {
 		console.log(e);
-		if (e.code != "Space") return;
-		const method = this.state.playing ? "pause" : "play";
-		this.audio[method]();
+		switch (e.keyCode) {
+			case 32:
+				this.togglePlay(e);
+				break;
+			case 37:
+				this.jumpBack(e);
+				break;
+			case 39:
+				this.jumpForward(e);
+				break;
+		}
 	};
 
 	playPause = e => {
@@ -104,7 +112,8 @@ class Player extends Component {
 		}
 	};
 
-	jumpForward = () => {
+	jumpForward = e => {
+		e.preventDefault();
 		let newTime = this.audio.currentTime + 10;
 		if (newTime >= this.audio.duration) newTime = this.audio.duration;
 		this.setState({ currentTime: newTime });
@@ -112,7 +121,8 @@ class Player extends Component {
 		this.progress.value = newTime / this.audio.duration;
 	};
 
-	jumpBack = () => {
+	jumpBack = e => {
+		e.preventDefault();
 		let newTime = this.audio.currentTime - 10;
 		if (newTime <= 0) newTime = 0;
 		this.setState({ currentTime: newTime });
