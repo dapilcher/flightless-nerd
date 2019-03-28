@@ -47,6 +47,11 @@ Post.add({
 		dependsOn: { type: ["podcast"] },
 		label: "Audio Source"
 	},
+	permalink: {
+		type: String,
+		dependsOn: { type: ["podcast"] },
+		label: "Audio Permalink"
+	},
 	publishedDate: {
 		type: Types.Datetime,
 		index: true,
