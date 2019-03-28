@@ -239,6 +239,25 @@ class Player extends Component {
 					.pointer {
 						cursor: pointer;
 					}
+					.below__progress {
+						display: flex;
+						flex-direction: row;
+						width: 100%;
+						justify-content: space-around;
+					}
+					.player__time-jump {
+						background: none;
+						border: none;
+						color: #eee;
+					}
+					.player__time-jump:hover,
+					.player__time-jump:active,
+					.player__time-jump:focus {
+						outline: none;
+					}
+					.pointer {
+						cursor: pointer;
+					}
 					@media (min-width: 768px) {
 						.player__container {
 							grid-template-columns: auto 1fr 10rem;
