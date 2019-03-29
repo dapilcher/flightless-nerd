@@ -50,10 +50,7 @@ const SocialLinks = props => (
 				display: flex;
 				flex-direction: row;
 				justify-content: center;
-				// background: #EB3E34;
 				padding: 1rem;
-				// box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-				// border-radius: 1rem 1rem 1rem 0;
 			}
 			.footer__social__item {
 				color: #eee;
@@ -62,7 +59,6 @@ const SocialLinks = props => (
 				transition: 75ms;
 			}
 			.footer__social__item:hover {
-				// color: #EB3E34;
 				color: #ffe838;
 				cursor: pointer;
 				transform: scale(1.1);
@@ -99,7 +95,7 @@ const Footer = () => (
 				width: 100%;
 				background-color: #586cff;
 				background-image: linear-gradient(to bottom right, #586cff, #2539cc);
-				border-top: 0.5rem solid #eb3e34;
+				border-top: 0.3rem solid #eb3e34;
 				padding: 1rem 0;
 				margin-top: auto;
 				width: 100%;
@@ -107,10 +103,6 @@ const Footer = () => (
 				justify-content: center;
 			}
 			.footer__container__grid {
-				// display: flex;
-				// flex-direction: row;
-				// justify-content: space-between;
-				// align-items: center;
 				color: #eee;
 				display: grid;
 				grid-gap: 10px;
@@ -145,6 +137,11 @@ const Footer = () => (
 			}
 			#footer__subscribe-form {
 				grid-area: subscribe-form;
+			}
+			@media (min-width: 768px) {
+				.footer__container {
+					border-top-width: 0.5rem;
+				}
 			}
 			@media (min-width: 992px) {
 				.footer__container__grid {

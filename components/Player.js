@@ -8,6 +8,7 @@ import {
 	FaUndo,
 	FaRedo
 } from "react-icons/fa";
+import Marquee from "react-marquee";
 import formatTime from "../utils/formatTime";
 
 class Player extends Component {
@@ -64,6 +65,7 @@ class Player extends Component {
 	}
 
 	togglePlay = e => {
+		console.log(e);
 		e.preventDefault();
 		const method = this.state.playing ? "pause" : "play";
 		this.audio[method]();
@@ -151,6 +153,7 @@ class Player extends Component {
 						justify-content: center;
 					}
 					.player__section__info {
+						max-width: 100%;
 						border-bottom: .3rem solid #eb3e34;
 						background-color: #586cff;
 						background-image: linear-gradient(
@@ -213,6 +216,10 @@ class Player extends Component {
 						margin-left: 3px;
 						flex: 1;
 					}
+					.player__title__marquee {
+						max-width: 100%;
+						overflow-x: hidden;
+					}
 					.below__progress {
 						display: flex;
 						flex-direction: row;
@@ -262,7 +269,9 @@ class Player extends Component {
 						</button>
 					</div>
 					<div className="player__section player__section__info">
-						<span>{`Ep ${show.epNumber} - ${show.title}`}</span>
+						<div className="player__title__marquee">
+							<span>{`Ep ${show.epNumber} - ${show.title}`}</span>
+						</div>
 						<progress
 							ref={p => (this.progress = p)}
 							className="player__progress"

@@ -55,7 +55,7 @@ class PodcastList extends Component {
 		ref.setAttribute("data-collapsed", "false");
 	};
 	render() {
-		const { posts } = this.props;
+		const { posts, updateCurrentEpisode } = this.props;
 		return (
 			<Fragment>
 				<style jsx>{`
@@ -73,10 +73,9 @@ class PodcastList extends Component {
 											<PodcastListItem
 												episode={post}
 												toggleCollapse={this.toggleCollapse}
-												updateCurrentEpisode={() => {
-													console.log("podcastlist component ", post.epNumber);
-													updateCurrentEpisode(post.epNumber);
-												}}
+												updateCurrentEpisode={() =>
+													updateCurrentEpisode(post.epNumber)
+												}
 											/>
 										</div>
 									);
