@@ -239,6 +239,7 @@ class Player extends Component {
 					.pointer {
 						cursor: pointer;
 					}
+<<<<<<< HEAD
 					.player__title__marquee {
 						max-width: 100%;
 						overflow-x: hidden;
@@ -262,6 +263,8 @@ class Player extends Component {
 					.pointer {
 						cursor: pointer;
 					}
+=======
+>>>>>>> 517c96b907d8b4a0084ab77d47759103256bb890
 					@media (min-width: 768px) {
 						.player__container {
 							grid-template-columns: auto 1fr 10rem;
