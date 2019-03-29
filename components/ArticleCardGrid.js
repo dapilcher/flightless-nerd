@@ -1,8 +1,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import ArticleCard from "./ArticleCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FaArrowRight } from "react-icons/fa";
 import Button from "./Button";
 
 const ArticleCardGrid = ({ posts, count = 6 }) => {
@@ -73,7 +72,7 @@ const ArticleCardGrid = ({ posts, count = 6 }) => {
 								<div className="more-posts__button">
 									<Link href="/articles">
 										<Button>
-											See more <FontAwesomeIcon icon={faArrowRight} />
+											See more <FaArrowRight />
 										</Button>
 									</Link>
 								</div>

@@ -8,6 +8,7 @@ import {
 	FaUndo,
 	FaRedo
 } from "react-icons/fa";
+import Marquee from "react-marquee";
 import formatTime from "../utils/formatTime";
 
 class Player extends Component {
@@ -64,6 +65,7 @@ class Player extends Component {
 	}
 
 	togglePlay = e => {
+		console.log(e);
 		e.preventDefault();
 		const method = this.state.playing ? "pause" : "play";
 		this.audio[method]();
@@ -151,6 +153,7 @@ class Player extends Component {
 						justify-content: center;
 					}
 					.player__section__info {
+						max-width: 100%;
 						border-bottom: .3rem solid #eb3e34;
 						background-color: #586cff;
 						background-image: linear-gradient(
@@ -211,7 +214,11 @@ class Player extends Component {
 					}
 					.player__buttons .player__button {
 						margin-left: 3px;
-						flex: 1;
+						flex: 1 0 auto;
+					}
+					.player__title__marquee {
+						max-width: 100%;
+						overflow-x: hidden;
 					}
 					.below__progress {
 						display: flex;
@@ -258,11 +265,21 @@ class Player extends Component {
 							className="player__button play-pause__button pointer"
 							onClick={this.togglePlay}
 						>
-							{this.state.playing ? <FaPause /> : <FaPlay />}
+							{this.state.playing ? (
+								<a title="Pause">
+									<FaPause />
+								</a>
+							) : (
+								<a title="Play">
+									<FaPlay />
+								</a>
+							)}
 						</button>
 					</div>
 					<div className="player__section player__section__info">
-						<span>{`Ep ${show.epNumber} - ${show.title}`}</span>
+						<div className="player__title__marquee">
+							<span>{`Ep ${show.epNumber} - ${show.title}`}</span>
+						</div>
 						<progress
 							ref={p => (this.progress = p)}
 							className="player__progress"
@@ -290,7 +307,11 @@ class Player extends Component {
 						</div>
 					</div>
 					<div className="player__section player__buttons">
-						<a href="https://flightlessnerd.libsyn.com/rss" target="_blank">
+						<a
+							href="https://flightlessnerd.libsyn.com/rss"
+							target="_blank"
+							title="Subscribe to RSS"
+						>
 							<button
 								className="player__button player__button__rss pointer"
 								onClick={this.copyRss}
@@ -298,7 +319,7 @@ class Player extends Component {
 								<FaRss />
 							</button>
 						</a>
-						<a href={show.audioUrl} download>
+						<a href={show.audioUrl} download title="Download episode">
 							<button className="player__button player__button__download pointer">
 								<FaArrowDown />
 							</button>

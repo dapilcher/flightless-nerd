@@ -33,6 +33,7 @@ const WithRecentsSidebar = ({ children, recents }) => (
 				}
 				.left {
 					margin-right: 1.5rem;
+					max-width: 100%;
 				}
 				.sidebar {
 					display: flex;
