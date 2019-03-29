@@ -110,14 +110,16 @@ const Post = ({ post }) => (
 			.post-img {
 				margin: 1rem 0;
 				max-width: 100%;
+				text-align: center;
 			}
 			img {
 				max-width: 100%;
+				max-height: 35rem;
 				margin: 1rem 0;
 				padding: 0;
 				box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 			}
-			figcaption {
+			.post-img figcaption {
 				padding-top: 0.3rem;
 				font-family: Raleway;
 				color: #505050;
