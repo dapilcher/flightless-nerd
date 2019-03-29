@@ -2,6 +2,7 @@ import { Fragment } from "react";
 
 const Button = ({
 	onClick,
+	title,
 	style = {},
 	disabled = false,
 	theme = "red",
@@ -54,14 +55,16 @@ const Button = ({
 					outline: none;
 				}
 			`}</style>
-			<button
-				className={`button ${classNames}`}
-				style={style}
-				onClick={onClick}
-				disabled={disabled}
-			>
-				{children}
-			</button>
+			<a title={title}>
+				<button
+					className={`button ${classNames}`}
+					style={style}
+					onClick={onClick}
+					disabled={disabled}
+				>
+					{children}
+				</button>
+			</a>
 		</Fragment>
 	);
 };

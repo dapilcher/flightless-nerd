@@ -214,7 +214,7 @@ class Player extends Component {
 					}
 					.player__buttons .player__button {
 						margin-left: 3px;
-						flex: 1;
+						flex: 1 0 auto;
 					}
 					.player__title__marquee {
 						max-width: 100%;
@@ -265,7 +265,15 @@ class Player extends Component {
 							className="player__button play-pause__button pointer"
 							onClick={this.togglePlay}
 						>
-							{this.state.playing ? <FaPause /> : <FaPlay />}
+							{this.state.playing ? (
+								<a title="Pause">
+									<FaPause />
+								</a>
+							) : (
+								<a title="Play">
+									<FaPlay />
+								</a>
+							)}
 						</button>
 					</div>
 					<div className="player__section player__section__info">
@@ -299,7 +307,11 @@ class Player extends Component {
 						</div>
 					</div>
 					<div className="player__section player__buttons">
-						<a href="https://flightlessnerd.libsyn.com/rss" target="_blank">
+						<a
+							href="https://flightlessnerd.libsyn.com/rss"
+							target="_blank"
+							title="Subscribe to RSS"
+						>
 							<button
 								className="player__button player__button__rss pointer"
 								onClick={this.copyRss}
@@ -307,7 +319,7 @@ class Player extends Component {
 								<FaRss />
 							</button>
 						</a>
-						<a href={show.audioUrl} download>
+						<a href={show.audioUrl} download title="Download episode">
 							<button className="player__button player__button__download pointer">
 								<FaArrowDown />
 							</button>
