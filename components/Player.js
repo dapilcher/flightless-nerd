@@ -239,6 +239,10 @@ class Player extends Component {
 					.pointer {
 						cursor: pointer;
 					}
+					.player__title__marquee {
+						max-width: 100%;
+						overflow-x: hidden;
+					}
 					.below__progress {
 						display: flex;
 						flex-direction: row;
