@@ -37,7 +37,8 @@ const ArticleCardGrid = ({ posts, count = 6 }) => {
 					display: grid;
 				}
 				.more-posts__button {
-					margin: 2rem auto;
+					place-self: center end;
+					margin: 0 1rem 1rem 0;
 				}
 				@media (min-width: 768px) {
 					.post-cards {
@@ -49,7 +50,10 @@ const ArticleCardGrid = ({ posts, count = 6 }) => {
 						border-bottom: none;
 					}
 				}
-				@media (min-width: 568px) {
+				@media (min-width: 576px) {
+					.more-posts__button {
+						margin: 0 0 1rem 0;
+					}
 					#no-posts {
 						margin: 0 0 1rem 0;
 					}

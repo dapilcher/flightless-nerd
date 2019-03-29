@@ -18,6 +18,7 @@ class PodcastListItem extends Component {
 			<Fragment>
 				<style jsx>{`
 					.episode-list-item {
+						margin: 0 10px;
 						margin-top: 1rem;
 						display: grid;
 						grid-template-columns: auto 1fr;
@@ -32,7 +33,12 @@ class PodcastListItem extends Component {
 						font-family: Montserrat;
 					}
 					h1 {
-						font-size: 1.1rem;
+						font-size: 1rem;
+						transition: font-size 100ms;
+					}
+					.episode__title.open h1 {
+						font-size: 1.3rem;
+						transition: font-size 100ms;
 					}
 					h2 {
 						font-size: 1rem;
@@ -72,15 +78,21 @@ class PodcastListItem extends Component {
 					}
 					@media (min-width: 576px) {
 						.episode-list-item {
+							margin: 0;
+							margin-top: 1rem;
 							grid-template-columns: auto 1fr auto;
 							grid-template-rows: auto auto;
 							grid-template-areas: "button title collapse" "details details details";
 						}
 						h1 {
-							font-size: 1.4rem;
+							font-size: 1rem;
+							transition: font-size 100ms ease;
+						}
+						.episode__title.open h1 {
+							font-size: 1.2rem;
 						}
 						h2 {
-							font-size: 1.2rem;
+							font-size: 1.1rem;
 						}
 					}
 				`}</style>
@@ -90,8 +102,17 @@ class PodcastListItem extends Component {
 							<FaPlay />
 						</Button>
 					</div>
-					<div className="episode__title">
-						<h1>{`Ep ${episode.epNumber} - ${episode.title}`}</h1>
+					<div
+						className={`episode__title ${
+							!this.state.isCollapsed ? "open" : ""
+						}`}
+					>
+						<h1
+							onClick={e => {
+								this.toggleIsCollapsed();
+								toggleCollapse(e, this.collapseHeader);
+							}}
+						>{`Ep ${episode.epNumber} - ${episode.title}`}</h1>
 					</div>
 					<div
 						className="collapse__window"

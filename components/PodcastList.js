@@ -1,5 +1,9 @@
 import { Component, Fragment } from "react";
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
+
 import PodcastListItem from "./PodcastListItem";
+import Button from "./Button";
 
 class PodcastList extends Component {
 	state = {
@@ -55,12 +59,27 @@ class PodcastList extends Component {
 		ref.setAttribute("data-collapsed", "false");
 	};
 	render() {
-		const { posts, updateCurrentEpisode } = this.props;
+		let { posts, updateCurrentEpisode, count } = this.props;
+		if (count > 0) {
+			posts = posts.slice(0, count);
+		}
 		return (
 			<Fragment>
 				<style jsx>{`
 					.list-item:not(:last-child) {
 						border-bottom: 1px solid #eb3e34;
+					}
+					.more-posts__button__container {
+						display: grid;
+					}
+					.more-posts__button {
+						place-self: center end;
+						margin-right: 1rem;
+					}
+					@media (min-width: 576px) {
+						.more-posts__button {
+							margin: 0;
+						}
 					}
 				`}</style>
 				<div className="list-items__container">
@@ -81,6 +100,17 @@ class PodcastList extends Component {
 									);
 								})}
 							</div>
+							{count > 0 && (
+								<div className="more-posts__button__container">
+									<div className="more-posts__button">
+										<Link href="/podcast">
+											<Button>
+												See more <FaArrowRight />
+											</Button>
+										</Link>
+									</div>
+								</div>
+							)}
 						</Fragment>
 					) : (
 						<h4 id="no-posts">No posts available...</h4>

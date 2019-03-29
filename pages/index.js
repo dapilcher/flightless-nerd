@@ -4,16 +4,35 @@ import ArticleCardGrid from "../components/ArticleCardGrid";
 import Carousel from "../components/Carousel";
 import SectionDivider from "../components/SectionDivider";
 import SubscribeForm from "../components/SubscribeForm";
-import PodcastPlayer from "../components/PodcastPlayer";
+import Player from "../components/Player";
+import PodcastList from "../components/PodcastList";
 
 class App extends Component {
-	static async getInitialProps() {
-		let response = await fetch(`${process.env.HOST_URL || "/"}api/posts`);
-		const data = await response.json();
-		return { posts: data };
+	constructor(props) {
+		super(props);
+		let currentEpisode = props.podcasts ? props.podcasts[0].epNumber : 1;
+		this.state = {
+			currentEpisode
+		};
 	}
 
+	static async getInitialProps() {
+		const podcasts = await fetch(
+			`${process.env.HOST_URL || "/"}api/posts/type/podcast`
+		).then(res => res.json());
+		let posts = await fetch(`${process.env.HOST_URL || "/"}api/posts`).then(
+			res => res.json()
+		);
+
+		return { posts, podcasts };
+	}
+
+	updateCurrentEpisode = epNumber => {
+		this.setState({ currentEpisode: epNumber });
+	};
+
 	render() {
+		const { posts, podcasts } = this.props;
 		return (
 			<Fragment>
 				<style jsx>{`
@@ -44,20 +63,31 @@ class App extends Component {
 				<main>
 					<div className="container">
 						<div className="row">
-							<Carousel
-								posts={this.props.posts.filter(post => post.isFeatured)}
-							/>
+							<Carousel posts={posts.filter(post => post.isFeatured)} />
 						</div>
 						<div className="row">
 							<SubscribeForm />
 						</div>
 						<div className="row">
 							<SectionDivider text="From the Podcast" />
-							<PodcastPlayer />
+							{/* <PodcastPlayer /> */}
+
+							<Player
+								show={
+									podcasts.filter(
+										ep => ep.epNumber === this.state.currentEpisode
+									)[0]
+								}
+							/>
+							<PodcastList
+								posts={podcasts}
+								count={3}
+								updateCurrentEpisode={this.updateCurrentEpisode}
+							/>
 						</div>
 						<div className="row">
 							<SectionDivider text="Latest Updates" />
-							<ArticleCardGrid posts={this.props.posts} />
+							<ArticleCardGrid posts={posts} />
 						</div>
 					</div>
 				</main>

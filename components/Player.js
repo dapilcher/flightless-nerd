@@ -8,7 +8,6 @@ import {
 	FaUndo,
 	FaRedo
 } from "react-icons/fa";
-import Marquee from "react-marquee";
 import formatTime from "../utils/formatTime";
 
 class Player extends Component {
