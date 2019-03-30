@@ -71,17 +71,17 @@ const Navbar = () => (
 		`}</style>
 		<div className="navbar">
 			<nav className="navbar__items">
-				<Link href="/">
+				<Link href="/" prefetch>
 					<div className="navbar__item">
 						<a className="navbar__link">Home</a>
 					</div>
 				</Link>
-				<Link href="/articles">
+				<Link href="/articles" prefetch>
 					<div className="navbar__item">
 						<a className="navbar__link">Articles</a>
 					</div>
 				</Link>
-				<Link href="/podcast">
+				<Link href="/podcast" prefetch>
 					<div className="navbar__item">
 						<a className="navbar__link">Podcast</a>
 					</div>
