@@ -25,8 +25,7 @@ io.metric({
 
 // Next app
 const next = require("next");
-const dev =
-	process.env.NODE_ENV !== "production" || process.env.NODE_ENV !== "staging";
+const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 
 // Require keystone
