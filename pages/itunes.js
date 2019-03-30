@@ -6,8 +6,10 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 class Itunes extends Component {
 	componentDidMount() {
-		if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-			Router.push("https://google.com");
+		if (typeof window !== "undefined") {
+			if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream) {
+				Router.push("https://google.com");
+			}
 		}
 	}
 	render() {
