@@ -1,8 +1,9 @@
 import { Component, Fragment } from "react";
 import Link from "next/link";
-import Router from "next/router";
+import getConfig from "next/config";
 import Button from "../components/Button";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+const { publicRuntimeConfig: envars } = getConfig();
 
 class Itunes extends Component {
 	componentWillMount() {
@@ -10,7 +11,7 @@ class Itunes extends Component {
 		if (typeof window !== "undefined") {
 			console.log("window!");
 			if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream) {
-				window.location = "https://google.com";
+				window.location = envars.podcastItunesUrl;
 			}
 		}
 	}
@@ -38,16 +39,20 @@ class Itunes extends Component {
 				<div className="itunes__page__wrapper">
 					<div className="button__wrapper">
 						<p>Do you use iTunes?</p>
-						<Button theme="blue">
-							Continue to iTunes <FaArrowRight style={{ fontSize: "1rem" }} />
-						</Button>
+						<a href={envars.podcastItunesUrl}>
+							<Button theme="blue">
+								Continue to iTunes <FaArrowRight style={{ fontSize: "1rem" }} />
+							</Button>
+						</a>
 					</div>
 					<div className="button__wrapper">
 						<p>Otherwise, stick around and listen here</p>
 						<Link href="/podcast">
-							<Button>
-								<FaArrowLeft style={{ fontSize: "1rem" }} /> Stay here
-							</Button>
+							<a>
+								<Button>
+									<FaArrowLeft style={{ fontSize: "1rem" }} /> Stay here
+								</Button>
+							</a>
 						</Link>
 					</div>
 				</div>

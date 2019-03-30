@@ -1,6 +1,7 @@
 import { Component, Fragment } from "react";
 import Head from "next/head";
 import NextSeo from "next-seo";
+import getConfig from "next/config";
 import fetch from "isomorphic-unfetch";
 import { FaItunes } from "react-icons/fa";
 
@@ -9,6 +10,8 @@ import Button from "../components/Button";
 import SectionDivider from "../components/SectionDivider";
 import Player from "../components/Player";
 import WithRecentsSidebar from "../components/WithRecentsSidebar";
+
+const { publicRuntimeConfig: envars } = getConfig();
 
 const seoConfig = {
 	title: `The Flightless Nerd Podcast | Flightless Nerd`,
@@ -135,10 +138,12 @@ class Podcast extends Component {
 					/>
 					<div className="podcast__container">
 						<div className="buttons">
-							<Button theme="blue" style={{ fontSize: "1.2rem" }}>
-								<FaItunes style={{ fontSize: "2rem" }} />
-								{" Listen on iTunes"}
-							</Button>
+							<a href={envars.podcastItunesUrl}>
+								<Button theme="blue" style={{ fontSize: "1.2rem" }}>
+									<FaItunes style={{ fontSize: "2rem" }} />
+									{" Listen on iTunes"}
+								</Button>
+							</a>
 						</div>
 						<SectionDivider text="Episodes" />
 						<PodcastList

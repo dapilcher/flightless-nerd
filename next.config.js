@@ -15,6 +15,7 @@ module.exports = {
 		gaTracker: process.env.GA_TRACKER,
 		fbAppId: process.env.FB_APP_ID,
 		fbPixelId: process.env.FB_PIXEL_ID,
-		mailchimpBaseUrl: process.env.MAILCHIMP_BASE_URL
+		mailchimpBaseUrl: process.env.MAILCHIMP_BASE_URL,
+		podcastItunesUrl: process.env.PODCAST_ITUNES_URL
 	}
 };
