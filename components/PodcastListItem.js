@@ -46,6 +46,7 @@ class PodcastListItem extends Component {
 					.episode__title {
 						grid-area: title;
 						width: 100%;
+						cursor: pointer;
 					}
 					.episode__play-pause__button {
 						grid-area: button;

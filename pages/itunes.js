@@ -5,10 +5,12 @@ import Button from "../components/Button";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 class Itunes extends Component {
-	componentDidMount() {
+	componentWillMount() {
+		console.log("mounted");
 		if (typeof window !== "undefined") {
+			console.log("window!");
 			if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream) {
-				Router.push("https://google.com");
+				window.location = "https://google.com";
 			}
 		}
 	}

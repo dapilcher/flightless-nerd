@@ -12,6 +12,7 @@ const TwitterLink = ({ handle }) => (
 			h6 {
 				margin: 0;
 				padding: 0;
+				color: #eee;
 			}
 			a {
 				color: #eee;
