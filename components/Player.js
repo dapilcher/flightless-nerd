@@ -6,9 +6,12 @@ import {
 	FaArrowDown,
 	FaShareAlt,
 	FaUndo,
-	FaRedo
+	FaRedo,
+	FaStopwatch
 } from "react-icons/fa";
 import formatTime from "../utils/formatTime";
+
+import SocialShare from "./SocialShare";
 
 class Player extends Component {
 	constructor(props) {
@@ -29,12 +32,12 @@ class Player extends Component {
 			currentTime: lastPlayed,
 			playbackRate: 1,
 			timeWasLoaded: lastPlayed !== 0,
-			rssCopied: false
+			displayShare: false
 		};
 	}
 
 	componentWillUpdate(nextProps, nextState) {
-		nextProps.show.epNumber !== this.props.show.epNumber;
+		this.audio.playbackRate = nextState.playbackRate;
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -131,6 +134,19 @@ class Player extends Component {
 		this.progress.value = newTime / this.audio.duration;
 	};
 
+	updateSpeed = () => {
+		let playbackRate = this.state.playbackRate + 0.25;
+		if (playbackRate > 2) {
+			playbackRate = 0.75;
+		}
+		this.setState({ playbackRate });
+	};
+
+	toggleShareButtons = () => {
+		const displayShare = !this.state.displayShare;
+		this.setState({ displayShare });
+	};
+
 	render() {
 		const { show } = this.props;
 		return (
@@ -146,12 +162,10 @@ class Player extends Component {
 						font-family: Raleway;
 						margin-top: 1rem;
 					}
-					.player__section {
+					.player__section__info {
 						display: flex;
 						flex-direction: column;
 						justify-content: center;
-					}
-					.player__section__info {
 						max-width: 100%;
 						border-bottom: .3rem solid #eb3e34;
 						background-color: #586cff;
@@ -166,7 +180,6 @@ class Player extends Component {
 						grid-area: info;
 					}
 					.player__play-pause__button__container {
-						align-items: stretch;
 						grid-area: playPause;
 					}
 					.player__button {
@@ -206,14 +219,41 @@ class Player extends Component {
 							#e6cf1f
 						);
 					}
-					.player__buttons {
-						display: flex;
-						flex-direction: row;
+					.player__section__buttons {
 						grid-area: buttons;
+						max-width: 100%;
+						display: grid;
+						grid-template-columns: repeat(3, 1fr);
+						grid-template-rows: minmax(0,1fr) minmax(0,auto);
+						grid-template-areas: "buttonRss buttonDownload buttonShare" "share share share";
+						overflow-y: hidden;
 					}
-					.player__buttons .player__button {
+					.player__button__rss__container {
+						grid-area: buttonRss
+					}
+					.player__button__download {
+						grid-area: buttonDownload
+					}
+					.player__button__share__container {
+						grid-area: buttonShare
+					}
+					.player__button__rss,
+					.player__button__download,
+					.player__button__share,
+					.play-pause__button {
+						width: 100%;
+					}
+					.share__buttons {
+						height: 0;
+						grid-area: share;
+						transition: height 100ms;
+					}
+					.share__buttons__active {
+						height: auto;
+						transition: height 100ms;
+					}
+					.player__section__buttons > * {
 						margin-left: 3px;
-						flex: 1 0 auto;
 					}
 					.player__title__marquee {
 						max-width: 100%;
@@ -223,52 +263,37 @@ class Player extends Component {
 						display: flex;
 						flex-direction: row;
 						width: 100%;
-						justify-content: space-around;
 					}
-					.player__time-jump {
+					.below__progress > * {
+						flex: 1;
+						text-align: center;
+					}
+					.player__time-jump,
+					.player__play-rate {
 						background: none;
 						border: none;
 						color: #eee;
 					}
 					.player__time-jump:hover,
 					.player__time-jump:active,
-					.player__time-jump:focus {
+					.player__time-jump:focus,
+					.player__play-rate:hover,
+					.player__play-rate:active,
+					.player__play-rate:focus {
 						outline: none;
-					}
-					.pointer {
-						cursor: pointer;
-					}
-					.player__title__marquee {
-						max-width: 100%;
-						overflow-x: hidden;
-					}
-					.below__progress {
-						display: flex;
-						flex-direction: row;
-						width: 100%;
-						justify-content: space-around;
-					}
-					.player__time-jump {
-						background: none;
-						border: none;
-						color: #eee;
-					}
-					.player__time-jump:hover,
-					.player__time-jump:active,
-					.player__time-jump:focus {
-						outline: none;
+						color: #ddd;
 					}
 					.pointer {
 						cursor: pointer;
 					}
 					@media (min-width: 768px) {
 						.player__container {
-							grid-template-columns: auto 1fr 10rem;
+							grid-template-columns: auto 1fr auto auto auto;
 							grid-template-rows: auto;
 							grid-template-areas: "playPause info buttons";
 						}
 						.player__section__info {
-							margin: 0 3px;
+							margin-left: 3px;
 							border-bottom-width: .5rem;
 						}
 						.player__button {
@@ -277,7 +302,7 @@ class Player extends Component {
 						.play-pause__button {
 							border-radius: 1rem 0 0 0;
 						}
-						.player__button__share {
+						.player__button__share__container .player__button {
 							border-radius: 0 1rem 1rem 0;
 						}
 				`}</style>
@@ -320,6 +345,12 @@ class Player extends Component {
 								{formatTime(this.state.currentTime)}/
 								{formatTime(this.state.duration)}
 							</div>
+							{/* <button
+								className="player__play-rate pointer"
+								onClick={this.updateSpeed}
+							>
+								<FaStopwatch /> {this.state.playbackRate}&times;
+							</button> */}
 							<button
 								className="player__time-jump pointer"
 								onClick={this.jumpForward}
@@ -328,11 +359,12 @@ class Player extends Component {
 							</button>
 						</div>
 					</div>
-					<div className="player__section player__buttons">
+					<div className="player__section player__section__buttons">
 						<a
 							href="https://flightlessnerd.libsyn.com/rss"
 							target="_blank"
 							title="Subscribe to RSS"
+							className="player__button__rss__container"
 						>
 							<button
 								className="player__button player__button__rss pointer"
@@ -341,16 +373,42 @@ class Player extends Component {
 								<FaRss />
 							</button>
 						</a>
-						<a href={show.audioUrl} download title="Download episode">
+						<a
+							href={show.audioUrl}
+							download
+							title="Download episode"
+							className="player__button__download__container"
+						>
 							<button className="player__button player__button__download pointer">
 								<FaArrowDown />
 							</button>
 						</a>
-						<button className="player__button player__button__share pointer">
-							<FaShareAlt />
-						</button>
+						<a
+							title="Share episode"
+							className="player__button__share__container"
+						>
+							<button
+								className="player__button player__button__share pointer"
+								onClick={this.toggleShareButtons}
+							>
+								<FaShareAlt />
+							</button>
+						</a>
+						<div
+							className={`share__buttons${
+								this.state.displayShare ? " share__buttons__active" : ""
+							}`}
+						>
+							<button>1</button>
+							<button>2</button>
+							<button>3</button>
+							<button>4</button>
+						</div>
 					</div>
 				</div>
+				{/* <div className="social-share__buttons">
+					<SocialShare slug={show.slug} title={show.title} />
+				</div> */}
 				<audio
 					src={show.audioUrl}
 					ref={audio => (this.audio = audio)}

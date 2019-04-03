@@ -138,7 +138,7 @@ class Podcast extends Component {
 					/>
 					<div className="podcast__container">
 						<div className="buttons">
-							<a href={envars.podcastItunesUrl}>
+							<a href={envars.podcastItunesUrl} target="_blank">
 								<Button theme="blue" style={{ fontSize: "1.2rem" }}>
 									<FaItunes style={{ fontSize: "2rem" }} />
 									{" Listen on iTunes"}
