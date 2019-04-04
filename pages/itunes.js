@@ -1,4 +1,6 @@
 import { Component, Fragment } from "react";
+import Head from "next/head";
+import NextSeo from "next-seo";
 import Link from "next/link";
 import getConfig from "next/config";
 import Button from "../components/Button";
@@ -9,6 +11,44 @@ import * as prodlytics from "../utils/analytics";
 import * as devlytics from "../utils/devlytics";
 
 const analytics = envars.nodeEnv === "production" ? prodlytics : devlytics;
+
+const seoConfig = {
+	title: `The Flightless Nerd Podcast | Flightless Nerd`,
+	description:
+		"Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.",
+	openGraph: {
+		type: "website",
+		locale: "en_US",
+		url: `https://www.flightlessnerd.com/itunes`,
+		title: `The Flightless Nerd Podcast | Flightless Nerd`,
+		description:
+			"Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.",
+		defaultImageWidth: 917,
+		defaultImageHeight: 921,
+		images: [
+			{
+				url:
+					"https://www.flightlessnerd.com/static/images/austrich_podcast_1280.jpg",
+				width: 1280,
+				height: 720,
+				alt: "The Flightless Nerd Podcast"
+			},
+			{
+				url:
+					"https://www.flightlessnerd.com/static/images/Austrich_circle_cropped.png",
+				width: 917,
+				height: 921,
+				alt: "Flightless Nerd"
+			}
+		],
+		site_name: "Flightless Nerd"
+	},
+	twitter: {
+		site: "@FlightlessNews",
+		handle: "@FlightlessNews",
+		cardType: "summary_large_image"
+	}
+};
 
 class Itunes extends Component {
 	componentWillMount() {
@@ -23,6 +63,10 @@ class Itunes extends Component {
 	render() {
 		return (
 			<Fragment>
+				<Head>
+					<title>The Flightless Nerd Podcast</title>
+				</Head>
+				<NextSeo config={seoConfig} />
 				<style jsx>{`
 					.itunes__page__wrapper {
 						width: 100%;

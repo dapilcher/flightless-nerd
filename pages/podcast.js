@@ -34,7 +34,7 @@ const seoConfig = {
 		images: [
 			{
 				url:
-					"https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg",
+					"https://www.flightlessnerd.com/static/images/austrich_podcast_1280.jpg",
 				width: 1280,
 				height: 720,
 				alt: "The Flightless Nerd Podcast"
@@ -86,7 +86,7 @@ class Podcast extends Component {
 		return (
 			<Fragment>
 				<Head>
-					<title>Podcast</title>
+					<title>The Flightless Nerd Podcast</title>
 				</Head>
 				<NextSeo config={seoConfig} />
 				<style jsx>{`
