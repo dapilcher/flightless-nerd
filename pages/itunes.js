@@ -5,6 +5,11 @@ import Button from "../components/Button";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 const { publicRuntimeConfig: envars } = getConfig();
 
+import * as prodlytics from "../utils/analytics";
+import * as devlytics from "../utils/devlytics";
+
+const analytics = envars.nodeEnv === "production" ? prodlytics : devlytics;
+
 class Itunes extends Component {
 	componentWillMount() {
 		console.log("mounted");
@@ -47,7 +52,15 @@ class Itunes extends Component {
 							Casts, etc?*
 						</p>
 						<a href={envars.podcastItunesUrl}>
-							<Button theme="blue">
+							<Button
+								theme="blue"
+								onClick={() =>
+									analytics.logEvent(
+										"Click",
+										"iTunes landing clickthrough to iTunes"
+									)
+								}
+							>
 								Open in App <FaArrowRight style={{ fontSize: "1rem" }} />
 							</Button>
 						</a>
@@ -56,7 +69,14 @@ class Itunes extends Component {
 						<p>Otherwise, you can still stick around and listen on our site!</p>
 						<Link href="/podcast" prefetch>
 							<a>
-								<Button>
+								<Button
+									onClick={() =>
+										analytics.logEvent(
+											"Click",
+											"iTunes landing clickthrough to podcast page"
+										)
+									}
+								>
 									<FaArrowLeft style={{ fontSize: "1rem" }} /> Stay here
 								</Button>
 							</a>

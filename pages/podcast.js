@@ -13,6 +13,11 @@ import WithRecentsSidebar from "../components/WithRecentsSidebar";
 
 const { publicRuntimeConfig: envars } = getConfig();
 
+import * as prodlytics from "../utils/analytics";
+import * as devlytics from "../utils/devlytics";
+
+const analytics = envars.nodeEnv === "production" ? prodlytics : devlytics;
+
 const seoConfig = {
 	title: `The Flightless Nerd Podcast | Flightless Nerd`,
 	description:
@@ -139,7 +144,16 @@ class Podcast extends Component {
 					<div className="podcast__container">
 						<div className="buttons">
 							<a href={envars.podcastItunesUrl} target="_blank">
-								<Button theme="blue" style={{ fontSize: "1.2rem" }}>
+								<Button
+									theme="blue"
+									style={{ fontSize: "1.2rem" }}
+									onClick={() =>
+										analytics.logEvent(
+											"Click",
+											"Podcast page clickthrough to iTunes"
+										)
+									}
+								>
 									<FaItunes style={{ fontSize: "2rem" }} />
 									{" Listen on iTunes"}
 								</Button>
