@@ -31,6 +31,16 @@ class App extends Component {
 		this.setState({ currentEpisode: epNumber });
 	};
 
+	getNextEpisode = () => {
+		const newEp = this.state.currentEpisode - 1;
+		if (
+			newEp <= 0 ||
+			this.props.podcasts.filter(p => p.epNumber === newEp).length < 1
+		)
+			return;
+		else this.updateCurrentEpisode(newEp);
+	};
+
 	render() {
 		const { posts, podcasts } = this.props;
 		return (
@@ -78,6 +88,7 @@ class App extends Component {
 										ep => ep.epNumber === this.state.currentEpisode
 									)[0]
 								}
+								onEnd={this.getNextEpisode}
 							/>
 							<PodcastList
 								posts={podcasts}

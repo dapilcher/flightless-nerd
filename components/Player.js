@@ -153,6 +153,11 @@ class Player extends Component {
 		this.setState({ showModal: false });
 	};
 
+	onEnd = () => {
+		if (this.props.onEnd && typeof this.props.onEnd === "function")
+			this.props.onEnd();
+	};
+
 	render() {
 		const { episode } = this.props;
 		return (
@@ -402,6 +407,7 @@ class Player extends Component {
 					onPause={this.playPause}
 					onTimeUpdate={this.timeUpdate}
 					onLoadedMetadata={this.timeUpdate}
+					onEnded={() => this.onEnd()}
 				/>
 				<Modal show={this.state.showModal} handleClose={this.hideModal}>
 					<SocialShare
