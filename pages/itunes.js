@@ -27,7 +27,8 @@ class Itunes extends Component {
 						align-items: center;
 						font-family: Raleway;
 						font-size: 1.2rem;
-						margin-top: 2rem;
+						padding: 2rem;
+						text-align: center;
 					}
 					.button__wrapper {
 						display: flex;
@@ -35,18 +36,24 @@ class Itunes extends Component {
 						align-items: center;
 						margin-bottom: 2rem;
 					}
+					em {
+						font-size: 1rem;
+					}
 				`}</style>
 				<div className="itunes__page__wrapper">
 					<div className="button__wrapper">
-						<p>Do you use iTunes?</p>
+						<p>
+							Do you use iTunes, or another podcast app that pulls from Apple
+							(i.e. Castbox, Pocket Casts, etc.)?*
+						</p>
 						<a href={envars.podcastItunesUrl}>
 							<Button theme="blue">
-								Continue to iTunes <FaArrowRight style={{ fontSize: "1rem" }} />
+								Open in App <FaArrowRight style={{ fontSize: "1rem" }} />
 							</Button>
 						</a>
 					</div>
 					<div className="button__wrapper">
-						<p>Otherwise, stick around and listen here</p>
+						<p>Otherwise, you can still stick around and listen on our site!</p>
 						<Link href="/podcast" prefetch>
 							<a>
 								<Button>
@@ -55,6 +62,12 @@ class Itunes extends Component {
 							</a>
 						</Link>
 					</div>
+					<p>
+						<em>
+							* We are currently only on iTunes, sorry Spotify/Google/Stitcher
+							users
+						</em>
+					</p>
 				</div>
 			</Fragment>
 		);
