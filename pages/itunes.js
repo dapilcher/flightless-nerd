@@ -47,7 +47,7 @@ class Itunes extends Component {
 					</div>
 					<div className="button__wrapper">
 						<p>Otherwise, stick around and listen here</p>
-						<Link href="/podcast">
+						<Link href="/podcast" prefetch>
 							<a>
 								<Button>
 									<FaArrowLeft style={{ fontSize: "1rem" }} /> Stay here
