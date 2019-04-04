@@ -56,6 +56,7 @@ class Itunes extends Component {
 		if (typeof window !== "undefined") {
 			console.log("window!");
 			if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream) {
+				analytics.logEvent("Redirect", "iTunes landing page auto redirect");
 				window.location = envars.podcastItunesUrl;
 			}
 		}
