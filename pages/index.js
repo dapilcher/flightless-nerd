@@ -73,7 +73,7 @@ class App extends Component {
 							{/* <PodcastPlayer /> */}
 
 							<Player
-								show={
+								episode={
 									podcasts.filter(
 										ep => ep.epNumber === this.state.currentEpisode
 									)[0]
