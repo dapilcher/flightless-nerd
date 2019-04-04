@@ -6,12 +6,13 @@ import getConfig from "next/config";
 import Page from "../components/Page";
 import Meta from "../components/Meta";
 
-import * as prodlytics from "../utils/analytics";
-import * as devlytics from "../utils/devlytics";
+import getAnalytics from "../utils/getAnalytics";
 import withFbq from "../components/withFbq";
 import seoConfig from "../seo.config";
 
 const { publicRuntimeConfig: envars } = getConfig();
+
+const analytics = getAnalytics();
 
 class MyApp extends App {
 	static async getInitialProps({ Component, router, ctx }) {
@@ -25,7 +26,6 @@ class MyApp extends App {
 	}
 
 	componentDidMount() {
-		const analytics = envars.nodeEnv === "production" ? prodlytics : devlytics;
 		analytics.initGA();
 		analytics.logPageView();
 		Router.router.events.on("routeChangeComplete", analytics.logPageView);

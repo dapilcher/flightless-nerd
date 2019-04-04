@@ -1,14 +1,9 @@
 import React, { Fragment, Component } from "react";
 
 import getConfig from "next/config";
+import getAnalytics from "../utils/getAnalytics";
 
-import * as prodlytics from "../utils/analytics";
-import * as devlytics from "../utils/devlytics";
-
-const { publicRuntimeConfig } = getConfig();
-
-const analytics =
-	publicRuntimeConfig.nodeEnv === "production" ? prodlytics : devlytics;
+const analytics = getAnalytics();
 
 const FlashMessage = ({ type, message }) => (
 	<Fragment>

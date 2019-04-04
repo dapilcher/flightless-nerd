@@ -5,6 +5,7 @@ import getConfig from "next/config";
 import fetch from "isomorphic-unfetch";
 import { FaItunes } from "react-icons/fa";
 
+import getAnalytics from "../utils/getAnalytics";
 import PodcastList from "../components/PodcastList";
 import Button from "../components/Button";
 import SectionDivider from "../components/SectionDivider";
@@ -13,10 +14,7 @@ import WithRecentsSidebar from "../components/WithRecentsSidebar";
 
 const { publicRuntimeConfig: envars } = getConfig();
 
-import * as prodlytics from "../utils/analytics";
-import * as devlytics from "../utils/devlytics";
-
-const analytics = envars.nodeEnv === "production" ? prodlytics : devlytics;
+const analytics = getAnalytics;
 
 const seoConfig = {
 	title: `The Flightless Nerd Podcast | Flightless Nerd`,
