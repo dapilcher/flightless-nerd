@@ -2,15 +2,14 @@ import { Component, Fragment } from "react";
 import Head from "next/head";
 import NextSeo from "next-seo";
 import Link from "next/link";
+import NextSeo from "next-seo";
 import getConfig from "next/config";
+import getAnalytics from "../utils/getAnalytics";
 import Button from "../components/Button";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 const { publicRuntimeConfig: envars } = getConfig();
 
-import * as prodlytics from "../utils/analytics";
-import * as devlytics from "../utils/devlytics";
-
-const analytics = envars.nodeEnv === "production" ? prodlytics : devlytics;
+const analytics = getAnalytics();
 
 const seoConfig = {
 	title: `The Flightless Nerd Podcast | Flightless Nerd`,
@@ -56,6 +55,7 @@ class Itunes extends Component {
 		if (typeof window !== "undefined") {
 			console.log("window!");
 			if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream) {
+				analytics.logEvent("Redirect", "iTunes landing page auto redirect");
 				window.location = envars.podcastItunesUrl;
 			}
 		}

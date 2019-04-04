@@ -1,13 +1,8 @@
 import React, { Component, Fragment } from "react";
-import getConfig from "next/config";
 import FlashMessage from "../components/FlashMessage";
-import * as prodlytics from "../utils/analytics";
-import * as devlytics from "../utils/devlytics";
+import getAnalytics from "../utils/getAnalytics";
 
-const { publicRuntimeConfig } = getConfig();
-
-const analytics =
-	publicRuntimeConfig.nodeEnv === "production" ? prodlytics : devlytics;
+const analytics = getAnalytics;
 
 class SubscribeForm extends Component {
 	state = {
@@ -68,7 +63,7 @@ class SubscribeForm extends Component {
 	render() {
 		const { submitted, loading } = this.state;
 		return (
-			<>
+			<Fragment>
 				<style jsx>{`
 					.subscribe-form {
 						display: flex;
@@ -167,7 +162,7 @@ class SubscribeForm extends Component {
 						</a>
 					</p>
 				</form>
-			</>
+			</Fragment>
 		);
 	}
 }
