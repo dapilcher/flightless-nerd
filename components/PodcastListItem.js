@@ -2,6 +2,7 @@ import { Component, Fragment } from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { FaTwitter, FaPlay, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import SocialShare from "./SocialShare";
 import Button from "./Button";
 
 class PodcastListItem extends Component {
@@ -54,6 +55,13 @@ class PodcastListItem extends Component {
 					.episode__details {
 						font-family: Raleway;
 						font-size: 1rem;
+						padding-top: 1rem;
+					}
+					.episode__hosts {
+						padding-bottom: 1rem;
+					}
+					.episode__share {
+						padding-bottom: 1rem;
 					}
 					.collapse__button {
 						place-self: center;
@@ -164,6 +172,10 @@ class PodcastListItem extends Component {
 										)}
 									</div>
 								))}
+						</div>
+						<div className="episode__share">
+							<h2>Share</h2>
+							<SocialShare title={episode.title} slug={episode.slug} />
 						</div>
 					</div>
 					<button

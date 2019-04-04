@@ -12,6 +12,7 @@ import {
 import formatTime from "../utils/formatTime";
 
 import SocialShare from "./SocialShare";
+import Modal from "./Modal";
 
 class Player extends Component {
 	constructor(props) {
@@ -21,7 +22,7 @@ class Player extends Component {
 
 		// for SSR
 		if (typeof window !== "undefined") {
-			const lp = localStorage.getItem(`lastPlayed${this.props.show.number}`);
+			const lp = localStorage.getItem(`lastPlayed${this.props.episode.number}`);
 			if (lp) lastPlayed = JSON.parse(lp).lastPlayed;
 		}
 
@@ -32,7 +33,7 @@ class Player extends Component {
 			currentTime: lastPlayed,
 			playbackRate: 1,
 			timeWasLoaded: lastPlayed !== 0,
-			displayShare: false
+			showModal: false
 		};
 	}
 
@@ -41,8 +42,10 @@ class Player extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.props.show.epNumber !== prevProps.show.epNumber) {
-			const lp = localStorage.getItem(`lastPlayed${this.props.show.epNumber}`);
+		if (this.props.episode.epNumber !== prevProps.episode.epNumber) {
+			const lp = localStorage.getItem(
+				`lastPlayed${this.props.episode.epNumber}`
+			);
 			if (lp) {
 				const data = JSON.parse(lp);
 				this.setState({
@@ -53,7 +56,7 @@ class Player extends Component {
 			this.audio.play();
 		} else {
 			localStorage.setItem(
-				`lastPlayed${this.props.show.epNumber}`,
+				`lastPlayed${this.props.episode.epNumber}`,
 				JSON.stringify({ lastPlayed: this.state.currentTime })
 			);
 		}
@@ -102,7 +105,7 @@ class Player extends Component {
 	timeUpdate = e => {
 		// Check if the user already had a curent time
 		if (this.state.timeWasLoaded) {
-			const lp = localStorage.getItem(`lastPlayed${this.props.show.number}`);
+			const lp = localStorage.getItem(`lastPlayed${this.props.episode.number}`);
 			if (lp) {
 				e.currentTarget.currentTime = JSON.parse(lp).lastPlayed;
 			}
@@ -142,13 +145,16 @@ class Player extends Component {
 		this.setState({ playbackRate });
 	};
 
-	toggleShareButtons = () => {
-		const displayShare = !this.state.displayShare;
-		this.setState({ displayShare });
+	showModal = () => {
+		this.setState({ showModal: true });
+	};
+
+	hideModal = () => {
+		this.setState({ showModal: false });
 	};
 
 	render() {
-		const { show } = this.props;
+		const { episode } = this.props;
 		return (
 			<Fragment>
 				<style jsx>{`
@@ -220,13 +226,12 @@ class Player extends Component {
 						);
 					}
 					.player__section__buttons {
-						grid-area: buttons;
 						max-width: 100%;
 						display: grid;
 						grid-template-columns: repeat(3, 1fr);
-						grid-template-rows: minmax(0,1fr) minmax(0,auto);
-						grid-template-areas: "buttonRss buttonDownload buttonShare" "share share share";
-						overflow-y: hidden;
+						grid-template-areas: "buttonRss buttonDownload buttonShare";
+						height: auto;
+						overflow: hidden;
 					}
 					.player__button__rss__container {
 						grid-area: buttonRss
@@ -242,15 +247,6 @@ class Player extends Component {
 					.player__button__share,
 					.play-pause__button {
 						width: 100%;
-					}
-					.share__buttons {
-						height: 0;
-						grid-area: share;
-						transition: height 100ms;
-					}
-					.share__buttons__active {
-						height: auto;
-						transition: height 100ms;
 					}
 					.player__section__buttons > * {
 						margin-left: 3px;
@@ -325,7 +321,7 @@ class Player extends Component {
 					</div>
 					<div className="player__section player__section__info">
 						<div className="player__title__marquee">
-							<span>{`Ep ${show.epNumber} - ${show.title}`}</span>
+							<span>{`Ep ${episode.epNumber} - ${episode.title}`}</span>
 						</div>
 						<progress
 							ref={p => (this.progress = p)}
@@ -374,7 +370,7 @@ class Player extends Component {
 							</button>
 						</a>
 						<a
-							href={show.audioUrl}
+							href={episode.audioUrl}
 							download
 							title="Download episode"
 							className="player__button__download__container"
@@ -389,34 +385,31 @@ class Player extends Component {
 						>
 							<button
 								className="player__button player__button__share pointer"
-								onClick={this.toggleShareButtons}
+								onClick={this.showModal}
 							>
 								<FaShareAlt />
 							</button>
 						</a>
-						<div
-							className={`share__buttons${
-								this.state.displayShare ? " share__buttons__active" : ""
-							}`}
-						>
-							<button>1</button>
-							<button>2</button>
-							<button>3</button>
-							<button>4</button>
-						</div>
 					</div>
 				</div>
 				{/* <div className="social-share__buttons">
-					<SocialShare slug={show.slug} title={show.title} />
+					<SocialShare slug={episode.slug} title={episode.title} />
 				</div> */}
 				<audio
-					src={show.audioUrl}
+					src={episode.audioUrl}
 					ref={audio => (this.audio = audio)}
 					onPlay={this.playPause}
 					onPause={this.playPause}
 					onTimeUpdate={this.timeUpdate}
 					onLoadedMetadata={this.timeUpdate}
 				/>
+				<Modal show={this.state.showModal} handleClose={this.hideModal}>
+					<SocialShare
+						title={episode.title}
+						slug={episode.slug}
+						iconSize={45}
+					/>
+				</Modal>
 			</Fragment>
 		);
 	}

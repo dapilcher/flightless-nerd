@@ -130,7 +130,7 @@ class Podcast extends Component {
 						src="https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg"
 					/>
 					<Player
-						show={
+						episode={
 							podcasts.filter(
 								ep => ep.epNumber === this.state.currentEpisode
 							)[0]

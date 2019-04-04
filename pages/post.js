@@ -226,6 +226,9 @@ const Post = ({ post }) => (
 			.post__social-share__button__wrapper {
 				cursor: pointer;
 			}
+			.social-share__wrapper {
+				display: flex;
+			}
 			.post__img {
 				max-width: 100%;
 				border: none;
@@ -281,8 +284,10 @@ const Post = ({ post }) => (
 				}`}
 			/>
 		</div>
-		<SocialShare title={post.title} slug={post.slug} />
-		{post.audioUrl && <Player show={post} />}
+		<div className="social-share__wrapper">
+			<SocialShare title={post.title} slug={post.slug} />
+		</div>
+		{post.audioUrl && <Player episode={post} />}
 		{post.content.extended.md ? (
 			<ReactMarkdown
 				className="post__content"
