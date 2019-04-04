@@ -2,7 +2,6 @@ import { Component, Fragment } from "react";
 import Head from "next/head";
 import NextSeo from "next-seo";
 import Link from "next/link";
-import NextSeo from "next-seo";
 import getConfig from "next/config";
 import getAnalytics from "../utils/getAnalytics";
 import Button from "../components/Button";
