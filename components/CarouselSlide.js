@@ -1,5 +1,8 @@
 import Link from "next/link";
 import CategoryTagList from "./CategoryTagList";
+import getAnalytics from "../utils/getAnalytics";
+
+const analytics = getAnalytics();
 
 const Slide = ({ sliding, post }) => (
 	<React.Fragment>
@@ -62,7 +65,11 @@ const Slide = ({ sliding, post }) => (
 		`}</style>
 		<div className={`carousel-slide ${sliding ? "sliding" : ""}`}>
 			<Link href={`/post?slug=${post.slug}`} as={`/post/${post.slug}`}>
-				<a>
+				<a
+					onClick={() =>
+						analytics.logEvent("Click", "Carousel slide image click")
+					}
+				>
 					{post.image && post.image.secure_url ? (
 						<img
 							className="slide-img"
@@ -82,7 +89,14 @@ const Slide = ({ sliding, post }) => (
 			</Link>
 			<div className="slide-text-box">
 				<Link href={`/post?slug=${post.slug}`} as={`/post/${post.slug}`}>
-					<a className="slide-text-title">{post.title}</a>
+					<a
+						className="slide-text-title"
+						onClick={() =>
+							analytics.logEvent("Click", "Carousel title text click")
+						}
+					>
+						{post.title}
+					</a>
 				</Link>
 				<span
 					className="slide-text-content"

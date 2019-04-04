@@ -1,8 +1,6 @@
 import { Component, Fragment } from "react";
 import Head from "next/head";
 import fetch from "isomorphic-unfetch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FaAngleDown } from "react-icons/fa";
 import ArticleCardGrid from "../components/ArticleCardGrid";
 

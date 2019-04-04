@@ -2,8 +2,11 @@ import { Component, Fragment } from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { FaTwitter, FaPlay, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import getAnalytics from "../utils/getAnalytics";
 import SocialShare from "./SocialShare";
 import Button from "./Button";
+
+const analytics = getAnalytics();
 
 class PodcastListItem extends Component {
 	state = {

@@ -10,9 +10,12 @@ import {
 	FaStopwatch
 } from "react-icons/fa";
 import formatTime from "../utils/formatTime";
+import getAnalytics from "../utils/getAnalytics";
 
 import SocialShare from "./SocialShare";
 import Modal from "./Modal";
+
+const analytics = getAnalytics();
 
 class Player extends Component {
 	constructor(props) {
@@ -154,6 +157,7 @@ class Player extends Component {
 	};
 
 	onEnd = () => {
+		analytics.logEvent("Podcast", "Episode ended");
 		if (this.props.onEnd && typeof this.props.onEnd === "function")
 			this.props.onEnd();
 	};
