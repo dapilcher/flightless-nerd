@@ -43,8 +43,8 @@ class Itunes extends Component {
 				<div className="itunes__page__wrapper">
 					<div className="button__wrapper">
 						<p>
-							Do you use iTunes, or another podcast app that pulls from Apple
-							(i.e. Castbox, Pocket Casts, etc.)?*
+							Do you use iTunes, or another podcast app like Castbox, Pocket
+							Casts, etc?*
 						</p>
 						<a href={envars.podcastItunesUrl}>
 							<Button theme="blue">
