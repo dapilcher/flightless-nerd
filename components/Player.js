@@ -157,7 +157,7 @@ class Player extends Component {
 	};
 
 	onEnd = () => {
-		analytics.logEvent("Podcast", "Episode ended");
+		analytics.logEvent("Podcast", "Episode ended", this.props.episode.title);
 		if (this.props.onEnd && typeof this.props.onEnd === "function")
 			this.props.onEnd();
 	};

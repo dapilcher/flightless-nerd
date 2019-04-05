@@ -12,8 +12,8 @@ import getAnalytics from "../utils/getAnalytics";
 const analytics = getAnalytics();
 
 class SocialShare extends Component {
-	logEvent = network => {
-		analytics.logEvent("Share", `${network} share button`);
+	logEvent = () => {
+		analytics.logEvent("Share", "Social Share button", this.props.title);
 	};
 	render() {
 		let { title, slug, iconSize = 32 } = this.props;
@@ -46,7 +46,7 @@ class SocialShare extends Component {
 						<FacebookShareButton
 							className="social-share__button"
 							url={`https://flightlessnerd.com/post/${slug}`}
-							onShareWindowClose={() => logEvent("Facebook")}
+							onShareWindowClose={this.logEvent}
 						>
 							<FacebookIcon
 								className="social-share__button__icon"

@@ -67,7 +67,11 @@ const Slide = ({ sliding, post }) => (
 			<Link href={`/post?slug=${post.slug}`} as={`/post/${post.slug}`}>
 				<a
 					onClick={() =>
-						analytics.logEvent("Click", "Carousel slide image click")
+						analytics.logEvent(
+							"Click",
+							"Carousel slide image click",
+							post.title
+						)
 					}
 				>
 					{post.image && post.image.secure_url ? (
@@ -92,7 +96,11 @@ const Slide = ({ sliding, post }) => (
 					<a
 						className="slide-text-title"
 						onClick={() =>
-							analytics.logEvent("Click", "Carousel title text click")
+							analytics.logEvent(
+								"Click",
+								"Carousel title text click",
+								post.title
+							)
 						}
 					>
 						{post.title}

@@ -16,6 +16,11 @@ class PodcastListItem extends Component {
 		const isCollapsed = !this.state.isCollapsed;
 		this.setState({ isCollapsed });
 	};
+	handlePlayclick = () => {
+		const ep = this.props.episode;
+		analytics.logEvent("Click", "Play episode", ep.title);
+		this.props.updateCurrentEpisode(ep.epNumber);
+	};
 	render() {
 		const { episode, updateCurrentEpisode, toggleCollapse } = this.props;
 		return (
@@ -110,7 +115,7 @@ class PodcastListItem extends Component {
 				`}</style>
 				<div className="episode-list-item">
 					<div className="episode__play-pause__button">
-						<Button onClick={updateCurrentEpisode}>
+						<Button onClick={this.handlePlayclick}>
 							<FaPlay />
 						</Button>
 					</div>
