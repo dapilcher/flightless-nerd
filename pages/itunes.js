@@ -17,7 +17,7 @@ const seoConfig = {
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: `https://www.flightlessnerd.com/itunes`,
+		url: `https://flightlessnerd.com/itunes`,
 		title: `The Flightless Nerd Podcast | Flightless Nerd`,
 		description:
 			"Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.",
@@ -26,14 +26,14 @@ const seoConfig = {
 		images: [
 			{
 				url:
-					"https://www.flightlessnerd.com/static/images/austrich_podcast_1280.jpg",
+					"https://flightlessnerd.com/static/images/austrich_podcast_1280.jpg",
 				width: 1280,
 				height: 720,
 				alt: "The Flightless Nerd Podcast"
 			},
 			{
 				url:
-					"https://www.flightlessnerd.com/static/images/Austrich_circle_cropped.png",
+					"https://flightlessnerd.com/static/images/Austrich_circle_cropped.png",
 				width: 917,
 				height: 921,
 				alt: "Flightless Nerd"

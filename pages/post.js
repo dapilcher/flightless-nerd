@@ -26,7 +26,7 @@ const createConfig = post => {
 		openGraph: {
 			type: "article",
 			locale: "en_US",
-			url: `https://www.flightlessnerd.com/post/${post.slug}`,
+			url: `https://flightlessnerd.com/post/${post.slug}`,
 			title: `${post.title}`,
 			description: !post.seo
 				? DEFAULT_DESC
@@ -46,14 +46,14 @@ const createConfig = post => {
 					: post.type === "podcast"
 					? {
 							url:
-								"https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg",
+								"https://flightlessnerd.com/static/images/austrich_podcast_1280.jpg",
 							width: 1280,
 							height: 720,
 							alt: post.title
 					  }
 					: {
 							url:
-								"https://www.flightlessnerd.com/static/images/Austrich_circle_cropped.png",
+								"https://flightlessnerd.com/static/images/Austrich_circle_cropped.png",
 							width: 917,
 							height: 921,
 							alt: "Flightless Nerd"

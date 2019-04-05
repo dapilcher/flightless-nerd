@@ -5,7 +5,7 @@ export default {
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: "https://www.flightlessnerd.com/",
+		url: "https://flightlessnerd.com/",
 		title: "Flightless Nerd",
 		description:
 			"Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.",
@@ -14,7 +14,7 @@ export default {
 		images: [
 			{
 				url:
-					"https://www.flightlessnerd.com/static/images/Austrich_circle_cropped.png",
+					"https://flightlessnerd.com/static/images/Austrich_circle_cropped.png",
 				width: 917,
 				height: 921,
 				alt: "Flightless Nerd"

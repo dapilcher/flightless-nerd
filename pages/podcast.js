@@ -23,7 +23,7 @@ const seoConfig = {
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: `https://www.flightlessnerd.com/podcast`,
+		url: `https://flightlessnerd.com/podcast`,
 		title: `The Flightless Nerd Podcast | Flightless Nerd`,
 		description:
 			"Flightless Nerd is a community for people who love video game news, reviews, and blogs. Top ten lists every Friday.",
@@ -32,14 +32,14 @@ const seoConfig = {
 		images: [
 			{
 				url:
-					"https://www.flightlessnerd.com/static/images/austrich_podcast_1280.jpg",
+					"https://flightlessnerd.com/static/images/austrich_podcast_1280.jpg",
 				width: 1280,
 				height: 720,
 				alt: "The Flightless Nerd Podcast"
 			},
 			{
 				url:
-					"https://www.flightlessnerd.com/static/images/Austrich_circle_cropped.png",
+					"https://flightlessnerd.com/static/images/Austrich_circle_cropped.png",
 				width: 917,
 				height: 921,
 				alt: "Flightless Nerd"
@@ -140,7 +140,7 @@ class Podcast extends Component {
 				<WithRecentsSidebar recents={recents}>
 					<img
 						className="podcast__image"
-						src="https://res.cloudinary.com/flightlessnerd/image/upload/v1553121319/flightlessnerd/Ostrich_for_web.jpg"
+						src="https://flightlessnerd.com/static/images/austrich_podcast_1280.jpg"
 					/>
 					<Player
 						episode={
