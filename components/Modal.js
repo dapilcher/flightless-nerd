@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { FaTimesCircle } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 
 const Modal = ({ handleClose, show, children }) => {
 	const showHideClassName = show ? "modal display-block" : "modal display-none";
@@ -56,7 +56,7 @@ const Modal = ({ handleClose, show, children }) => {
 				<section className="modal-main">
 					{children}
 					<button className="modal__button" onClick={handleClose}>
-						<FaTimesCircle />
+						<FaTimes />
 					</button>
 				</section>
 			</div>
