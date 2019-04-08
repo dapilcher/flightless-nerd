@@ -25,6 +25,10 @@ const Meta = () => (
 			property="fb:app_id"
 			content={publicRuntimeConfig.fbAppId || "00000"}
 		/>
+		<meta
+			name="google-site-verification"
+			content="TkU1zgWPRfxHho7wx9-HpitRs3JqFNn78RU8WUIq2IE"
+		/>
 	</Head>
 );
 
