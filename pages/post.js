@@ -349,9 +349,7 @@ class PostContainer extends Component {
 							) : (
 								<>
 									<Post post={post[0]} />
-									{post[0].type === "article" && (
-										<AboutAuthor author={post[0].author} />
-									)}
+									{post[0].author && <AboutAuthor author={post[0].author} />}
 								</>
 							)}
 						</WithRecentsSidebar>
