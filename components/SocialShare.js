@@ -4,25 +4,32 @@ import {
 	FacebookShareButton,
 	TwitterShareButton,
 	RedditShareButton,
+	PinterestShareButton,
 	EmailShareButton
 } from "react-share";
-import { FacebookIcon, TwitterIcon, RedditIcon, EmailIcon } from "react-share";
+import {
+	FacebookIcon,
+	TwitterIcon,
+	RedditIcon,
+	PinterestIcon,
+	EmailIcon
+} from "react-share";
 import getAnalytics from "../utils/getAnalytics";
 
 const analytics = getAnalytics();
 
 class SocialShare extends Component {
-	logEvent = () => {
-		analytics.logEvent("Share", "Social Share button", this.props.title);
+	logEvent = network => {
+		analytics.logEvent("Share", `${network} share`, this.props.title);
 	};
 	render() {
-		let { title, slug, iconSize = 32 } = this.props;
+		let { title, slug, img, iconSize = 32 } = this.props;
 		return (
 			<Fragment>
 				<style jsx>{`
 					.social-share {
 						display: grid;
-						grid-template-columns: repeat(4, ${iconSize}px);
+						grid-template-columns: repeat(5, ${iconSize}px);
 						grid-gap: 1rem;
 						padding: 1rem 10px;
 					}
@@ -46,7 +53,7 @@ class SocialShare extends Component {
 						<FacebookShareButton
 							className="social-share__button"
 							url={`https://flightlessnerd.com/post/${slug}`}
-							onShareWindowClose={this.logEvent}
+							onShareWindowClose={() => logEvent("Facebook")}
 						>
 							<FacebookIcon
 								className="social-share__button__icon"
@@ -84,6 +91,21 @@ class SocialShare extends Component {
 								round={true}
 							/>
 						</RedditShareButton>
+					</div>
+					<div className="social-share__button__wrapper">
+						<PinterestShareButton
+							className="social-share__button"
+							url={`https://flightlessnerd.com/post/${slug}`}
+							onShareWindowClose={() => logEvent("Pinterest")}
+							media={img}
+							description={`Check out this Flightless Nerd article: ${title}`}
+						>
+							<PinterestIcon
+								className="social-share__button__icon"
+								size={iconSize}
+								round={true}
+							/>
+						</PinterestShareButton>
 					</div>
 					<div className="social-share__button__wrapper">
 						<EmailShareButton

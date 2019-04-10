@@ -350,12 +350,6 @@ class Player extends Component {
 								{formatTime(this.state.currentTime)}/
 								{formatTime(this.state.duration)}
 							</div>
-							{/* <button
-								className="player__play-rate pointer"
-								onClick={this.updateSpeed}
-							>
-								<FaStopwatch /> {this.state.playbackRate}&times;
-							</button> */}
 							<button
 								className="player__time-jump pointer"
 								onClick={this.jumpForward}
@@ -401,9 +395,6 @@ class Player extends Component {
 						</a>
 					</div>
 				</div>
-				{/* <div className="social-share__buttons">
-					<SocialShare slug={episode.slug} title={episode.title} />
-				</div> */}
 				<audio
 					src={episode.audioUrl}
 					ref={audio => (this.audio = audio)}
@@ -418,6 +409,13 @@ class Player extends Component {
 						title={episode.title}
 						slug={episode.slug}
 						iconSize={45}
+						img={
+							episode.image && episode.image.secure_url
+								? episode.image.secure_url
+								: episode.type === "podcast"
+								? "https://flightlessnerd.com/static/images/austrich_podcast_1280.jpg"
+								: "https://flightlessnerd.com/static/images/Austrich_circle_cropped.png"
+						}
 					/>
 				</Modal>
 			</Fragment>

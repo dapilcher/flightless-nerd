@@ -184,7 +184,17 @@ class PodcastListItem extends Component {
 						</div>
 						<div className="episode__share">
 							<h2>Share</h2>
-							<SocialShare title={episode.title} slug={episode.slug} />
+							<SocialShare
+								title={episode.title}
+								slug={episode.slug}
+								img={
+									episode.image && episode.image.secure_url
+										? episode.image.secure_url
+										: episode.type === "podcast"
+										? "https://flightlessnerd.com/static/images/austrich_podcast_1280.jpg"
+										: "https://flightlessnerd.com/static/images/Austrich_circle_cropped.png"
+								}
+							/>
 						</div>
 					</div>
 					<button
