@@ -60,7 +60,7 @@ class Carousel extends React.Component {
 		}
 		const slideTimer = setTimeout(() => {
 			this.shiftSlide(1);
-		}, 7000);
+		}, 4750);
 		this.setState({ slideIndex: i, slideTimer });
 	}
 
