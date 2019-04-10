@@ -172,6 +172,7 @@ class PodcastListItem extends Component {
 												{" - "}
 												<FaTwitter />{" "}
 												<a
+													target="_blank"
 													href={`https://twitter.com/${
 														host.social.twitterHandle
 													}`}

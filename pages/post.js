@@ -3,6 +3,7 @@ import Head from "next/head";
 import NextSeo from "next-seo";
 import fetch from "isomorphic-unfetch";
 import ReactMarkdown from "react-markdown/";
+import { FaTwitter } from "react-icons/fa";
 
 import helpers from "../helpers";
 import WithRecentsSidebar from "../components/WithRecentsSidebar";
@@ -135,7 +136,8 @@ const Post = ({ post }) => (
 				font-style: italic;
 				text-align: center;
 			}
-			p {
+			p,
+			.episode__host {
 				font-family: Raleway;
 				line-height: 1.8rem;
 				font-size: 1.1rem;
@@ -253,9 +255,6 @@ const Post = ({ post }) => (
 					max-width: 100%;
 					border-bottom-width: 0.5rem;
 				}
-				.post__container {
-					// max-width: 75%;
-				}
 			}
 		`}</style>
 		{post.image && post.image.secure_url ? (
@@ -300,6 +299,25 @@ const Post = ({ post }) => (
 				dangerouslySetInnerHTML={{ __html: post.content.extended }}
 			/>
 		)}
+		<div className="episode__hosts">
+			{post.hosts && post.hosts.length > 0 && <h2>Hosts</h2>}
+			{post.hosts &&
+				post.hosts.map((host, i) => (
+					<div className="episode__host" key={`${post.slug}-host-${i}`}>
+						{`${host.name.first} ${host.name.last}`}
+						{host.social && host.social.twitterHandle && (
+							<Fragment>
+								{" - "}
+								<FaTwitter />{" "}
+								<a
+									target="_blank"
+									href={`https://twitter.com/${host.social.twitterHandle}`}
+								>{`@${host.social.twitterHandle}`}</a>
+							</Fragment>
+						)}
+					</div>
+				))}
+		</div>
 	</Fragment>
 );
 
