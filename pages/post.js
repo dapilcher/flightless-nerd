@@ -95,7 +95,6 @@ const Post = ({ post }) => (
 				position: relative;
 				padding-bottom: 56.25%;
 				height: 0;
-				// overflow: hidden;
 				max-width: 100%;
 			}
 			.embed-container iframe,
@@ -188,13 +187,13 @@ const Post = ({ post }) => (
 				.embed-container {
 					margin-bottom: 3rem;
 				}
-				p,
-				h1,
-				h2,
-				h3,
-				h4,
-				h5,
-				h6 {
+				.post__content > h1,
+				.post__content > h2,
+				.post__content > h3,
+				.post__content > h4,
+				.post__content > h5,
+				.post__content > h6,
+				.post__content > p {
 					padding: 0;
 				}
 				.post-img {
