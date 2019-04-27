@@ -3,7 +3,7 @@ import Head from "next/head";
 import NextSeo from "next-seo";
 import getConfig from "next/config";
 import fetch from "isomorphic-unfetch";
-import { FaItunes } from "react-icons/fa";
+import { FaItunes, FaSpotify, FaGooglePlay, FaPodcast } from "react-icons/fa";
 
 import getAnalytics from "../utils/getAnalytics";
 import PodcastList from "../components/PodcastList";
@@ -52,6 +52,52 @@ const seoConfig = {
 		handle: "@FlightlessNews",
 		cardType: "summary_large_image"
 	}
+};
+
+const podcastServices = [
+	{
+		title: "iTunes",
+		theme: { light: "#EA4CC0", dark: "#BB3D9A" },
+		url: envars.podcastItunesUrl,
+		icon: <FaItunes style={{ fontSize: "1.5rem" }} />
+	},
+	{
+		title: "Spotify",
+		theme: { light: "#1ED761", dark: "#18AC4E" },
+		url: envars.podcastSpotifyUrl,
+		icon: <FaSpotify style={{ fontSize: "1.5rem" }} />
+	},
+	{
+		title: "Google",
+		theme: { light: "#F55A34", dark: "#C4482A" },
+		url: envars.podcastGoogleUrl,
+		icon: <FaGooglePlay style={{ fontSize: "1.5rem" }} />
+	},
+	{
+		title: "Stitcher",
+		theme: "blue",
+		url: envars.podcastStitcherUrl,
+		icon: <FaPodcast style={{ fontSize: "1.5rem" }} />
+	}
+];
+
+const ServiceButton = ({ title, url, icon, theme }) => {
+	return (
+		url && (
+			<a href={url} target="_blank">
+				<Button
+					theme={theme}
+					style={{ fontSize: "1.2rem" }}
+					onClick={() =>
+						analytics.logEvent("Click", `Podcast page clickthrough to ${title}`)
+					}
+				>
+					{icon !== null && icon}
+					{` ${title}`}
+				</Button>
+			</a>
+		)
+	);
 };
 
 class Podcast extends Component {
@@ -120,7 +166,10 @@ class Podcast extends Component {
 						border-bottom: 0.3rem solid #eb3e34;
 					}
 					.buttons {
-						margin-bottom: 1rem;
+						display: grid;
+						grid-gap: 5px;
+						grid-template-columns: auto auto auto auto;
+						place-items: center;
 					}
 					@media (min-width: 768px) {
 						.podcast__image {
@@ -152,21 +201,14 @@ class Podcast extends Component {
 					/>
 					<div className="podcast__container">
 						<div className="buttons">
-							<a href={envars.podcastItunesUrl} target="_blank">
-								<Button
-									theme="blue"
-									style={{ fontSize: "1.2rem" }}
-									onClick={() =>
-										analytics.logEvent(
-											"Click",
-											"Podcast page clickthrough to iTunes"
-										)
-									}
-								>
-									<FaItunes style={{ fontSize: "2rem" }} />
-									{" Listen on iTunes"}
-								</Button>
-							</a>
+							{podcastServices.map(service => (
+								<ServiceButton
+									title={service.title}
+									url={service.url}
+									icon={service.icon}
+									theme={service.theme}
+								/>
+							))}
 						</div>
 						<SectionDivider text="Episodes" />
 						<PodcastList

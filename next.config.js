@@ -16,6 +16,9 @@ module.exports = {
 		fbAppId: process.env.FB_APP_ID,
 		fbPixelId: process.env.FB_PIXEL_ID,
 		mailchimpBaseUrl: process.env.MAILCHIMP_BASE_URL,
-		podcastItunesUrl: process.env.PODCAST_ITUNES_URL
+		podcastItunesUrl: process.env.PODCAST_ITUNES_URL,
+		podcastSpotifyUrl: process.env.PODCAST_SPOTIFY_URL,
+		podcastStitcherUrl: process.env.PODCAST_STITCHER_URL,
+		podcastGoogleUrl: process.env.PODCAST_GOOGLE_URL
 	}
 };
