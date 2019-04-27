@@ -84,18 +84,19 @@ const podcastServices = [
 const ServiceButton = ({ title, url, icon, theme }) => {
 	return (
 		url && (
-			<a href={url} target="_blank">
-				<Button
-					theme={theme}
-					style={{ fontSize: "1.2rem" }}
-					onClick={() =>
-						analytics.logEvent("Click", `Podcast page clickthrough to ${title}`)
-					}
-				>
-					{icon !== null && icon}
-					{` ${title}`}
-				</Button>
-			</a>
+			<Button
+				href={url}
+				target="_blank"
+				title={title}
+				theme={theme}
+				style={{ fontSize: "1.2rem" }}
+				onClick={() =>
+					analytics.logEvent("Click", `Podcast page clickthrough to ${title}`)
+				}
+			>
+				{icon !== null && icon}
+				{` ${title}`}
+			</Button>
 		)
 	);
 };

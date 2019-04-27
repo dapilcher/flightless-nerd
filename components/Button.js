@@ -3,6 +3,8 @@ import { Fragment } from "react";
 const Button = ({
 	onClick,
 	title,
+	href,
+	target,
 	style = {},
 	disabled = false,
 	theme = "red",
@@ -55,7 +57,7 @@ const Button = ({
 					outline: none;
 				}
 			`}</style>
-			<a title={title}>
+			<a title={title} href={href} target={target}>
 				<button
 					className={`button ${classNames}`}
 					style={style}
