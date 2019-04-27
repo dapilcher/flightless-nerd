@@ -287,7 +287,7 @@ const Post = ({ post }) => (
 				title={post.title}
 				slug={post.slug}
 				img={
-					post.image.secure_url
+					post.image && post.image.secure_url
 						? post.image.secure_url
 						: post.type === "podcast"
 						? "https://flightlessnerd.com/static/images/austrich_podcast_1280.jpg"
