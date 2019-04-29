@@ -70,7 +70,7 @@ const AboutAuthor = ({ author }) => (
 				padding: 1rem;
 				box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 				border-radius: 1rem 1rem 1rem 0;
-				margin: 2rem 10px;
+				margin: 2rem 10px 0 10px;
 			}
 			a {
 				color: #eee;
@@ -103,10 +103,9 @@ const AboutAuthor = ({ author }) => (
 			}
 			@media (min-width: 576px) {
 				.about-author {
-					margin: 2rem 0;
+					margin: 0;
+					margin-top: 2rem;
 				}
-			}
-			@media (min-width: 768px) {
 			}
 			@media (min-width: 992px) {
 				.about-author {
