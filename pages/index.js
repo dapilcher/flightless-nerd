@@ -6,6 +6,7 @@ import SectionDivider from "../components/SectionDivider";
 import SubscribeForm from "../components/SubscribeForm";
 import Player from "../components/Player";
 import PodcastList from "../components/PodcastList";
+import PodcastServiceButtons from "../components/PodcastServiceButtons";
 
 class App extends Component {
 	constructor(props) {
@@ -89,6 +90,9 @@ class App extends Component {
 									)[0]
 								}
 								onEnd={this.getNextEpisode}
+							/>
+							<PodcastServiceButtons
+								style={{ margin: "1rem 10px 2rem 10px" }}
 							/>
 							<PodcastList
 								posts={podcasts}

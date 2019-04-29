@@ -3,7 +3,8 @@ import Head from "next/head";
 import NextSeo from "next-seo";
 import fetch from "isomorphic-unfetch";
 import ReactMarkdown from "react-markdown/";
-import { FaTwitter } from "react-icons/fa";
+import { FaTwitter, FaArrowRight } from "react-icons/fa";
+import Link from "next/link";
 
 import helpers from "../helpers";
 import WithRecentsSidebar from "../components/WithRecentsSidebar";
@@ -13,6 +14,8 @@ import CategoryTagList from "../components/CategoryTagList";
 import AboutAuthor from "../components/AboutAuthor";
 import SocialShare from "../components/SocialShare";
 import Player from "../components/Player";
+import Button from "../components/Button";
+import PodcastServiceButtons from "../components/PodcastServiceButtons";
 
 const createConfig = post => {
 	const DEFAULT_DESC =
@@ -241,7 +244,17 @@ const Post = ({ post }) => (
 			.post__title {
 				padding: 0 10px;
 			}
+			.more-posts__button__container {
+				display: grid;
+				margin-top: 1rem;
+			}
+			.more-posts__button {
+				place-self: center start;
+			}
 			@media (min-width: 576px) {
+				.more-posts__button {
+					margin: 0;
+				}
 				.post__title {
 					padding: 0;
 				}
@@ -295,7 +308,13 @@ const Post = ({ post }) => (
 				}
 			/>
 		</div>
-		{post.audioUrl && <Player episode={post} />}
+		{post.audioUrl && (
+			<>
+				<Player episode={post} />
+				<PodcastServiceButtons style={{ margin: "2rem 0" }} />
+				<h2>Show Notes</h2>
+			</>
+		)}
 		{post.content.extended.md ? (
 			<ReactMarkdown
 				className="post__content"
@@ -308,25 +327,38 @@ const Post = ({ post }) => (
 				dangerouslySetInnerHTML={{ __html: post.content.extended }}
 			/>
 		)}
-		<div className="episode__hosts">
-			{post.hosts && post.hosts.length > 0 && <h2>Hosts</h2>}
-			{post.hosts &&
-				post.hosts.map((host, i) => (
-					<div className="episode__host" key={`${post.slug}-host-${i}`}>
-						{`${host.name.first} ${host.name.last}`}
-						{host.social && host.social.twitterHandle && (
-							<Fragment>
-								{" - "}
-								<FaTwitter />{" "}
-								<a
-									target="_blank"
-									href={`https://twitter.com/${host.social.twitterHandle}`}
-								>{`@${host.social.twitterHandle}`}</a>
-							</Fragment>
-						)}
-					</div>
-				))}
-		</div>
+		{post.hosts && (
+			<div className="episode__hosts">
+				{post.hosts && post.hosts.length > 0 && <h2>Hosts</h2>}
+				{post.hosts &&
+					post.hosts.map((host, i) => (
+						<div className="episode__host" key={`${post.slug}-host-${i}`}>
+							{`${host.name.first} ${host.name.last}`}
+							{host.social && host.social.twitterHandle && (
+								<Fragment>
+									{" - "}
+									<FaTwitter />{" "}
+									<a
+										target="_blank"
+										href={`https://twitter.com/${host.social.twitterHandle}`}
+									>{`@${host.social.twitterHandle}`}</a>
+								</Fragment>
+							)}
+						</div>
+					))}
+			</div>
+		)}
+		{post.type === "podcast" && (
+			<div className="more-posts__button__container">
+				<div className="more-posts__button">
+					<Link href="/podcast">
+						<Button>
+							More episodes <FaArrowRight />
+						</Button>
+					</Link>
+				</div>
+			</div>
+		)}
 	</Fragment>
 );
 
