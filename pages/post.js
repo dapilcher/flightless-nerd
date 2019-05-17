@@ -112,10 +112,13 @@ const Post = ({ post }) => (
 			hr {
 				margin: 2rem 0;
 			}
-			p a {
+			p a,
+			li > a {
+				font-family: Raleway;
 				color: #586cff;
 			}
-			p a:hover {
+			p a:hover,
+			li > a:hover {
 				color: #2539cc;
 				text-decoration: underline;
 			}
