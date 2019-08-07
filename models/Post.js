@@ -63,8 +63,7 @@ Post.add({
 		folder: "flightlessnerd",
 		autoCleanup: true,
 		select: true,
-		selectPrefix: "flightlessnerd",
-		dependsOn: { type: ["article"] }
+		selectPrefix: "flightlessnerd"
 	},
 	content: {
 		brief: { type: Types.Markdown, height: 90 },
