@@ -71,6 +71,7 @@ const PodcastServiceButtons = ({ style }) => (
 					url={service.url}
 					icon={service.icon}
 					theme={service.theme}
+					key={`service-button-${service.title}`}
 				/>
 			))}
 		</div>

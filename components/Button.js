@@ -1,10 +1,30 @@
-import { Fragment } from "react";
+import styled from "styled-components";
+
+const StyledButton = styled.button`
+	background-color: ${props => props.lightColor};
+	color: #eee;
+	font-family: Montserrat;
+	font-size: 1.2rem;
+	border: none;
+	border-radius: 1rem 1rem 1rem 0;
+	padding: 0.7rem 0.7rem;
+	outline: none;
+	margin: 0;
+	&:hover {
+		background-color: ${props => props.darkColor};
+		border: none;
+		cursor: pointer;
+	}
+	&:focus {
+		outline: none;
+	}
+`;
 
 const Button = ({
-	onClick,
+	onClick = () => {},
 	title,
 	href,
-	target,
+	target = "_blank",
 	style = {},
 	disabled = false,
 	theme = "red",
@@ -35,39 +55,18 @@ const Button = ({
 		}
 	}
 	return (
-		<Fragment>
-			<style jsx>{`
-				.button {
-					background-color: ${lightColor};
-					color: #eee;
-					font-family: Montserrat;
-					font-size: 1.3rem;
-					border: none;
-					border-radius: 1rem 1rem 1rem 0;
-					padding: 0.7rem 0.7rem;
-					outline: none;
-					margin: 0;
-				}
-				.button:hover {
-					background-color: ${darkColor};
-					border: none;
-					cursor: pointer;
-				}
-				.button:focus {
-					outline: none;
-				}
-			`}</style>
-			<a title={title} href={href} target={target}>
-				<button
-					className={`button ${classNames}`}
-					style={style}
-					onClick={onClick}
-					disabled={disabled}
-				>
-					{children}
-				</button>
-			</a>
-		</Fragment>
+		<a title={title} href={href} target={target}>
+			<StyledButton
+				lightColor={lightColor}
+				darkColor={darkColor}
+				className={classNames}
+				style={style}
+				onClick={onClick}
+				disabled={disabled}
+			>
+				{children}
+			</StyledButton>
+		</a>
 	);
 };
 

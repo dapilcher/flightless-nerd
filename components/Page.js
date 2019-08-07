@@ -1,11 +1,28 @@
-import React, { Component, Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
+import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 import { initGA, logPageView } from "../utils/analytics";
+import FlashBanner from "./FlashBanner";
 import ResponsiveWidthContainer from "./ResponsiveWidthContainer";
 
-class Page extends Component {
-	componentDidMount() {
+const StyledPage = styled.div`
+	overflow-x: hidden;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	background: linear-gradient(#eee8, #ddd8);
+	min-height: 100vh;
+	max-width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+const Page = ({ children }) => {
+	const [flashIsVisible, setFlashIsVisible] = useState(true);
+	const toggleFlash = () => setFlashIsVisible(!flashIsVisible);
+	useEffect(() => {
 		if (process.env.NODE_ENV === "production") {
 			if (!window.GA_INITIALIZED) {
 				initGA();
@@ -13,36 +30,17 @@ class Page extends Component {
 			}
 			logPageView();
 		}
-	}
-	render() {
-		return (
-			<Fragment>
-				<style jsx>{`
-					overflowx: hidden;
-					display: flex;
-					flex-direction: row;
-					justify-content: center;
-					.page {
-						min-height: 100vh;
-						display: flex;
-						flex-direction: column;
-						align-items: center;
-						background: linear-gradient(#eee8, #ddd8);
-						 {
-							/* url("/static/images/clean-textile.png"); */
-						}
-					}
-				`}</style>
-				<div className="page">
-					<Header />
-					<ResponsiveWidthContainer>
-						{this.props.children}
-					</ResponsiveWidthContainer>
-					<Footer />
-				</div>
-			</Fragment>
-		);
-	}
-}
+	}, []);
+	return (
+		<StyledPage>
+			<Header />
+			{flashIsVisible && (
+				<FlashBanner isVisible={flashIsVisible} closeFlash={toggleFlash} />
+			)}
+			<ResponsiveWidthContainer>{children}</ResponsiveWidthContainer>
+			<Footer />
+		</StyledPage>
+	);
+};
 
 export default Page;

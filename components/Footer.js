@@ -7,7 +7,8 @@ import {
 	faTwitter,
 	faInstagram,
 	faYoutube,
-	faTwitch
+	faTwitch,
+	faPatreon
 } from "@fortawesome/free-brands-svg-icons";
 
 const social = [
@@ -35,27 +36,30 @@ const social = [
 		network: "YouTube",
 		icon: faYoutube,
 		url: "https://www.youtube.com/channel/UCOqiG5MdFEFUF8BK2RSCSAw"
+	},
+	{
+		network: "Patreon",
+		icon: faPatreon,
+		url: "https://www.patreon.com/flightlessnerd/"
 	}
 ];
 
 const SocialLinks = props => (
 	<React.Fragment>
 		<style jsx>{`
-			.footer__social__container__wrapper {
-				display: flex;
-				flex-direction: row;
-				justify-content: center;
-			}
 			.footer__social__container {
-				display: flex;
-				flex-direction: row;
-				justify-content: center;
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				grid-gap: 1rem 2rem;
+				 {
+					/* flex-direction: row;
+				justify-content: space-around; */
+				}
 				padding: 1rem;
 			}
 			.footer__social__item {
 				color: #eee;
 				font-size: 2rem;
-				margin: 0 1rem;
 				transition: 75ms;
 			}
 			.footer__social__item:hover {
@@ -64,26 +68,24 @@ const SocialLinks = props => (
 				transform: scale(1.1);
 			}
 		`}</style>
-		<div className="footer__social__container__wrapper">
-			<div className="footer__social__container">
-				{social.map(network => (
-					<a
-						href={network.url}
-						className="footer__social__link"
-						target="_blank"
-						key={network.network}
-					>
-						<span className="fa-layers footer__social__item">
-							<FontAwesomeIcon
-								icon={network.icon}
-								transform="right-1 down-1"
-								style={{ color: "rgba(0,0,0,0.1)" }}
-							/>
-							<FontAwesomeIcon icon={network.icon} />
-						</span>
-					</a>
-				))}
-			</div>
+		<div className="footer__social__container">
+			{social.map(network => (
+				<a
+					href={network.url}
+					className="footer__social__link"
+					target="_blank"
+					key={network.network}
+				>
+					<span className="fa-layers footer__social__item">
+						<FontAwesomeIcon
+							icon={network.icon}
+							transform="right-1 down-1"
+							style={{ color: "rgba(0,0,0,0.1)" }}
+						/>
+						<FontAwesomeIcon icon={network.icon} />
+					</span>
+				</a>
+			))}
 		</div>
 	</React.Fragment>
 );

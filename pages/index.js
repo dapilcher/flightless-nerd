@@ -4,6 +4,7 @@ import ArticleCardGrid from "../components/ArticleCardGrid";
 import Carousel from "../components/Carousel";
 import SectionDivider from "../components/SectionDivider";
 import SubscribeForm from "../components/SubscribeForm";
+import PatreonCTA from "../components/PatreonCTA";
 import Player from "../components/Player";
 import PodcastList from "../components/PodcastList";
 import PodcastServiceButtons from "../components/PodcastServiceButtons";
@@ -77,12 +78,11 @@ class App extends Component {
 							<Carousel posts={posts.filter(post => post.isFeatured)} />
 						</div>
 						<div className="row">
-							<SubscribeForm />
+							<PatreonCTA />
+							{/* <SubscribeForm /> */}
 						</div>
 						<div className="row">
 							<SectionDivider text="From the Podcast" />
-							{/* <PodcastPlayer /> */}
-
 							<Player
 								episode={
 									podcasts.filter(
