@@ -127,6 +127,9 @@ const Post = ({ post }) => (
 				font-family: Raleway;
 				color: #586cff;
 			}
+			li {
+				font-family: Raleway;
+			}
 			p a:hover,
 			li > a:hover,
 			.post-img figcaption a:hover {
@@ -217,9 +220,6 @@ const Post = ({ post }) => (
 				.post-img {
 					padding: 1rem;
 					border-width: 0.5rem;
-				}
-				.post-img figcaption {
-					text-align: left;
 				}
 			}
 		`}</style>
