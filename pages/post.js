@@ -138,7 +138,7 @@ const Post = ({ post }) => (
 				max-width: 100%;
 				text-align: center;
 			}
-			img {
+			.post-img img {
 				max-width: 100%;
 				max-height: 35rem;
 				margin: 1rem 0;
@@ -218,7 +218,7 @@ const Post = ({ post }) => (
 					padding: 1rem;
 					border-width: 0.5rem;
 				}
-				figcaption {
+				.post-img figcaption {
 					text-align: left;
 				}
 			}
