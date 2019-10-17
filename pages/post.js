@@ -88,6 +88,15 @@ const Post = ({ post }) => (
 				/>
 			</Head>
 		)}
+		{post.meta.requiresReddit && (
+			<Head>
+				<script
+					async
+					src="//embed.redditmedia.com/widgets/platform.js"
+					charset="UTF-8"
+				/>
+			</Head>
+		)}
 		<style jsx global>{`
 			iframe {
 				max-width: 100%;

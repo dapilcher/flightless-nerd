@@ -78,7 +78,8 @@ Post.add({
 		}
 	},
 	meta: {
-		requiresTwitter: { type: Boolean, label: "Contains Twitter Embeds" }
+		requiresTwitter: { type: Boolean, label: "Contains Twitter Embeds" },
+		requiresReddit: { type: Boolean, label: "Contains Reddit Embeds" }
 	},
 	categories: { type: Types.Relationship, ref: "PostCategory", many: true },
 	topic: { type: Types.Relationship, ref: "PostTopic", many: false },
