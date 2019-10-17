@@ -122,12 +122,14 @@ const Post = ({ post }) => (
 				margin: 2rem 0;
 			}
 			p a,
-			li > a {
+			li > a,
+			.post-img figcaption a {
 				font-family: Raleway;
 				color: #586cff;
 			}
 			p a:hover,
-			li > a:hover {
+			li > a:hover,
+			.post-img figcaption a:hover {
 				color: #2539cc;
 				text-decoration: underline;
 			}
@@ -149,12 +151,6 @@ const Post = ({ post }) => (
 				color: #505050;
 				font-style: italic;
 				text-align: center;
-			}
-			.post-img figcaption a {
-				color: #586cff;
-			}
-			.post-img figcaption a:hover {
-				text-decoration: underline;
 			}
 			p,
 			.episode__host {
@@ -195,7 +191,8 @@ const Post = ({ post }) => (
 				margin: 2rem auto !important;
 			}
 			p > em,
-			li > em {
+			li > em,
+			figcaption > em {
 				font-family: Montserrat;
 				color: #eb3e34;
 			}
