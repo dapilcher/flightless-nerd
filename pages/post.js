@@ -150,6 +150,12 @@ const Post = ({ post }) => (
 				font-style: italic;
 				text-align: center;
 			}
+			.post-img figcaption a {
+				color: #586cff;
+			}
+			.post-img figcaption a:hover {
+				text-decoration: underline;
+			}
 			p,
 			.episode__host {
 				font-family: Raleway;
